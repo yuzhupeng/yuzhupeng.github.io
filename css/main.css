@@ -1764,8 +1764,8 @@ pre .javascript .function {
 }
 .site-state-item {
   display: inline-block;
-  padding: 0 15px;
-  border-left: 1px solid;
+  padding: 8px 19px;
+  border-left: 1px solid #eee;
 }
 .site-state-item:first-child {
   border-left: none;
@@ -1827,7 +1827,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff59fb;
+  background: #da32ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3068,7 +3068,7 @@ pre .javascript .function {
 }
 .site-state-item {
   display: inline-block;
-  padding: 8px 28px;
+  padding: 8px 19px;
   border-left: 1px solid #649ab6;
 }
 .sidebar-nav .sidebar-nav-active {
