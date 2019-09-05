@@ -81,7 +81,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JasonYZP前端开发博客" />
+  <meta name="keywords" content="front-end,css," />
 
 
 
@@ -97,17 +97,21 @@
 
 
 
-<meta name="description" content="不积跬步，无以至千里。不积小流，无以成江海。  没有伴随着痛楚的教训毫无意义， 不付出牺牲就不会得到任何回报， 然而当你跨越这一切破茧而出时,就会得到不输给任何事的坚韧的心">
+<meta name="description" content="前段时间试译了Keith J.Grant的CSS好书《CSS in Depth》，其中的第二章《Working with relative units》，书中对relative units的讲解和举例可以说相当全面，看完之后发现自己并不太懂CSS相对单位，也希望分享给大家，所以有了这个译文系列。（若有勘误或翻译建议，欢">
+<meta name="keywords" content="front-end,css">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《劝学篇》—— 荀子。">
-<meta property="og:url" content="http://yoursite.com/2017/12/12/hello-world/index.html">
+<meta property="og:title" content="无单位数字和行高 —— 别说你懂CSS相对单位">
+<meta property="og:url" content="http://yoursite.com/2018/04/05/css-in-depth-unitless-number/index.html">
 <meta property="og:site_name" content="Mantis丶Shrimp">
-<meta property="og:description" content="不积跬步，无以至千里。不积小流，无以成江海。  没有伴随着痛楚的教训毫无意义， 不付出牺牲就不会得到任何回报， 然而当你跨越这一切破茧而出时,就会得到不输给任何事的坚韧的心">
+<meta property="og:description" content="前段时间试译了Keith J.Grant的CSS好书《CSS in Depth》，其中的第二章《Working with relative units》，书中对relative units的讲解和举例可以说相当全面，看完之后发现自己并不太懂CSS相对单位，也希望分享给大家，所以有了这个译文系列。（若有勘误或翻译建议，欢迎 Github PR ^_^） 《别说你懂CSS相对单位》系列译文：  如何更">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-19T14:55:15.541Z">
+<meta property="og:image" content="http://sinacloud.net/woodysblog/css-in-depth/02fig11.jpg">
+<meta property="og:image" content="http://sinacloud.net/woodysblog/css-in-depth/02fig12.jpg">
+<meta property="og:updated_time" content="2019-09-05T15:57:30.123Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《劝学篇》—— 荀子。">
-<meta name="twitter:description" content="不积跬步，无以至千里。不积小流，无以成江海。  没有伴随着痛楚的教训毫无意义， 不付出牺牲就不会得到任何回报， 然而当你跨越这一切破茧而出时,就会得到不输给任何事的坚韧的心">
+<meta name="twitter:title" content="无单位数字和行高 —— 别说你懂CSS相对单位">
+<meta name="twitter:description" content="前段时间试译了Keith J.Grant的CSS好书《CSS in Depth》，其中的第二章《Working with relative units》，书中对relative units的讲解和举例可以说相当全面，看完之后发现自己并不太懂CSS相对单位，也希望分享给大家，所以有了这个译文系列。（若有勘误或翻译建议，欢迎 Github PR ^_^） 《别说你懂CSS相对单位》系列译文：  如何更">
+<meta name="twitter:image" content="http://sinacloud.net/woodysblog/css-in-depth/02fig11.jpg">
 
 
 
@@ -136,13 +140,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/12/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/05/css-in-depth-unitless-number/"/>
 
 
 
 
 
-  <title>《劝学篇》—— 荀子。 | Mantis丶Shrimp</title>
+  <title>无单位数字和行高 —— 别说你懂CSS相对单位 | Mantis丶Shrimp</title>
   
 
 
@@ -300,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/12/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/05/css-in-depth-unitless-number/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jason YZP">
@@ -317,7 +321,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">《劝学篇》—— 荀子。</h2>
+          <h2 class="post-title" itemprop="name headline">无单位数字和行高 —— 别说你懂CSS相对单位</h2>
         
 
         <div class="post-meta">
@@ -329,8 +333,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-12T23:12:57+08:00">
-                2017-12-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-05T13:28:03+08:00">
+                2018-04-05
               </time>
             
 
@@ -339,28 +343,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/分享/" itemprop="url" rel="index">
-                    <span itemprop="name">分享</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -422,7 +404,110 @@
       
 
       
-        <h2 id="不积跬步，无以至千里。不积小流，无以成江海。"><a href="#不积跬步，无以至千里。不积小流，无以成江海。" class="headerlink" title="不积跬步，无以至千里。不积小流，无以成江海。"></a>不积跬步，无以至千里。不积小流，无以成江海。</h2>  <blockquote class="blockquote-center">没有伴随着痛楚的教训毫无意义， 不付出牺牲就不会得到任何回报， 然而当你跨越这一切破茧而出时,就会得到不输给任何事的坚韧的心 </blockquote>
+        <p>前段时间试译了Keith J.Grant的CSS好书《CSS in Depth》，其中的第二章<a href="https://livebook.manning.com/#!/book/css-in-depth/chapter-2" target="_blank" rel="noopener">《Working with relative units》</a>，书中对relative units的讲解和举例可以说相当全面，看完之后发现自己并不太懂CSS相对单位，也希望分享给大家，所以有了这个译文系列。（若有勘误或翻译建议，欢迎 <a href="https://github.com/YuyingWu/blog/tree/dev/source/_posts" target="_blank" rel="noopener">Github PR</a> ^_^）</p>
+<p>《别说你懂CSS相对单位》系列译文：</p>
+<ul>
+<li><a href="/blog/archives/css-in-depth-relative-units/">如何更愉快地使用em</a></li>
+<li><a href="/blog/archives/css-in-depth-stop-thinking-in-px/">如何更愉快地使用rem</a></li>
+<li><a href="/blog/archives/css-in-depth-viewport-relative-units/">视口相关单位的应用</a></li>
+<li><a href="/blog/archives/css-in-depth-unitless-number/">无单位数字和行高</a> [本文]</li>
+<li><a href="/blog/archives/css-in-depth-css-variables/">CSS自定义属性</a></li>
+</ul>
+<p>本文对应的章节目录：</p>
+<ul>
+<li>2.5 不带单位的数字（unitless number）和行高（line-height）</li>
+</ul>
+<hr>
+<h2 id="2-5-无单位数字（unitless-number）和行高（line-height）"><a href="#2-5-无单位数字（unitless-number）和行高（line-height）" class="headerlink" title="2.5 无单位数字（unitless number）和行高（line-height）"></a>2.5 无单位数字（unitless number）和行高（line-height）</h2><p>有一些属性可以接收不带单位的数值（意思就是一个不带长度单位的数字），如<code>line-height</code>、<code>z-index</code>和<code>font-weight</code>（700等于bold，400等于normal，如此类推）。你也可以在需要长度单位的地方（如px、em、rem）使用一个不带单位的<code>0</code>，因为长度已经是0了，带不带单位也无所谓了 —— 0px 等于 0% 等于 0em。</p>
+<blockquote>
+<p>警告</p>
+<p>不带单位的0只可以表示长度单位和百分比的值，譬如padding、border和width。而对于一些特殊的情况，如度数（degrees）或者像秒这样基于时间的值（time-based values），是不可以使用不带单位的0的。</p>
+</blockquote>
+<p><code>line-height</code>属性最特别的地方，在于同时支持带单位和不带单位的值。你应该保持使用不带单位的数值，因为这样就可以从父元素继承。我们在页面上写点文字，看看它是怎么表现的吧。把下面代码添加到你的样式表。</p>
+<p>[ 代码片段 2.20 继承<code>line-height</code>的模板 ]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;p class=&quot;about-us&quot;&gt;</span><br><span class="line">    We have built partnerships with small farms around the world to</span><br><span class="line">    hand-select beans at the peak of season. We then carefully roast in</span><br><span class="line">    small batches to maximize their potential.</span><br><span class="line">  &lt;/p&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<p>给<code>body</code>声明一个<code>line-height</code>，然后文档的其他元素会从这里继承。页面的展示符合预期，不管你对页面的其他元素的字号大小做了什么改变。</p>
+<p>[ 图 2.11 不带单位的行高，会在每个后代元素下重新计算出实际值 ]</p>
+<p><img src="http://sinacloud.net/woodysblog/css-in-depth/02fig11.jpg" alt="&quot;图 2.11&quot;"></p>
+<p>把代码片段2.21的内容添加到你的样式表。段落（<code>&lt;p&gt;</code>）继承了1.2的行高。因为字号是32px（<code>2em</code> <em> 16px，浏览器默认字号大小），所以本地的行高计算值是38.4px（32px </em> 1.2）。这会给段落的行间距留下比较合适的空间。</p>
+<p>[ 代码片段 2.21 对line-height使用不带单位的值 ]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">  line-height: 1.2;               1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.about-us &#123;</span><br><span class="line">  font-size: 2em;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>1 后代元素继承不带单位的值</li>
+</ul>
+<p>如果你给行高设定了一个带单位的值，你可能会得到意想不到的结果，如图2.12那样，行间文字互相重叠了，代码片段2.22则是造成这个结果的CSS代码。</p>
+<p>[ 图 2.12 继承行高造成的行间互叠 ]<br><img src="http://sinacloud.net/woodysblog/css-in-depth/02fig12.jpg" alt="&quot;图 2.12&quot;"></p>
+<p>[ 代码片段 2.22 带单位的行高值造成意外的结果 ]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">  line-height: 1.2em;             1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.about-us &#123;</span><br><span class="line">  font-size: 2em;                 2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>1 后代元素继承了计算值（19.2px）</li>
+<li>2 等于32px</li>
+</ul>
+<p>这样的结果源于一次奇怪的继承：当一个元素是用带单位的值声明的，那么它的后代元素会继承计算结果值。当行高属性是用类似em来声明时，它的值会先被计算，然后计算后的值会传到任何继承它的后代元素。对于<code>line-height</code>这个属性来说，如果子元素有跟父元素不一样字号大小的情况，就会导致意想不到的结果，譬如文字间的遮挡。</p>
+<blockquote>
+<p>长度 —— CSS中用来描述距离测量的正式用语。它是一个带单位的数字，如5px。长度有两种类型：绝对的和相对的。百分比跟长度很类似，但严格来说，百分比不能叫长度。</p>
+</blockquote>
+<p>当你（对某个属性）使用不带单位的数字，声明的值会被继承，也就是说这个值会在子元素中用来重新计算子元素域下的值，而这个通常是你想要的效果。使用不带单位的数字，可以让你在body上设定一个行高，然后什么都不用管，页面上其他元素会默认继承，除非在某个特定的地方你想要做一个额外的样式。</p>
+<hr>
+<p>《别说你懂CSS相对单位》系列译文：</p>
+<ul>
+<li><a href="/blog/archives/css-in-depth-relative-units/">如何更愉快地使用em</a></li>
+<li><a href="/blog/archives/css-in-depth-stop-thinking-in-px/">如何更愉快地使用rem</a></li>
+<li><a href="/blog/archives/css-in-depth-viewport-relative-units/">视口相关单位的应用</a></li>
+<li><a href="/blog/archives/css-in-depth-unitless-number/">无单位数字和行高</a> [本文]</li>
+<li><a href="/blog/archives/css-in-depth-css-variables/">CSS自定义属性</a></li>
+</ul>
+<p>章节：</p>
+<ul>
+<li>2.1 相对单位值的魔力<ul>
+<li>2.1.1 完美像素设计（pixel-perfect design）的挣扎</li>
+<li>2.1.2 完美像素网页的终结</li>
+<li>像素（pixel）、点（point）和pc（pica）</li>
+</ul>
+</li>
+<li>2.2 em和rem<ul>
+<li>2.2.1 对font-size使用em<ul>
+<li>当我们在一个元素内用em同时声明font-size和其他属性</li>
+<li>字号收缩问题</li>
+</ul>
+</li>
+<li>2.2.2 对font-size使用rem<ul>
+<li>可用性：对font-size使用相对长度单位</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.3 停止使用像素思维去思考<ul>
+<li>2.3.1 设置一个合理的字号默认值</li>
+<li>2.3.2 让这个面板变得“响应式”</li>
+<li>2.3.3 调整单个组件的大小</li>
+</ul>
+</li>
+<li>2.4 视口相关单位（viewport-relative units）<ul>
+<li>CSS3</li>
+<li>2.4.1 在font-size上使用vw</li>
+<li>2.4.2 在font-size上使用calc()</li>
+</ul>
+</li>
+<li>2.5 不带单位的数字（unitless number）和行高（line-height）</li>
+<li>2.6 自定义属性（也叫“CSS变量”）<ul>
+<li>2.6.1 动态改变自定义属性的值</li>
+<li>2.6.2 通过JavaScript改变自定义属性的值</li>
+<li>2.6.3 初探自定义属性</li>
+</ul>
+</li>
+<li>总结</li>
+</ul>
+<blockquote>
+<p>原著版权信息：</p>
+<p>作者：Keith J.Grant<br>书籍：CSS in Depth<br>章节：<a href="https://livebook.manning.com/#!/book/css-in-depth/chapter-2" target="_blank" rel="noopener">Working with relative units</a>   </p>
+</blockquote>
+<hr>
+<p>笔者 @Yuying Wu，前端爱好者 / 鼓励师 / 新西兰打工度假 / 铲屎官。目前就职于某大型电商的B2B前端团队。</p>
+<p>感谢你读到这里，对上文若有任何疑问或建议，欢迎留言。</p>
+<p>如果你和我一样喜欢前端，喜欢捣腾独立博客或者前沿技术，或者有什么职业疑问，欢迎关注我以及各种交流哈。</p>
+<p>独立博客：<a href="http://wuyuying.com/" target="_blank" rel="noopener">wuyuying.com</a><br>知乎ID：<a href="https://www.zhihu.com/people/yuying_wu/posts" target="_blank" rel="noopener">@Yuying Wu</a><br>Github：<a href="https://github.com/YuyingWu" target="_blank" rel="noopener">Yuying Wu</a></p>
+
       
     </div>
     
@@ -437,6 +522,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/front-end/" rel="tag"># front-end</a>
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+        </div>
+      
 
       
       
@@ -446,8 +539,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/28/‘HelloEveryone’/" rel="next" title="終於完成了blog的搭建！">
-                <i class="fa fa-chevron-left"></i> 終於完成了blog的搭建！
+              <a href="/2018/03/05/css-in-depth-viewport-relative-units/" rel="next" title="视口相关单位的应用 —— 别说你懂CSS相对单位">
+                <i class="fa fa-chevron-left"></i> 视口相关单位的应用 —— 别说你懂CSS相对单位
               </a>
             
           </div>
@@ -456,8 +549,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/20/marklongjiaochen/" rel="prev" title="Markdown教程">
-                Markdown教程 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/05/css-in-depth-stop-thinking-in-px/" rel="prev" title="如何更愉快地使用rem —— 别说你懂CSS相对单位">
+                如何更愉快地使用rem —— 别说你懂CSS相对单位 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -614,7 +707,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#不积跬步，无以至千里。不积小流，无以成江海。"><span class="nav-number">1.</span> <span class="nav-text">不积跬步，无以至千里。不积小流，无以成江海。</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-无单位数字（unitless-number）和行高（line-height）"><span class="nav-number">1.</span> <span class="nav-text">2.5 无单位数字（unitless number）和行高（line-height）</span></a></li></ol></div>
             
 
           </div>
