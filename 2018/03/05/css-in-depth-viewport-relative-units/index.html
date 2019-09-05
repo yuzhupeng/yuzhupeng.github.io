@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+<link href="/lib/nprogress/nprogress.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="front-end,css," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="前段时间试译了Keith J.Grant的CSS好书《CSS in Depth》，其中的第二章《Working with relative units》，书中对relative units的讲解和举例可以说相当全面，看完之后发现自己并不太懂CSS相对单位，也希望分享给大家，所以有了这个译文系列。（若有勘误或翻译建议，欢">
+<meta name="keywords" content="front-end,css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="视口相关单位的应用 —— 别说你懂CSS相对单位">
+<meta property="og:url" content="http://yoursite.com/2018/03/05/css-in-depth-viewport-relative-units/index.html">
+<meta property="og:site_name" content="Mantis丶Shrimp">
+<meta property="og:description" content="前段时间试译了Keith J.Grant的CSS好书《CSS in Depth》，其中的第二章《Working with relative units》，书中对relative units的讲解和举例可以说相当全面，看完之后发现自己并不太懂CSS相对单位，也希望分享给大家，所以有了这个译文系列。（若有勘误或翻译建议，欢迎 Github PR ^_^） 《别说你懂CSS相对单位》系列译文：  如何更">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://sinacloud.net/woodysblog/css-in-depth/02fig10_alt.jpg">
+<meta property="og:updated_time" content="2019-09-05T15:57:35.499Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="视口相关单位的应用 —— 别说你懂CSS相对单位">
+<meta name="twitter:description" content="前段时间试译了Keith J.Grant的CSS好书《CSS in Depth》，其中的第二章《Working with relative units》，书中对relative units的讲解和举例可以说相当全面，看完之后发现自己并不太懂CSS相对单位，也希望分享给大家，所以有了这个译文系列。（若有勘误或翻译建议，欢迎 Github PR ^_^） 《别说你懂CSS相对单位》系列译文：  如何更">
+<meta name="twitter:image" content="http://sinacloud.net/woodysblog/css-in-depth/02fig10_alt.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/05/css-in-depth-viewport-relative-units/"/>
+
+
+
+
+
+  <title>视口相关单位的应用 —— 别说你懂CSS相对单位 | Mantis丶Shrimp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+<a href="https://yuzhupeng.github.io/"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mantis丶Shrimp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">生活、技术个人博客</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/05/css-in-depth-viewport-relative-units/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jason YZP">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mantis丶Shrimp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">视口相关单位的应用 —— 别说你懂CSS相对单位</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-05T13:28:02+08:00">
+                2018-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前段时间试译了Keith J.Grant的CSS好书《CSS in Depth》，其中的第二章<a href="https://livebook.manning.com/#!/book/css-in-depth/chapter-2" target="_blank" rel="noopener">《Working with relative units》</a>，书中对relative units的讲解和举例可以说相当全面，看完之后发现自己并不太懂CSS相对单位，也希望分享给大家，所以有了这个译文系列。（若有勘误或翻译建议，欢迎 <a href="https://github.com/YuyingWu/blog/tree/dev/source/_posts" target="_blank" rel="noopener">Github PR</a> ^_^）</p>
+<p>《别说你懂CSS相对单位》系列译文：</p>
+<ul>
+<li><a href="/blog/archives/css-in-depth-relative-units/">如何更愉快地使用em</a></li>
+<li><a href="/blog/archives/css-in-depth-stop-thinking-in-px/">如何更愉快地使用rem</a></li>
+<li><a href="/blog/archives/css-in-depth-viewport-relative-units/">视口相关单位的应用</a> [本文]</li>
+<li><a href="/blog/archives/css-in-depth-unitless-number/">无单位数字和行高</a></li>
+<li><a href="/blog/archives/css-in-depth-css-variables/">CSS自定义属性</a></li>
+</ul>
+<p>本文对应的章节目录：</p>
+<ul>
+<li>2.4 视口相关单位（viewport-relative units）<ul>
+<li>CSS3</li>
+<li>2.4.1 在font-size上使用vw</li>
+<li>2.4.2 在font-size上使用calc()</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="2-4-视口相关单位（viewport-relative-units）"><a href="#2-4-视口相关单位（viewport-relative-units）" class="headerlink" title="2.4 视口相关单位（viewport-relative units）"></a>2.4 视口相关单位（viewport-relative units）</h2><p>你已经学完em和rem了，它们都是以<code>font-size</code>为基准值的，但相对单位不只它们。还有视口相关单位，依赖浏览器的视口大小来定义长度的。</p>
+<blockquote>
+<p>视口（viewport） —— 在浏览器窗口中用来渲染页面的可视区域，这不包括浏览器的地址栏、工具栏、状态栏等（如果有的话）。</p>
+</blockquote>
+<p>如果你不熟悉视口相关单位的话，在这里简单介绍一下。</p>
+<ul>
+<li>vh —— 视口高度的1/100</li>
+<li>vw —— 视口宽度的1/100</li>
+<li>vmin —— 视区宽度或高度较小值的1/100（IE9支持的是vm）</li>
+<li>vmax —— 视区宽度或高度较大值的1/100（在写本书时，IE或者Edge都不支持）</li>
+</ul>
+<p>举个例子，50vw等于视口宽度的一半，而25vh等于视口高度的25%。vmin依赖两者（宽或高）的较小值，如果我们需要确保一个元素不管在横屏还是竖屏下适应屏幕展示的话，这个属性会很有帮助：如果是横屏，vmin的基准值是屏幕的高度，如果是竖屏，它的基准值是屏幕的宽度。</p>
+<p>图2.10展示了一个正方形的元素在不同屏幕尺寸下的视口的情况。宽和高的值都声明为90vmin，也就是宽高较小值的90%。边长的值等于，横屏情况下高度的90%，或者竖屏情况下宽度的90%。</p>
+<p>[ 图 2.10 如果把一个元素的宽高定义成90vmin，它总会展示成一个正方形，边长稍小于屏幕的视口，不管它的尺寸或方向怎样。 ]</p>
+<p><img src="http://sinacloud.net/woodysblog/css-in-depth/02fig10_alt.jpg" alt="&quot;图 2.10&quot;"></p>
+<p>在代码片段2.18可以看到这个元素的样式，渲染了一个适应屏幕尺寸的大正方形，不管浏览器的尺寸是多少。你可以通过添加<code>&lt;div class=&quot;square&quot;&gt;</code>，再看看页面效果。</p>
+<p>[ 代码片段 2.18 边长使用<code>vmin</code>的正方形元素 ]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.square &#123;</span><br><span class="line">  width: 90vmin;</span><br><span class="line">  height: 90vmin;</span><br><span class="line">  background-color: #369;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果想做一个大英雄图片充满屏幕的效果，视口相关长度最合适不过。你的图片可以在一个长条形的容器内，把图片的高度设为100vh，那它的高度就会跟视口高度一样。</p>
+<blockquote>
+<h3 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h3><p>视口相关单位对于大多数浏览器还是一项比较新的特性，所以当你试图把这个特性和其他样式混搭时，有可能会有一些很奇怪的bug。详情参考<a href="http://caniuse.com/#feat=viewport-units" target="_blank" rel="noopener">http://caniuse.com/#feat=viewport-units</a>列表中的“已知问题（Known Issues）”</p>
+<h3 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h3><p>本章提到的很多单位类型，其实并不在早期的CSS版本里（尤其是rem和视口相关单位）。在这门语言一系列的更新迭代过程中，它们慢慢被加进来，我们将最新的版本称作CSS3。  </p>
+<p>在二十世纪末二十一世纪初，在CSS规范的初版发布之后的很长一段时间，只有很小的改动。在1998年5月份，W3C（World Wide Web Consortium）发布了CSS 2规范。不久之后，修正版本2中问题和缺陷的2.1版本开始了，CSS 2.1的工作持续了好多年，但并没有添加什么令人印象深刻的特性。直到2011年4月份，版本2.1终于被确认为“提议推荐标准”（Proposed Recommendation）。到这个时候，大多数浏览器对CSS 2.1的特性已经支持得很好了，在此基础上，浏览器又努力地添加一些新的特性。这就是新规范CSS 3。  </p>
+<p>“3”是个非正式的版本号，实际上并没有CSS3规范。相反，这个规范被拆成多个独立的模块，分别有独立的版本号。background和border的规范已经从盒模型（box model）以及层叠与继承（cascading and inheritance）规范中独立出来。通过这种方式，W3C就可以针对CSS某个模块进行更新迭代，而不用同时更新其他不相关的模块的内容。在这些模块规范里，很多还停留在第3版本（现在叫“第3级”），但有的模块（比如选择器规范（selectors specification））已经到第4级，而其他的模块（比如flexbox）还在第1级。  </p>
+<p>这些新特性进入了人们的视野。我们可以看到在2009到2013年间，大量新的CSS特性涌进浏览器中。其中有现在比较出名的rem和视口相关单位，以及新的选择器（new selectors）、媒体查询（media queries）、网页文字（web fonts）、圆形边框（rounded borders）、动画（animation）、变换（transitions）、变形（transformations）以及定义颜色的不同方式。然而，每年的新特性的数量还在逐年稳定增长。  </p>
+<p>这意味着，我们不再只跟一个特定版本的CSS规范打交道。这是一套有生命的标准，每个浏览器也在持续地支持新的特性，开发者会开始使用然后渐渐习惯它们。CSS4大概不会出现了，如果有的话，应该也只是个用于市场营销的名词。尽管这本书也会提到CSS3的新特性，但没有必要把它们都搬出来，就整个网页而言，这些都是CSS。</p>
+</blockquote>
+<h3 id="2-4-1-在font-size上使用vw"><a href="#2-4-1-在font-size上使用vw" class="headerlink" title="2.4.1 在font-size上使用vw"></a>2.4.1 在font-size上使用vw</h3><p>一个应用如果使用了视口相关单位，可能效果最不明显的地方就是用在字号大小上。事实上，我发现把vh和vw用在字号上比元素的宽或者高更实用。</p>
+<p>试想一下，如果把元素的font-size声明为2vm，会怎么样？台式机屏幕宽是1200px，2vm等于24px（1200 <em> 2%）。而平板电脑的屏幕宽768px，2vm约等于15px（768 </em> 2%）。很棒的是，元素在两个尺寸下缩放自如。这意味着这里并没有一个突然的断点，元素会随着视口尺寸的增大而平滑增大。</p>
+<p>不幸的是，24px对于大屏幕来说有点太大了。而更糟糕的是，在iPhone6它直接缩小到7.5px。好消息是缩放生效了，而坏消息是极限情况的处理有点差。你可以通过CSS的方法<code>calc()</code>解决这个问题。</p>
+<h3 id="2-4-2-在font-size上使用calc"><a href="#2-4-2-在font-size上使用calc" class="headerlink" title="2.4.2 在font-size上使用calc()"></a>2.4.2 在font-size上使用calc()</h3><p><code>calc()</code>函数支持对2个或者更多个数值进行基础的运算。这个函数对不同类型的单位间的运算尤其有用。这个函数支持加（+）、减（-）、乘（*）和除以（/）。其中，加和减运算符左右必须留有空格，所以我建议我们来培养一个习惯，总是在四个运算符的两侧都写上空格，譬如<code>calc(1em + 10px)</code>。</p>
+<p>你会在下一个代码片段中，使用<code>calc()</code>来计算vh单位和em单位的值。把你的样式表中的上一段设定基础字号大小的代码去掉（及相关的媒体查询代码），添加以下代码。</p>
+<p>[ 代码片段 2.19 在font-size中使用em和vh单位进行calc()运算 ]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:root &#123;</span><br><span class="line">  font-size: calc(0.5em + 1vw);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，打开页面，缓慢地改变浏览器的大小。你会发现，字号改变的过渡很平滑。0.5em在这里代表的是字号的最小值，1vm则代表着响应式地往上累加。这样基础字号大小就在iPhone6的11.75px和1200px宽浏览器窗口的20px间缩放。你可以根据自己的喜好改变这些值。</p>
+<p>你现在可以实现响应式策略的核心逻辑而不需要添加一行媒体查询的代码。页面上的所有元素可以根据视口大小平滑缩放，不再需要3或4个硬编码的断点。</p>
+<hr>
+<p>《别说你懂CSS相对单位》系列译文：</p>
+<ul>
+<li><a href="/blog/archives/css-in-depth-relative-units/">如何更愉快地使用em</a></li>
+<li><a href="/blog/archives/css-in-depth-stop-thinking-in-px/">如何更愉快地使用rem</a></li>
+<li><a href="/blog/archives/css-in-depth-viewport-relative-units/">视口相关单位的应用</a> [本文]</li>
+<li><a href="/blog/archives/css-in-depth-unitless-number/">无单位数字和行高</a></li>
+<li><a href="/blog/archives/css-in-depth-css-variables/">CSS自定义属性</a></li>
+</ul>
+<p>章节：</p>
+<ul>
+<li>2.1 相对单位值的魔力<ul>
+<li>2.1.1 完美像素设计（pixel-perfect design）的挣扎</li>
+<li>2.1.2 完美像素网页的终结</li>
+<li>像素（pixel）、点（point）和pc（pica）</li>
+</ul>
+</li>
+<li>2.2 em和rem<ul>
+<li>2.2.1 对font-size使用em<ul>
+<li>当我们在一个元素内用em同时声明font-size和其他属性</li>
+<li>字号收缩问题</li>
+</ul>
+</li>
+<li>2.2.2 对font-size使用rem<ul>
+<li>可用性：对font-size使用相对长度单位</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2.3 停止使用像素思维去思考<ul>
+<li>2.3.1 设置一个合理的字号默认值</li>
+<li>2.3.2 让这个面板变得“响应式”</li>
+<li>2.3.3 调整单个组件的大小</li>
+</ul>
+</li>
+<li>2.4 视口相关单位（viewport-relative units）<ul>
+<li>CSS3</li>
+<li>2.4.1 在font-size上使用vw</li>
+<li>2.4.2 在font-size上使用calc()</li>
+</ul>
+</li>
+<li>2.5 不带单位的数字（unitless number）和行高（line-height）</li>
+<li>2.6 自定义属性（也叫“CSS变量”）<ul>
+<li>2.6.1 动态改变自定义属性的值</li>
+<li>2.6.2 通过JavaScript改变自定义属性的值</li>
+<li>2.6.3 初探自定义属性</li>
+</ul>
+</li>
+<li>总结</li>
+</ul>
+<blockquote>
+<p>原著版权信息：</p>
+<p>作者：Keith J.Grant<br>书籍：CSS in Depth<br>章节：<a href="https://livebook.manning.com/#!/book/css-in-depth/chapter-2" target="_blank" rel="noopener">Working with relative units</a>  </p>
+</blockquote>
+<hr>
+<p>笔者 @Yuying Wu，前端爱好者 / 鼓励师 / 新西兰打工度假 / 铲屎官。目前就职于某大型电商的B2B前端团队。</p>
+<p>感谢你读到这里，对上文若有任何疑问或建议，欢迎留言。</p>
+<p>如果你和我一样喜欢前端，喜欢捣腾独立博客或者前沿技术，或者有什么职业疑问，欢迎关注我以及各种交流哈。</p>
+<p>独立博客：<a href="http://wuyuying.com/" target="_blank" rel="noopener">wuyuying.com</a><br>知乎ID：<a href="https://www.zhihu.com/people/yuying_wu/posts" target="_blank" rel="noopener">@Yuying Wu</a><br>Github：<a href="https://github.com/YuyingWu" target="_blank" rel="noopener">Yuying Wu</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/front-end/" rel="tag"># front-end</a>
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/20/marklongjiaochen/" rel="next" title="Markdown教程">
+                <i class="fa fa-chevron-left"></i> Markdown教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/05/css-in-depth-unitless-number/" rel="prev" title="无单位数字和行高 —— 别说你懂CSS相对单位">
+                无单位数字和行高 —— 别说你懂CSS相对单位 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Jason YZP" />
+          <p class="site-author-name" itemprop="name">Jason YZP</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://yuzhupeng.github.io/" title="hexo" target="_blank">hexo</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/YzpJason/" title="cnblog" target="_blank">cnblog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://weibo.com/jasonyuzhupeng/" title="weibo" target="_blank">weibo</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-视口相关单位（viewport-relative-units）"><span class="nav-number">1.</span> <span class="nav-text">2.4 视口相关单位（viewport-relative units）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#笔记"><span class="nav-number">1.1.</span> <span class="nav-text">笔记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS3"><span class="nav-number">1.2.</span> <span class="nav-text">CSS3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1-在font-size上使用vw"><span class="nav-number">1.3.</span> <span class="nav-text">2.4.1 在font-size上使用vw</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2-在font-size上使用calc"><span class="nav-number">1.4.</span> <span class="nav-text">2.4.2 在font-size上使用calc()</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-tint"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jason YZP</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/nprogress/nprogress.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/custom.js"></script>
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

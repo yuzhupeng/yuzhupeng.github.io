@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+<link href="/lib/nprogress/nprogress.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JasonYZP前端开发博客" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Dapper 简介Dapper是.NET的一款轻量级ORM工具（GitHub），也可称为简单对象映射器。在速度方面拥有微型ORM之王的称号。它是半自动的，也就是说实体类和SQL语句都要自己写，但它提供自动对象映射。是通过对IDbConnection接口的扩展来操作数据库的。 优点：    轻量，只有一个文件 性能高，D">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASP.NET Core 中的 ORM 之 Dapper">
+<meta property="og:url" content="http://yoursite.com/2019/07/25/1.6 [Basic] ASP.NET Core 中的 ORM 之 Dapper/index.html">
+<meta property="og:site_name" content="Mantis丶Shrimp">
+<meta property="og:description" content="Dapper 简介Dapper是.NET的一款轻量级ORM工具（GitHub），也可称为简单对象映射器。在速度方面拥有微型ORM之王的称号。它是半自动的，也就是说实体类和SQL语句都要自己写，但它提供自动对象映射。是通过对IDbConnection接口的扩展来操作数据库的。 优点：    轻量，只有一个文件 性能高，Dapper的速度接近与IDataReader，取列表的数据超过了DataTabl">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-05T16:02:15.563Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ASP.NET Core 中的 ORM 之 Dapper">
+<meta name="twitter:description" content="Dapper 简介Dapper是.NET的一款轻量级ORM工具（GitHub），也可称为简单对象映射器。在速度方面拥有微型ORM之王的称号。它是半自动的，也就是说实体类和SQL语句都要自己写，但它提供自动对象映射。是通过对IDbConnection接口的扩展来操作数据库的。 优点：    轻量，只有一个文件 性能高，Dapper的速度接近与IDataReader，取列表的数据超过了DataTabl">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/25/1.6 [Basic] ASP.NET Core 中的 ORM 之 Dapper/"/>
+
+
+
+
+
+  <title>ASP.NET Core 中的 ORM 之 Dapper | Mantis丶Shrimp</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+<a href="https://yuzhupeng.github.io/"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/567c3a48d796e2fc06ea80409cc9dd82bf714434/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mantis丶Shrimp</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">生活、技术个人博客</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/25/1.6 [Basic] ASP.NET Core 中的 ORM 之 Dapper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jason YZP">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mantis丶Shrimp">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">ASP.NET Core 中的 ORM 之 Dapper</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-25T23:06:58+08:00">
+                2019-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Dapper-简介"><a href="#Dapper-简介" class="headerlink" title="Dapper 简介"></a>Dapper 简介</h1><p>Dapper是.NET的一款轻量级ORM工具（<a href="https://github.com/StackExchange/Dapper" target="_blank" rel="noopener">GitHub</a>），也可称为简单对象映射器。在速度方面拥有微型ORM之王的称号。<br>它是半自动的，也就是说实体类和SQL语句都要自己写，但它提供自动对象映射。是通过对IDbConnection接口的扩展来操作数据库的。</p>
+<p><strong>优点</strong>：  </p>
+<ul>
+<li>轻量，只有一个文件</li>
+<li>性能高，Dapper的速度接近与IDataReader，取列表的数据超过了DataTable。</li>
+<li>支持多种数据库。Dapper可以在所有Ado.net Providers下工作，包括sqlite, sqlce, firebird, oracle, MySQL, PostgreSQL and SQL Server</li>
+<li>使用Dapper可以自动进行对象映射，通过Emit反射IDataReader的序列队列，来快速的得到和产生对象</li>
+</ul>
+<h1 id="使用-Dapper"><a href="#使用-Dapper" class="headerlink" title="使用 Dapper"></a>使用 Dapper</h1><p>下面简单创建一个Web API应用并通过Dapper访问MySQL数据。</p>
+<ol>
+<li><p><strong>创建MySQL测试数据</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">CREATE SCHEMA `ormdemo` ;</span><br><span class="line"></span><br><span class="line">CREATE TABLE `ormdemo`.`category` (</span><br><span class="line">  `Id` INT NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `name` VARCHAR(45) NOT NULL,</span><br><span class="line">  PRIMARY KEY (`Id`));</span><br><span class="line">  </span><br><span class="line">CREATE TABLE `ormdemo`.`product` (</span><br><span class="line">  `Id` INT NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `Name` VARCHAR(45) NOT NULL,</span><br><span class="line">  `Price` DECIMAL(19,2) NULL,</span><br><span class="line">  `Quantity` INT NULL,</span><br><span class="line">  `CategoryId` INT NOT NULL,</span><br><span class="line">  PRIMARY KEY (`Id`),</span><br><span class="line">  INDEX `fk_product_category_idx` (`CategoryId` ASC),</span><br><span class="line">  CONSTRAINT `fk_product_category`</span><br><span class="line">    FOREIGN KEY (`CategoryId`)</span><br><span class="line">    REFERENCES `ormdemo`.`category` (`Id`)</span><br><span class="line">    ON DELETE CASCADE</span><br><span class="line">    ON UPDATE NO ACTION);  </span><br><span class="line"></span><br><span class="line">INSERT INTO `ormdemo`.`category` (`Name`) VALUES(&quot;Phones&quot;);</span><br><span class="line">INSERT INTO `ormdemo`.`category` (`Name`) VALUES(&quot;Computers&quot;);</span><br><span class="line"></span><br><span class="line">INSERT INTO `ormdemo`.`product` (`Name`,`Price`,`Quantity`,`CategoryId`) VALUES(&quot;iPhone8&quot;,4999.99,10,1);</span><br><span class="line">INSERT INTO `ormdemo`.`product` (`Name`,`Price`,`Quantity`,`CategoryId`) VALUES(&quot;iPhone7&quot;,2999.99,10,1);</span><br><span class="line">INSERT INTO `ormdemo`.`product` (`Name`,`Price`,`Quantity`,`CategoryId`) VALUES(&quot;HP750&quot;,6000.00,5,2);</span><br><span class="line">INSERT INTO `ormdemo`.`product` (`Name`,`Price`,`Quantity`,`CategoryId`) VALUES(&quot;HP5000&quot;,12000.00,10,2);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p><strong>创建Web API应用并添加NuGet引用</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Install-Package MySql.Data</span><br><span class="line">Install-Package Dapper</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p><strong>新建一个Product类</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Category</span><br><span class="line">&#123;</span><br><span class="line">    public int Id &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">    public string Name &#123; get; set; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Product</span><br><span class="line">&#123;</span><br><span class="line">    public int Id &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">    public string Name &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">    public int Quantity &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">    public decimal Price &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">    public int CategoryId &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">    public virtual Category Category &#123; get; set; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p><strong>新建一个DBConfig类用于创建并返回数据库连接</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">using MySql.Data.MySqlClient;</span><br><span class="line">using System.Data;</span><br><span class="line">using System.Configuration;</span><br><span class="line"></span><br><span class="line">public class DBConfig</span><br><span class="line">&#123;</span><br><span class="line">    //ConfigurationManager.ConnectionStrings[&quot;Connection&quot;].ConnectionString;</span><br><span class="line">    private static string DefaultSqlConnectionString = @&quot;server=127.0.0.1;database=ormdemo;uid=root;pwd=Open0001;SslMode=none;&quot;;</span><br><span class="line"></span><br><span class="line">    public static IDbConnection GetSqlConnection(string sqlConnectionString = null)</span><br><span class="line">    &#123;</span><br><span class="line">        if (string.IsNullOrWhiteSpace(sqlConnectionString))</span><br><span class="line">        &#123;</span><br><span class="line">            sqlConnectionString = DefaultSqlConnectionString;</span><br><span class="line">        &#125;</span><br><span class="line">        IDbConnection conn = new MySqlConnection(sqlConnectionString);</span><br><span class="line">        conn.Open();</span><br><span class="line">        return conn;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p><strong>创建简单的仓储接口和类</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public interface IProductRepository</span><br><span class="line">&#123;</span><br><span class="line">    Task&lt;bool&gt; AddAsync(Product prod);</span><br><span class="line">    Task&lt;IEnumerable&lt;Product&gt;&gt; GetAllAsync();</span><br><span class="line">    Task&lt;Product&gt; GetByIDAsync(int id);</span><br><span class="line">    Task&lt;bool&gt; DeleteAsync(int id);</span><br><span class="line">    Task&lt;bool&gt; UpdateAsync(Product prod);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">public class ProductRepository : IProductRepository</span><br><span class="line">&#123;</span><br><span class="line">    public async Task&lt;IEnumerable&lt;Product&gt;&gt; GetAllAsync()</span><br><span class="line">    &#123;</span><br><span class="line">        using (IDbConnection conn = DBConfig.GetSqlConnection())</span><br><span class="line">        &#123;</span><br><span class="line">            return await conn.QueryAsync&lt;Product&gt;(@&quot;SELECT Id</span><br><span class="line">                                            ,Name</span><br><span class="line">                                            ,Quantity</span><br><span class="line">                                            ,Price</span><br><span class="line">                                            ,CategoryId</span><br><span class="line">                                        FROM Product&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public async Task&lt;Product&gt; GetByIDAsync(int id)</span><br><span class="line">    &#123;</span><br><span class="line">        using (IDbConnection conn = DBConfig.GetSqlConnection())</span><br><span class="line">        &#123;</span><br><span class="line">            string sql = @&quot;SELECT Id</span><br><span class="line">                                ,Name</span><br><span class="line">                                ,Quantity</span><br><span class="line">                                ,Price </span><br><span class="line">                                ,CategoryId</span><br><span class="line">                            FROM Product</span><br><span class="line">                            WHERE Id = @Id&quot;;</span><br><span class="line">            return await conn.QueryFirstOrDefaultAsync&lt;Product&gt;(sql, new &#123; Id = id &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public async Task&lt;bool&gt; AddAsync(Product prod)</span><br><span class="line">    &#123;</span><br><span class="line">        using (IDbConnection conn = DBConfig.GetSqlConnection())</span><br><span class="line">        &#123;</span><br><span class="line">            string sql = @&quot;INSERT INTO Product </span><br><span class="line">                            (Name</span><br><span class="line">                            ,Quantity</span><br><span class="line">                            ,Price</span><br><span class="line">                            ,CategoryId)</span><br><span class="line">                        VALUES</span><br><span class="line">                            (@Name</span><br><span class="line">                            ,@Quantity</span><br><span class="line">                            ,@Price</span><br><span class="line">                            ,@CategoryId)&quot;;</span><br><span class="line">            return await conn.ExecuteAsync(sql, prod) &gt; 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public async Task&lt;bool&gt; UpdateAsync(Product prod)</span><br><span class="line">    &#123;</span><br><span class="line">        using (IDbConnection conn = DBConfig.GetSqlConnection())</span><br><span class="line">        &#123;</span><br><span class="line">            string sql = @&quot;UPDATE Product SET </span><br><span class="line">                                Name = @Name</span><br><span class="line">                                ,Quantity = @Quantity</span><br><span class="line">                                ,Price= @Price</span><br><span class="line">                                ,CategoryId= @CategoryId</span><br><span class="line">                           WHERE Id = @Id&quot;;</span><br><span class="line">            return await conn.ExecuteAsync(sql, prod) &gt; 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public async Task&lt;bool&gt; DeleteAsync(int id)</span><br><span class="line">    &#123;</span><br><span class="line">        using (IDbConnection conn = DBConfig.GetSqlConnection())</span><br><span class="line">        &#123;</span><br><span class="line">            string sql = @&quot;DELETE FROM Product</span><br><span class="line">                            WHERE Id = @Id&quot;;</span><br><span class="line">            return await conn.ExecuteAsync(sql, new &#123; Id = id &#125;) &gt; 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+在Startup ConfigureServices方法里面配置依赖注入
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public void ConfigureServices(IServiceCollection services)</span><br><span class="line">&#123;</span><br><span class="line">    services.AddTransient&lt;IProductRepository, ProductRepository&gt;();</span><br><span class="line"></span><br><span class="line">    services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><ol>
+<li><p><strong>在Controller里面调用仓储方法</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">[Route(&quot;api/[controller]&quot;)]</span><br><span class="line">[ApiController]</span><br><span class="line">public class ProductController : ControllerBase</span><br><span class="line">&#123;</span><br><span class="line">    private readonly IProductRepository _productRepository;</span><br><span class="line">    public ProductController(IProductRepository productRepository)</span><br><span class="line">    &#123;</span><br><span class="line">        _productRepository = productRepository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [HttpGet]</span><br><span class="line">    public async Task&lt;IActionResult&gt; Get()</span><br><span class="line">    &#123;</span><br><span class="line">        var data = await _productRepository.GetAllAsync();</span><br><span class="line">        return Ok(data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [HttpGet(&quot;&#123;id&#125;&quot;)]</span><br><span class="line">    public async Task&lt;IActionResult&gt; Get(int id)</span><br><span class="line">    &#123;</span><br><span class="line">        var data = await _productRepository.GetByIDAsync(id);</span><br><span class="line">        return Ok(data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [HttpPost]</span><br><span class="line">    public async Task&lt;IActionResult&gt; Post([FromBody] Product prod)</span><br><span class="line">    &#123;</span><br><span class="line">        if (!ModelState.IsValid)</span><br><span class="line">        &#123;</span><br><span class="line">            return BadRequest(ModelState);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        await _productRepository.AddAsync(prod);</span><br><span class="line">        return NoContent();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [HttpPut(&quot;&#123;id&#125;&quot;)]</span><br><span class="line">    public async Task&lt;IActionResult&gt; Put(int id, [FromBody] Product prod)</span><br><span class="line">    &#123;</span><br><span class="line">        if (!ModelState.IsValid)</span><br><span class="line">        &#123;</span><br><span class="line">            return BadRequest(ModelState);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        var model = await _productRepository.GetByIDAsync(id);</span><br><span class="line">        model.Name = prod.Name;</span><br><span class="line">        model.Quantity = prod.Quantity;</span><br><span class="line">        model.Price = prod.Price;</span><br><span class="line">        await _productRepository.UpdateAsync(model);</span><br><span class="line"></span><br><span class="line">        return NoContent();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [HttpDelete(&quot;&#123;id&#125;&quot;)]</span><br><span class="line">    public async Task&lt;IActionResult&gt; Delete(int id)</span><br><span class="line">    &#123;</span><br><span class="line">        await _productRepository.DeleteAsync(id);</span><br><span class="line">        return NoContent();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p><strong>测试API是否可以正常工作</strong></p>
+</li>
+<li><p><strong>Dapper对存储过程和事务的支持</strong></p>
+<p> <code>存储过程</code></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">using (var connection = My.ConnectionFactory())</span><br><span class="line">&#123;</span><br><span class="line">	connection.Open();</span><br><span class="line"></span><br><span class="line">	var affectedRows = connection.Execute(sql,</span><br><span class="line">		new &#123;Kind = InvoiceKind.WebInvoice, Code = &quot;Single_Insert_1&quot;&#125;,</span><br><span class="line">		commandType: CommandType.StoredProcedure);</span><br><span class="line"></span><br><span class="line">	My.Result.Show(affectedRows);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<pre><code>`事务`
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">using (var connection = My.ConnectionFactory())</span><br><span class="line">&#123;</span><br><span class="line">	connection.Open();</span><br><span class="line">	</span><br><span class="line">	using (var transaction = connection.BeginTransaction())</span><br><span class="line">	&#123;</span><br><span class="line">		var affectedRows = connection.Execute(sql, new &#123;CustomerName = &quot;Mark&quot;&#125;, transaction: transaction);</span><br><span class="line">		</span><br><span class="line">		transaction.Commit();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><ol>
+<li><p><strong>Dapper对多表映射的支持</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var selectAllProductWithCategorySQL = @&quot;select * from product p </span><br><span class="line">    inner join category c on c.Id = p.CategoryId</span><br><span class="line">    Order by p.Id&quot;;</span><br><span class="line">var allProductWithCategory = connection.Query&lt;Product, Category, Product&gt;(selectAllProductWithCategorySQL, (prod, cg) =&gt; &#123; prod.Category = cg; return prod; &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="使用-Dapper-Contrib-或其他扩展"><a href="#使用-Dapper-Contrib-或其他扩展" class="headerlink" title="使用 Dapper Contrib 或其他扩展"></a>使用 Dapper Contrib 或其他扩展</h1><p>Dapper Contrib扩展Dapper提供了CRUD的方法</p>
+<ul>
+<li>Get</li>
+<li>GetAll</li>
+<li>Insert</li>
+<li>Update</li>
+<li>Delete</li>
+<li>DeleteAll</li>
+</ul>
+<ol>
+<li><p><strong>添加NuGet引用Dapper.Contrib</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Install-Package Dapper.Contrib</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>为Product类添加数据注解</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Table(&quot;Product&quot;)]</span><br><span class="line">public class Product</span><br><span class="line">&#123;</span><br><span class="line">    [Key]</span><br><span class="line">    public int Id &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">    public string Name &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">    public int Quantity &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">    public decimal Price &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">    public int CategoryId &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">    public virtual Category Category &#123; get; set; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p><strong>增加一个新的仓储类继承</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">public class ContribProductRepository : IProductRepository</span><br><span class="line">&#123;</span><br><span class="line">    public async Task&lt;bool&gt; AddAsync(Product prod)</span><br><span class="line">    &#123;</span><br><span class="line">        using (IDbConnection conn = DBConfig.GetSqlConnection())</span><br><span class="line">        &#123;</span><br><span class="line">            return await conn.InsertAsync(prod) &gt; 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public async Task&lt;IEnumerable&lt;Product&gt;&gt; GetAllAsync()</span><br><span class="line">    &#123;</span><br><span class="line">        using (IDbConnection conn = DBConfig.GetSqlConnection())</span><br><span class="line">        &#123;</span><br><span class="line">            return await conn.GetAllAsync&lt;Product&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public async Task&lt;Product&gt; GetByIDAsync(int id)</span><br><span class="line">    &#123;</span><br><span class="line">        using (IDbConnection conn = DBConfig.GetSqlConnection())</span><br><span class="line">        &#123;</span><br><span class="line">            return await conn.GetAsync&lt;Product&gt;(id);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public async Task&lt;bool&gt; DeleteAsync(int id)</span><br><span class="line">    &#123;</span><br><span class="line">        using (IDbConnection conn = DBConfig.GetSqlConnection())</span><br><span class="line">        &#123;</span><br><span class="line">            var entity = await conn.GetAsync&lt;Product&gt;(id);</span><br><span class="line">            return await conn.DeleteAsync(entity);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public async Task&lt;bool&gt; UpdateAsync(Product prod)</span><br><span class="line">    &#123;</span><br><span class="line">        using (IDbConnection conn = DBConfig.GetSqlConnection())</span><br><span class="line">        &#123;</span><br><span class="line">            return await conn.UpdateAsync(prod);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 修改Startup ConfigureServices方法里面配置依赖注入</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">services.AddTransient&lt;IProductRepository, ContribProductRepository&gt;();</span><br></pre></td></tr></table></figure>
+<p> 测试，这样可以少写了不少基本的SQL语句。</p>
+</li>
+<li><p><strong>其他一些开源的Dapper扩展</strong></p>
+<p> 类库 | 提供的方法<br> —|—<br> <a href="https://github.com/ericdc1/Dapper.SimpleCRUD/" target="_blank" rel="noopener">Dapper.SimpleCRUD</a> | <code>Get</code> <code>GetList</code> <code>GetListPaged</code> <code>Insert</code> <code>Update</code> <code>Delete</code> <code>DeleteList</code> <code>RecordCount</code><br> <a href="https://github.com/zzzprojects/Dapper-Plus" target="_blank" rel="noopener">Dapper Plus</a> | <code>Bulk Insert</code> <code>Bulk Delete</code> <code>Bulk Update</code> <code>Bulk Merge</code> <code>Bulk Action Async</code> <code>Bulk Also Action</code> <code>Bulk Then Action</code><br> <a href="https://github.com/MoonStorm/Dapper.FastCRUD" target="_blank" rel="noopener">Dapper.FastCRUD</a> | <code>Get</code> <code>Find</code> <code>Insert</code> <code>Update</code> <code>BulkUpdate</code> <code>Delete</code> <code>BulkDelete</code> <code>Count</code><br> <a href="https://github.com/dotarj/Dapper.Mapper" target="_blank" rel="noopener">Dapper.Mapper</a> | <code>Multi-mapping</code></p>
+</li>
+</ol>
+<h1 id="引入工作单元-Unit-of-Work"><a href="#引入工作单元-Unit-of-Work" class="headerlink" title="引入工作单元 Unit of Work"></a>引入工作单元 Unit of Work</h1><p>仓储模式往往需要工作单元模式的介入来负责一系列仓储对象的持久化，确保数据完整性。网上关于工作单元模式的实现方式有多种，但其本质都是工作单元类通过创建一个所有仓储共享的数据库上下文对象，来组织多个仓储对象。</p>
+<p>网上的一些实现方式：</p>
+<ul>
+<li><p><a href="https://docs.microsoft.com/zh-cn/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application" target="_blank" rel="noopener">Implementing the Repository and Unit of Work Patterns in an ASP.NET MVC Application</a><br>  微软之前给出的一个示例，仓储类做为工作单元的变量，并通过工作单元传入一致的context参数创建。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">public class UnitOfWork : IDisposable</span><br><span class="line">&#123;</span><br><span class="line">    private SchoolContext context = new SchoolContext();</span><br><span class="line">    private GenericRepository&lt;Department&gt; departmentRepository;</span><br><span class="line">    private GenericRepository&lt;Course&gt; courseRepository;</span><br><span class="line"></span><br><span class="line">    public GenericRepository&lt;Department&gt; DepartmentRepository</span><br><span class="line">    &#123;</span><br><span class="line">        get</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            if (this.departmentRepository == null)</span><br><span class="line">            &#123;</span><br><span class="line">                this.departmentRepository = new GenericRepository&lt;Department&gt;(context);</span><br><span class="line">            &#125;</span><br><span class="line">            return departmentRepository;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public GenericRepository&lt;Course&gt; CourseRepository</span><br><span class="line">    &#123;</span><br><span class="line">        get</span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            if (this.courseRepository == null)</span><br><span class="line">            &#123;</span><br><span class="line">                this.courseRepository = new GenericRepository&lt;Course&gt;(context);</span><br><span class="line">            &#125;</span><br><span class="line">            return courseRepository;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void Save()</span><br><span class="line">    &#123;</span><br><span class="line">        context.SaveChanges();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private bool disposed = false;</span><br><span class="line"></span><br><span class="line">    protected virtual void Dispose(bool disposing)</span><br><span class="line">    &#123;</span><br><span class="line">        if (!this.disposed)</span><br><span class="line">        &#123;</span><br><span class="line">            if (disposing)</span><br><span class="line">            &#123;</span><br><span class="line">                context.Dispose();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        this.disposed = true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void Dispose()</span><br><span class="line">    &#123;</span><br><span class="line">        Dispose(true);</span><br><span class="line">        GC.SuppressFinalize(this);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://www.cnblogs.com/xishuai/p/ddd-repository-iunitofwork-and-idbcontext-part-3.html" target="_blank" rel="noopener">DDD 领域驱动设计－谈谈 Repository、IUnitOfWork 和 IDbContext 的实践</a><br>博客园一位大神的总结，最终采用的方案是仓储类负责查询，工作单元类负责增删改等数据持久化操作。</p>
+</li>
+</ul>
+<p>优缺点不作讨论，适合自己的就是最好的，这里采用了另外一种实现方式：</p>
+<ul>
+<li><p>定义DapperDBContext</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">public interface IContext : IDisposable</span><br><span class="line">&#123;</span><br><span class="line">    bool IsTransactionStarted &#123; get; &#125;</span><br><span class="line"></span><br><span class="line">    void BeginTransaction();</span><br><span class="line"></span><br><span class="line">    void Commit();</span><br><span class="line"></span><br><span class="line">    void Rollback();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public abstract class DapperDBContext : IContext</span><br><span class="line">&#123;</span><br><span class="line">    private IDbConnection _connection;</span><br><span class="line">    private IDbTransaction _transaction;</span><br><span class="line">    private int? _commandTimeout = null;</span><br><span class="line">    private readonly DapperDBContextOptions _options;</span><br><span class="line"></span><br><span class="line">    public bool IsTransactionStarted &#123; get; private set; &#125;</span><br><span class="line"></span><br><span class="line">    protected abstract IDbConnection CreateConnection(string connectionString);</span><br><span class="line"></span><br><span class="line">    protected DapperDBContext(IOptions&lt;DapperDBContextOptions&gt; optionsAccessor)</span><br><span class="line">    &#123;</span><br><span class="line">        _options = optionsAccessor.Value;</span><br><span class="line"></span><br><span class="line">        _connection = CreateConnection(_options.Configuration);</span><br><span class="line">        _connection.Open();</span><br><span class="line"></span><br><span class="line">        DebugPrint(&quot;Connection started.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    #region Transaction</span><br><span class="line"></span><br><span class="line">    public void BeginTransaction()</span><br><span class="line">    &#123;</span><br><span class="line">        if (IsTransactionStarted)</span><br><span class="line">            throw new InvalidOperationException(&quot;Transaction is already started.&quot;);</span><br><span class="line"></span><br><span class="line">        _transaction = _connection.BeginTransaction();</span><br><span class="line">        IsTransactionStarted = true;</span><br><span class="line"></span><br><span class="line">        DebugPrint(&quot;Transaction started.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void Commit()</span><br><span class="line">    &#123;</span><br><span class="line">        if (!IsTransactionStarted)</span><br><span class="line">            throw new InvalidOperationException(&quot;No transaction started.&quot;);</span><br><span class="line"></span><br><span class="line">        _transaction.Commit();</span><br><span class="line">        _transaction = null;</span><br><span class="line"></span><br><span class="line">        IsTransactionStarted = false;</span><br><span class="line"></span><br><span class="line">        DebugPrint(&quot;Transaction committed.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void Rollback()</span><br><span class="line">    &#123;</span><br><span class="line">        if (!IsTransactionStarted)</span><br><span class="line">            throw new InvalidOperationException(&quot;No transaction started.&quot;);</span><br><span class="line"></span><br><span class="line">        _transaction.Rollback();</span><br><span class="line">        _transaction.Dispose();</span><br><span class="line">        _transaction = null;</span><br><span class="line"></span><br><span class="line">        IsTransactionStarted = false;</span><br><span class="line"></span><br><span class="line">        DebugPrint(&quot;Transaction rollbacked and disposed.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    #endregion Transaction</span><br><span class="line"></span><br><span class="line">    #region Dapper Execute &amp; Query</span><br><span class="line"></span><br><span class="line">    public async Task&lt;int&gt; ExecuteAsync(string sql, object param = null, CommandType commandType = CommandType.Text)</span><br><span class="line">    &#123;</span><br><span class="line">        return await _connection.ExecuteAsync(sql, param, _transaction, _commandTimeout, commandType);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public async Task&lt;IEnumerable&lt;T&gt;&gt; QueryAsync&lt;T&gt;(string sql, object param = null, CommandType commandType = CommandType.Text)</span><br><span class="line">    &#123;</span><br><span class="line">        return await _connection.QueryAsync&lt;T&gt;(sql, param, _transaction, _commandTimeout, commandType);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public async Task&lt;T&gt; QueryFirstOrDefaultAsync&lt;T&gt;(string sql, object param = null, CommandType commandType = CommandType.Text)</span><br><span class="line">    &#123;</span><br><span class="line">        return await _connection.QueryFirstOrDefaultAsync&lt;T&gt;(sql, param, _transaction, _commandTimeout, commandType);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public async Task&lt;IEnumerable&lt;TReturn&gt;&gt; QueryAsync&lt;TFirst, TSecond, TReturn&gt;(string sql, Func&lt;TFirst, TSecond, TReturn&gt; map, object param = null, string splitOn = &quot;Id&quot;, CommandType commandType = CommandType.Text)</span><br><span class="line">    &#123;</span><br><span class="line">        return await _connection.QueryAsync(sql, map, param, _transaction, true, splitOn, _commandTimeout, commandType);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    #endregion Dapper Execute &amp; Query</span><br><span class="line"></span><br><span class="line">    public void Dispose()</span><br><span class="line">    &#123;</span><br><span class="line">        if (IsTransactionStarted)</span><br><span class="line">            Rollback();</span><br><span class="line"></span><br><span class="line">        _connection.Close();</span><br><span class="line">        _connection.Dispose();</span><br><span class="line">        _connection = null;</span><br><span class="line"></span><br><span class="line">        DebugPrint(&quot;Connection closed and disposed.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void DebugPrint(string message)</span><br><span class="line">    &#123;</span><br><span class="line">#if DEBUG</span><br><span class="line">        Debug.Print(&quot;&gt;&gt;&gt; UnitOfWorkWithDapper - Thread &#123;0&#125;: &#123;1&#125;&quot;, Thread.CurrentThread.ManagedThreadId, message);</span><br><span class="line">#endif</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>定义UnitOfWork</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public interface IUnitOfWork : IDisposable</span><br><span class="line">&#123;</span><br><span class="line">    void SaveChanges();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class UnitOfWork : IUnitOfWork</span><br><span class="line">&#123;</span><br><span class="line">    private readonly IContext _context;</span><br><span class="line"></span><br><span class="line">    public UnitOfWork(IContext context)</span><br><span class="line">    &#123;</span><br><span class="line">        _context = context;</span><br><span class="line">        _context.BeginTransaction();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void SaveChanges()</span><br><span class="line">    &#123;</span><br><span class="line">        if (!_context.IsTransactionStarted)</span><br><span class="line">            throw new InvalidOperationException(&quot;Transaction have already been commited or disposed.&quot;);</span><br><span class="line"></span><br><span class="line">        _context.Commit();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void Dispose()</span><br><span class="line">    &#123;</span><br><span class="line">        if (_context.IsTransactionStarted)</span><br><span class="line">            _context.Rollback();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义UnitOfWorkFactory</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public interface IUnitOfWorkFactory</span><br><span class="line">&#123;</span><br><span class="line">    IUnitOfWork Create();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class DapperUnitOfWorkFactory : IUnitOfWorkFactory</span><br><span class="line">&#123;</span><br><span class="line">    private readonly DapperDBContext _context;</span><br><span class="line"></span><br><span class="line">    public DapperUnitOfWorkFactory(DapperDBContext context)</span><br><span class="line">    &#123;</span><br><span class="line">        _context = context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public IUnitOfWork Create()</span><br><span class="line">    &#123;</span><br><span class="line">        return new UnitOfWork(_context);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义服务扩展</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public class DapperDBContextOptions : IOptions&lt;DapperDBContextOptions&gt;</span><br><span class="line">&#123;</span><br><span class="line">    public string Configuration &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">    DapperDBContextOptions IOptions&lt;DapperDBContextOptions&gt;.Value</span><br><span class="line">    &#123;</span><br><span class="line">        get &#123; return this; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static class DapperDBContextServiceCollectionExtensions</span><br><span class="line">&#123;</span><br><span class="line">    public static IServiceCollection AddDapperDBContext&lt;T&gt;(this IServiceCollection services, Action&lt;DapperDBContextOptions&gt; setupAction) where T : DapperDBContext</span><br><span class="line">    &#123;</span><br><span class="line">        if (services == null)</span><br><span class="line">        &#123;</span><br><span class="line">            throw new ArgumentNullException(nameof(services));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (setupAction == null)</span><br><span class="line">        &#123;</span><br><span class="line">            throw new ArgumentNullException(nameof(setupAction));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        services.AddOptions();</span><br><span class="line">        services.Configure(setupAction);</span><br><span class="line">        services.AddScoped&lt;DapperDBContext, T&gt;();</span><br><span class="line">        services.AddScoped&lt;IUnitOfWorkFactory, DapperUnitOfWorkFactory&gt;();</span><br><span class="line"></span><br><span class="line">        return services;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>怎么使用</p>
+<ol>
+<li><p>创建一个自己的Context并继承DapperDBContext。下面测试的TestDBContext是采用MySQL数据库并返回MySqlConnection。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class TestDBContext : DapperDBContext</span><br><span class="line">&#123;</span><br><span class="line">    public TestDBContext(IOptions&lt;DapperDBContextOptions&gt; optionsAccessor) : base(optionsAccessor)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    protected override IDbConnection CreateConnection(string connectionString)</span><br><span class="line">    &#123;</span><br><span class="line">        IDbConnection conn = new MySqlConnection(connectionString);</span><br><span class="line">        return conn;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>仓储类里面添加DapperDBContext引用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public class UowProductRepository : IProductRepository</span><br><span class="line">&#123;</span><br><span class="line">    private readonly DapperDBContext _context;</span><br><span class="line">    public UowProductRepository(DapperDBContext context)</span><br><span class="line">    &#123;</span><br><span class="line">        _context = context;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    public async Task&lt;Product&gt; GetByIDAsync(int id)</span><br><span class="line">    &#123;</span><br><span class="line">        string sql = @&quot;SELECT Id</span><br><span class="line">                            ,Name</span><br><span class="line">                            ,Quantity</span><br><span class="line">                            ,Price </span><br><span class="line">                            ,CategoryId</span><br><span class="line">                        FROM Product</span><br><span class="line">                        WHERE Id = @Id&quot;;</span><br><span class="line">        return await _context.QueryFirstOrDefaultAsync&lt;Product&gt;(sql, new &#123; Id = id &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public async Task&lt;bool&gt; AddAsync(Product prod)</span><br><span class="line">    &#123;</span><br><span class="line">        string sql = @&quot;INSERT INTO Product </span><br><span class="line">                        (Name</span><br><span class="line">                        ,Quantity</span><br><span class="line">                        ,Price</span><br><span class="line">                        ,CategoryId)</span><br><span class="line">                    VALUES</span><br><span class="line">                        (@Name</span><br><span class="line">                        ,@Quantity</span><br><span class="line">                        ,@Price</span><br><span class="line">                        ,@CategoryId)&quot;;</span><br><span class="line">        return await _context.ExecuteAsync(sql, prod) &gt; 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Startup里面注册服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public void ConfigureServices(IServiceCollection services)</span><br><span class="line">&#123;</span><br><span class="line">    services.AddDapperDBContext&lt;TestDBContext&gt;(options =&gt; &#123;</span><br><span class="line">        options.Configuration = @&quot;server=127.0.0.1;database=ormdemo;uid=root;pwd=password;SslMode=none;&quot;;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    services.AddTransient&lt;IProductRepository, UowProductRepository&gt;();</span><br><span class="line">    services.AddTransient&lt;ICategoryRepository, UowCategoryRepository&gt;();</span><br><span class="line"></span><br><span class="line">    services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Controller调用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">public class ProductController : ControllerBase</span><br><span class="line">&#123;</span><br><span class="line">    private readonly IUnitOfWorkFactory _uowFactory;</span><br><span class="line">    private readonly IProductRepository _productRepository;</span><br><span class="line">    private readonly ICategoryRepository _categoryRepository;</span><br><span class="line">    </span><br><span class="line">    public ProductController(IUnitOfWorkFactory uowFactory, IProductRepository productRepository, ICategoryRepository categoryRepository)</span><br><span class="line">    &#123;</span><br><span class="line">        _uowFactory = uowFactory;</span><br><span class="line">        _productRepository = productRepository;</span><br><span class="line">        _categoryRepository = categoryRepository;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    [HttpGet(&quot;&#123;id&#125;&quot;)]</span><br><span class="line">    public async Task&lt;IActionResult&gt; Get(int id)</span><br><span class="line">    &#123;</span><br><span class="line">        var data = await _productRepository.GetByIDAsync(id);</span><br><span class="line">        return Ok(data);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    [HttpPost]</span><br><span class="line">    public async Task&lt;IActionResult&gt; Post([FromBody] Product prod)</span><br><span class="line">    &#123;</span><br><span class="line">        if (!ModelState.IsValid)</span><br><span class="line">        &#123;</span><br><span class="line">            return BadRequest(ModelState);</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        //await _productRepository.AddAsync(prod);</span><br><span class="line">    </span><br><span class="line">        using (var uow = _uowFactory.Create())</span><br><span class="line">        &#123;</span><br><span class="line">            await _productRepository.AddAsync(prod);</span><br><span class="line">    </span><br><span class="line">            uow.SaveChanges();</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">        return NoContent();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h1><p><a href="https://github.com/zdz72113/NETCore_BasicKnowledge.Examples/tree/master/ORMDemo" target="_blank" rel="noopener">Github</a>    </p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://github.com/StackExchange/Dapper" target="_blank" rel="noopener">Dapper Github</a></li>
+<li><a href="http://dapper-tutorial.net/dapper" target="_blank" rel="noopener">Dapper Tutorial</a></li>
+<li><a href="https://github.com/EloreTec/UnitOfWorkWithDapper" target="_blank" rel="noopener">UnitOfWorkWithDapper</a></li>
+<li><a href="https://github.com/grandchamp/Identity.Dapper" target="_blank" rel="noopener">Identity.Dapper</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/24/1.5 [Basic] ASP.NET Core 中的缓存/" rel="next" title="ASP .NET Core 的缓存">
+                <i class="fa fa-chevron-left"></i> ASP .NET Core 的缓存
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/22/2017-roadmap/" rel="prev" title="2019年Web开发者的技能蓝图">
+                2019年Web开发者的技能蓝图 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="Jason YZP" />
+          <p class="site-author-name" itemprop="name">Jason YZP</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://yuzhupeng.github.io/" title="hexo" target="_blank">hexo</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/YzpJason/" title="cnblog" target="_blank">cnblog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://weibo.com/jasonyuzhupeng/" title="weibo" target="_blank">weibo</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dapper-简介"><span class="nav-number">1.</span> <span class="nav-text">Dapper 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-Dapper"><span class="nav-number">2.</span> <span class="nav-text">使用 Dapper</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-Dapper-Contrib-或其他扩展"><span class="nav-number">3.</span> <span class="nav-text">使用 Dapper Contrib 或其他扩展</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引入工作单元-Unit-of-Work"><span class="nav-number">4.</span> <span class="nav-text">引入工作单元 Unit of Work</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源代码"><span class="nav-number">5.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">6.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-tint"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jason YZP</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/nprogress/nprogress.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/custom.js"></script>
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
