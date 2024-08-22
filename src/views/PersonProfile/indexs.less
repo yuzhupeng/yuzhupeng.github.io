@@ -1,0 +1,86 @@
+.left {
+    padding-bottom: 30px;
+    .left__title {
+        position: relative;
+        height: 32px;
+        margin: 10px auto 5px;
+        overflow: hidden;
+
+        & > h2 {
+            position: relative;
+            z-index: 1;
+            width: 24%;
+            min-width: 100px;
+            margin: 0 auto;
+            padding: 4px 10px;
+            border-radius: 32px;
+            font-size: 16px;
+            font-weight: normal;
+            text-align: center;
+            background-color: #00b38a;
+            color: #FFF;
+        }
+        & > span {
+            position: absolute;
+            top: 50%;
+            display: inline-block;
+            width: 35%;
+            height: 0;
+            vertical-align: middle;
+            border-top: 1px solid #00b38a;
+        }
+        & > span:nth-of-type(1) {
+            left: 0;
+        }
+        & > span:nth-of-type(2) {
+            right: 0;
+        }
+    }
+    .left-item {
+        padding: 10px 0 15px;
+        .left-item-header {
+            display: flex;
+            align-items: flex-end;
+            & > span {
+                flex: 0.25;
+                color: gray;
+            }
+            & > h3 {
+                flex: 0.5;
+                margin: 0;
+                text-align: center;
+            }
+            & > div {
+                text-align: right;
+                flex: 0.25;
+                button {
+                    width: 40px;
+                    height: 20px;
+                    padding: 0;
+                    font-size: 14px;
+                    border: 1px solid #00b38a;
+                    border-radius: 3px;
+                    color: #00b38a;
+                    &:hover {
+                        color: #FFF;
+                        background: #00b38a;
+                    }
+                }
+            }
+        }
+    }
+    .left__personal {
+        p {
+            /*font-size: 14px;*/
+            margin: 8px 0;
+        }
+    }
+    .left__personal-point {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-right: 8px;
+        background: #00b38a;
+        border-radius: 50%;
+    }
+}
