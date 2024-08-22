@@ -1,2 +1,2 @@
 personal site
-https://yuzhupeng.github.io/personalsite/
+https://yuzhupeng.top
