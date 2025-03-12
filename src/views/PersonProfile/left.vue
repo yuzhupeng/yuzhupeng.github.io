@@ -50,15 +50,12 @@
       }}</a> -->
 <p>1、.C#/.NET、.NET Core、.NET MVC、Web API、RESTful API</p>
 <p>2、前端：js、jQuery、Vue.js、Vuex、IView、Element-UI、Bootstrap</p>
-<p>3、数据库：SQLServer、MySQL、Redis、MongoDB </p>
+<p>3、数据库：Pgsql,SQLServer、MySQL、Redis、MongoDB </p>
 <p>4、ORM：Nhibernate、Dapper、Entity Framework、FreeSql、SqlSugar</p>
 <p>5、架构：领域驱动设计 DDD、</p>
-<p>6、环境：Windows、Linux、IIS、Nginx</p>
-
+<p>6、环境：Windows、Linux、</p>
 <p>7、其他：微信小程序 Python：爬虫、办公自动化处理、图像处理</p>
-
-<p>8、工具：.Vscode、VS Studio、git、Svn、npm、yarn、Webpack、Docker、</p>
-
+<p>8、分布式、高并发、微服务、Docker、CI/CD、DevOps、Portainer;Dapr、RabbitMQ、Kafka、RPC、Elasticsearch、Minio</p>
  </div>
 
 
@@ -79,6 +76,12 @@
           <b style="color: black"> .NET Core高质量资源-#需FQ:</b>
          <p> <a href="https://yuzhupeng.github.io/DotNetGuide/" target="_blank">https://yuzhupeng.github.io/DotNetGuide/</a></p>
         </div>
+        <div>
+          <b style="color: black"> 2025 NET er 路线-#需FQ:</b>
+         <p> <a href="https://github.com/MoienTajik/AspNetCore-Developer-Roadmap/tree/master" target="_blank">https://github.com/MoienTajik/AspNetCore-Developer-Roadmap/tree/master</a></p>
+        </div>
+
+
               <div>
           <b style="color: black"> JavaScript 资源大全中文版-#需FQ:</b>
          <p> <a href="https://yuzhupeng.github.io/awesome-python-cn/" target="_blank">https://yuzhupeng.github.io/awesome-python-cn/</a></p>

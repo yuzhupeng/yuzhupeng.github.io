@@ -85,7 +85,7 @@ const skillList = [
     'vue',
     'jQuery',
     'html',
-    'SQL',
+    'SQL,PGSQL MongoDb',
     'javascript',
     'css',
     'webpack',
@@ -132,7 +132,7 @@ const social = [{
 const personalInfo = {
     name: '庾柱鹏',
     sex: '男',
-    position: '高级工程师',
+    position: '全栈工程师',
     birthday: '1992.09',
     university: '东莞理工学院城市学院',
     major: '软件工程',
@@ -145,20 +145,32 @@ const personalInfo = {
 //项目列表
 const projectlists = [
     {
-        starttime: '2022.06',
-        time: "20个月",
-        title: "领益智造QMS&WMS管理系统",
+        starttime: '2022.09',
+        time: "24个月",
+        title: "领益智造 全球化分布式QMSWMS管理系统(QMSWMS3.0)",
         company: '广东领益智造股份有限公司',
         job: '开发工程师',
-        duty: '系统核心功能设计,详细设计,框架的搭建和所有功能模块的设计实现,以及部署-发布-上线（devops）全流程',
-        technology: ".net core 5,vue,nginx,,PyPDF2,,docker,git,Jenkins,portal",
+        duty: '系统核心功能设计,详细设计,框架的搭建和所有功能模块的设计实现,对接集团内系统 SRM,OA,MES,ERP(SAP) 实现集团 数字化工厂总体目标,以及部署-发布-上线（devops）全流程',
+        technology: ".net core 5,vue,Pgsql,redis,nginx,docker,git,Jenkins,portal",
         people: '17人',
         Projectmessage: [
-            '1. 项目包含：票根网发票数据爬取模块,KPTG 数据自动化处理模块,简历系统自动化模块,定时任务管理模块',
-            '2. 票根网发票数据爬取模块：按月份批量抓取发票信息,批量合并发票pdf,读取发票pdf信息,合并并统计生成发票金额信息EXCEL',
-            '3. KPTG 数据自动化处理模块:采购订单自动下载,检收单自动打印整合,下载采购单数据自动发送邮件',
-            '4: 简历系统自动化模块: 问卷星招聘签名批量自动下载API,Sony相机 拍照API对接,python处理免冠照片剪辑,OCR识别身份证信息',
-            '5. 个人主要负责以上所有模块开发',
+             '1.项目包含业务：sap单据管理，物料出入库，成品出入库，配送管理，库存盘点，容器最小包装管理,无纸化流程,报关自动化,等业务',
+             '2.功能包括：基础资料，库存管理，拆合箱，标签打印，报表管理，初始化数据管理，品质管理，看板管理，位置管理 等功能',
+             '3.产品追溯模块：通过批号、容器等信息追溯制造过程。',
+             '4.看板模块: 内置看板自适应模板，已实现轮播，定点投放，已包含工位操作看板、物流指示看板。',
+             '5.多工厂动态标签，跨组织数据共享，对接SRM系统 标签打印 收货 出入库管理模块',
+             '6.报关自动化称重管理模块',
+             '7.电镀物料失效防呆模块','',
+             
+             
+             '',
+             '',''
+             
+             
+             
+             ,'',''
+
+
         ],
         picture: [
 
@@ -167,19 +179,21 @@ const projectlists = [
 
     {
         starttime: '2022.06',
-        time: "24个月",
+        time: "6个月",
         title: "领益智造WMS2.0管理系统",
         company: '广东领益智造股份有限公司',
         job: '开发工程师',
-        duty: '项目问题调研,核心功能重构,对接集团内系统（SRM,OA,MES,QMS,ERP(SAP)）,以及部署和上线',
-        technology: ".net,Quzartz,python,图像处理,爬虫,PyPDF2,Pillow,pandas,BeautifulSoup",
-        people: '4人',
+        duty: '项目问题调研,核心功能重构和现有业务的痛点难点疏通,对接集团内系统（SRM,OA,MES,QMS,ERP(SAP)）,以及部署和上线',
+        technology: ".net core 3.1,Quzartz,vue,nginx,jQuery,IIS,",
+        people: '9人',
         Projectmessage: [
-            '1. 项目包含：物料出入库，成品出入库，位置管理，配送管理，库存盘点，容器管理',
-            '2. 票根网发票数据爬取模块：按月份批量抓取发票信息,批量合并发票pdf,读取发票pdf信息,合并并统计生成发票金额信息EXCEL',
-            '3. KPTG 数据自动化处理模块:采购订单自动下载,检收单自动打印整合,下载采购单数据自动发送邮件',
-            '4: 简历系统自动化模块: 问卷星招聘签名批量自动下载API,Sony相机 拍照API对接,python处理免冠照片剪辑',
-            '5. 个人主要负责以上所有模块开发',
+            '1. wms sap 数据同步异常处理,OA WMS SAP 审批流程数据异常解决',
+            '2.处理不同工厂大批量提交库存过账数据，数据库卡死问题',
+            '3.后台表结构数据优化-删除无效表，数据，字段调整，索引优化',
+            '4.建立物料时效管理模块，在mes 生产 成品 半成品 原材料 入库出库时监控其有效期',
+            '解决前端PDA 扫描重复，识别条码异常，使用便捷性，流畅性，人机交互异常等问题',
+            '现场网络异常，人员使用操作异常整理和跟进'
+ 
         ],
         picture: [
 
@@ -370,7 +384,7 @@ const projectlists = [
         duty: '项目组织工作,项目需求调研,功能设计,详细设计,框架的搭建和重要功能模块的设计实现,以及部署和上线',
         technology: "ASP.net MVC,Spring.net,Nhibernate,Web Api,knockout.js,echarts,Ext.js,JQuery,light.7.css,SQL",
         Projectmessage: [
-            '1. 系统主要功能模块:包括基础设置、訂單模塊、工作票模塊、生產訂單管理模塊、補數模塊、品質模塊、KPI模塊、MTS領料模塊、货架模块,报表模块,資源管理模塊等.',
+            '1. 系统主要功能模块:包括基础设置、訂單模塊、工作票模塊、生產訂單管理模塊、補數模塊、品質模塊、KPI模塊、MTS領料模塊、货架模块,报表模块,資源管理模塊 APS生产计划管理模塊等.',
             '2. 包含中间件：实时显示货架模块,状态机组件,sql动态可配置报表,基于echar配置图表组件',
             '3. 项目目标：达成工业4.0的认证配合公司在香港上市',
             '4. 个人主要处理：基础设置,订单模块,工作票模块,MTS領料模塊,货架模块',

@@ -47,14 +47,14 @@
 
 <p>&nbsp;1、.C#/.NET、.NET Core、MVC、Web API、RESTful API</p>
 <p>&nbsp;2、前端：jQuery、Vue.js、Vuex、IView、Element-UI、Bootstrap</p>
-<p>&nbsp;3、数据库：SQLServer、MySQL、Redis、MongoDB </p>
+<p>&nbsp;3、数据库：PgsqlSQL、Server、MySQL、Redis、MongoDB </p>
 <p>&nbsp;4、ORM：Nhibernate、Dapper、Entity Framework、FreeSql、SqlSugar、分库分表、读写分离</p>
-<p>&nbsp;5、架构：领域驱动设计 DDD、</p>
+<p>&nbsp;5、架构：领域驱动设计 DDD、 ABP</p>
 <p>&nbsp;6、环境：Windows、Linux、IIS、Nginx</p>
-<p>&nbsp;7、Python：爬虫、自动化测试、图像处理</p>
-<p>&nbsp;8、其他：微信小程序</p>
-<p>&nbsp; &nbsp;</p>
-<p>&nbsp;9、工具：.Vscode、VS Studio、git、Svn、npm、yarn、Webpack、Docker、</p>
+<p>&nbsp;7、Python：爬虫、自动化、图像处理</p>
+<p>&nbsp;8、 分布式、高并发、微服务、Docker、CI/CD、DevOps、Portainer;Dapr、RabbitMQ、Kafka、RPC、Elasticsearch</p>
+
+
 
 
 </div>
@@ -65,7 +65,7 @@
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;熟悉微软.NET技术(.NET Core、Web、MVC、WinForm、WPF)、通用权限管理系统、工作流引擎、自动化项目(代码)生成器、SOA 、DDD、 云原生(Docker、微服务、）； </p>
 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;熟悉 Python (pytest mkdocs)。</p>
   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;熟悉中小企业软件开发过程：需求分析、架构设计、编码测试、实施部署、项目管理。通过技术与管理帮助中小企业快速化实现互联网技术全流程解决方案。</p>
-    <p><span style="font-size: 14px; color: #ffffff; font-family: &quot;Microsoft YaHei&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+    <p><span style="font-size: 14px; color: #ffffff; font-family: Microsoft YaHei;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
     <hr style="border: 1px solid #eaeaea">
 
 	<p>如有问题，可以通过邮件<a href="mailto:364466548@qq.com"><span style="font-size: 10pt">364466548@qq.com</span></a>联系。共同交流、互相学习。</p>
