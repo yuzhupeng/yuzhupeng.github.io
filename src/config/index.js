@@ -144,23 +144,69 @@ const personalInfo = {
 };
 //项目列表
 const projectlists = [
+
     {
+        starttime: '2025.03',
+        time: "3个月",
+        title: "领益物流微信小程序",
+        company: '广东领益智造股份有限公司',
+        job: '开发工程师',
+        duty: ' 项目问题调研,核心功能重构和现有业务的痛点难点疏通,实现全球化印度地区独立上线,以及前后端 构建 测试 部署CICD',
+        technology: ".net core 3,vue,mysql,redis,nginx,docker,git,Jenkins,layui,vue2,3,IView,Element-UI,Vuex,axios,webpack",
+        people: '8人',
+        Projectmessage: [
+             '业务：TMS 后台管理系统，TMS 设备搬运系统,TMS 手机端，TMS PC端，TMS 报表系统，TMS ,TMS运力资源',
+             '1.解决痛点:解决以上前端 Cdn资源在不同厂区加载卡顿问题 ，优化前端部分UI页面 布局问题，解决 前端项目大量页面js错误',
+             '2.解决后端部分接口查询卡顿慢的问题，优化查询索引设置',
+             '3.配合印度 信息审核, 前后端框架实现印度数据隔离， docker 部署前后端微服务 ',
+             '4.前后端项目 基于jenkins 自动构建 自动部署 '
+        ],
+        picture: [
+            require("@/static/project/tms/1 (1).png"),
+        ],
+    },
+
+
+
+    {
+
+
+
+
         starttime: '2024.12',
-        time: "4个月",
+        time: "3个月",
         title: "领益智造 全球化 TMS 管理系统",
         company: '广东领益智造股份有限公司',
         job: '开发工程师',
         duty: ' 项目问题调研,核心功能重构和现有业务的痛点难点疏通,实现全球化印度地区独立上线,以及前后端 构建 测试 部署CICD',
-        technology: ".net core 3,vue,mysql,redis,nginx,docker,git,Jenkins,layui,vue2,3 ",
+        technology: ".net core 3,vue,mysql,redis,nginx,docker,git,Jenkins,layui,vue2,3,IView,Element-UI,Vuex,axios,webpack",
         people: '8人',
         Projectmessage: [
-             '1.解决痛点:解决前端 Cdn资源在不同厂区加载卡顿问题 ，优化前端部分UI页面 布局问题，解决几个前端项目大量页面js错误',
+              '业务：TMS 后台管理系统，TMS 设备搬运系统,TMS 手机端，TMS PC端，TMS 报表系统，TMS ,TMS运力资源',
+             '1.解决痛点:解决以上前端 Cdn资源在不同厂区加载卡顿问题 ，优化前端部分UI页面 布局问题，解决 前端项目大量页面js错误',
              '2.解决后端部分接口查询卡顿慢的问题，优化查询索引设置',
-             '3.印度 信息审核 docker 部署前后端微服务 ',
+             '3.配合印度 信息审核, 前后端框架实现印度数据隔离， docker 部署前后端微服务 ',
              '4.前后端项目 基于jenkins 自动构建 自动部署 '
         ],
         picture: [
-
+            require("@/static/project/tms/1 (1).png"),
+            require("@/static/project/tms/1 (2).png"),
+            require("@/static/project/tms/1 (3).png"),
+            require("@/static/project/tms/1 (4).png"),
+            require("@/static/project/tms/1 (5).png"),
+            require("@/static/project/tms/1 (6).png"),
+            require("@/static/project/tms/1 (7).png"),
+            require("@/static/project/tms/1 (8).png"),
+            require("@/static/project/tms/1 (9).png"),
+            require("@/static/project/tms/1 (10).png"),
+            require("@/static/project/tms/1 (11).png"),
+            require("@/static/project/tms/1 (12).png"),
+            require("@/static/project/tms/1 (13).png"),
+            require("@/static/project/tms/1 (14).png"),
+               require("@/static/project/tms/1 (15).png"),
+                  require("@/static/project/tms/1 (16).png"),
+                  require("@/static/project/tms/1 (17).png"),
+                  require("@/static/project/tms/1 (18).png"),
         ],
     },
 
@@ -180,24 +226,31 @@ const projectlists = [
              '1.项目包含业务：sap单据管理，物料出入库，成品出入库，配送管理，库存盘点，容器最小包装管理,无纸化流程,报关自动化...',
              '2.功能包括：基础资料，库存管理，拆合箱，标签打印，报表管理，初始化数据管理，品质管理，看板管理，位置管理 等功能',
              '3.产品追溯模块：通过批号、容器等信息追溯制造过程。',
-             '4.看板模块: 内置看板自适应模板，已实现轮播，定点投放，已包含工位操作看板、物流指示看板。',
-             '5.集团多工厂动态标签，跨组织数据共享，对接SRM系统 订单  标签打印 收货 出入库管理模块',
-             '6.报关自动化称重管理模块',
+             '4.看板模块: 内置看板自适应模板，无纸化单据效率看板，定点投放看板，工位操作看板、物流指示看板。',
+             '5.集团多工厂动态标签，跨组织数据共享，对接SRM系统 送货单,po单  标签打印 收货 出入库管理模块',
+             '6.SAP-WMS 报关自动化称重管理模块',
              '7.电镀物料失效防呆模块',
              '8.基于集团下不同厂区发料动态可配置 先进先出 规则 ',
-             '9.DDD-容器-库存结构 动态处理 集团内 冲压,模切,注塑,CNC 不同业务，相关库存不同物料属性存储',
+             '9.DDD-容器-库存结构 动态处理 集团内 冲压,模切,注塑,CNC 不同业务，相关库存不同物料属性存储，跨组织-跨业务-无差别共享识别标签',
+             '10.标签配置化管理模块',
              '技术：',
-             '分布式 微服务架构-负载均衡 WMS， BASE（质检公共模块，SN管理，定时任务,标签打印管理） ，Interface(字典，参数，权限，角色，钉钉，组织，人员) ，QMS ，BI（数据看板） ',
+             '分布式 微服务架构 WMS， BASE（质检公共模块，SN管理，定时任务,标签打印管理） ，Interface(字典，参数，权限，角色，钉钉，组织，人员) ，QMS ，BI（数据看板） ',
              'YARP+AgileConfig动态配置的代理网关 ',
              '基于 minIO组件 分布式 文件服务',
-             '基于当前服务器负载，动态配置 服务器，接口 读写分离 sugarsql',                        
+             '基于当前服务器负载，动态配置 服务器，接口 读写分离 修改sugarsql orm',                        
              'Prometheus+Grafana  docker 微服务 监控&告警',
              'redis热缓存,库存，标签，容器 冷热数据分离 历史数据归档处理',
-
-
         ],
         picture: [
-
+            require("@/static/project/skccar/1.png"),
+            require("@/static/project/skccar/2.png"),
+            require("@/static/project/skccar/3.png"),
+            require("@/static/project/skccar/4.png"),
+            require("@/static/project/skccar/5.png"),
+            require("@/static/project/skccar/6.png"),
+            require("@/static/project/skccar/7.png"),
+            require("@/static/project/skccar/8.png"),
+            require("@/static/project/skccar/9.png"),
         ],
     },
 
@@ -214,13 +267,20 @@ const projectlists = [
             '1. wms sap 数据同步异常处理,OA WMS SAP 审批流程数据异常解决',
             '2.处理不同工厂大批量提交库存过账数据，数据库卡死问题',
             '3.后台表结构数据优化-删除无效表，数据，字段调整，索引优化',
-            '4.建立物料时效管理模块，在mes 生产 成品 半成品 原材料 入库出库时监控其有效期',
+            '4.建立物料时效管理模块，在mes 生产 成品 半成品 原材料 入库出库时监控其有效期，并给到品质 进行审批是否放行',
             '5.解决前端PDA 扫描重复，识别条码异常，使用便捷性，流畅性，人机交互异常等问题',
-            '5.现场网络异常，人员使用操作异常整理和跟进'
- 
+            '5.现场网络异常，人员使用操作异常整理和跟进' 
         ],
         picture: [
-
+            require("@/static/project/skccar/1.png"),
+            require("@/static/project/skccar/2.png"),
+            require("@/static/project/skccar/3.png"),
+            require("@/static/project/skccar/4.png"),
+            require("@/static/project/skccar/5.png"),
+            require("@/static/project/skccar/6.png"),
+            require("@/static/project/skccar/7.png"),
+            require("@/static/project/skccar/8.png"),
+            require("@/static/project/skccar/9.png"),
         ],
     },
 
