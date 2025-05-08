@@ -144,23 +144,21 @@ const personalInfo = {
 };
 //项目列表
 const projectlists = [
-
     {
         starttime: '2025.03',
-        time: "3个月",
-        title: "领益物流微信小程序",
+        time: "2个月",
+        title: "领益总务类费用化采购系统",
         company: '广东领益智造股份有限公司',
-        job: '开发工程师',
-        duty: ' 项目问题调研,核心功能重构和现有业务的痛点难点疏通,实现全球化印度地区独立上线,以及前后端 构建 测试 部署CICD',
-        technology: ".net core 3,vue,mysql,redis,nginx,docker,git,Jenkins,layui,vue2,3,IView,Element-UI,Vuex,axios,webpack",
-        people: '8人',
+        job: '开发工程师（全栈）',
+        duty: ' 开源JAVA 多语言 分销 SAAS商城 本地化改造,集成OA SRM SAP系统,实现统一集团费用化采购审批流程,以及前后端 构建 测试 部署CICD',
+        technology: "vue 2,IView,Element-UI,Vuex,axios,webpack,Vue CLI 4,JAVA,Springboot,mysql,redis,nginx,docker,docker-compose,git,Jenkins, ",
+        people: '5人',
         Projectmessage: [
-             '业务：TMS 后台管理系统，TMS 设备搬运系统,TMS 手机端，TMS PC端，TMS 报表系统，TMS ,TMS运力资源',
-             '1.解决痛点:解决以上前端 Cdn资源在不同厂区加载卡顿问题 ，优化前端部分UI页面 布局问题，解决 前端项目大量页面js错误',
-             '2.解决后端部分接口查询卡顿慢的问题，优化查询索引设置',
-             '3.配合印度 信息审核, 前后端框架实现印度数据隔离， docker 部署前后端微服务 ',
-             '4.前后端项目 基于jenkins 自动构建 自动部署 '
-        ],
+             '业务：问题调研 总务类费用化采购系统，费用化采购审批流程',
+             '1.配合OA系统,实现费用化采购审批流程',
+             '2.前后端项目 基于jenkins 自动构建 自动部署 '
+             '3.商品 SKU  SPU 管理 商品 供应商 价格 库存 等管理' 
+        ],   '4.从 SAP 同步 物料商品数据从商城平台传输至OA，导入成本中心、物料组、工厂、 物料信息、等数据'
         picture: [
             require("@/static/project/tms/1 (1).png"),
         ],
@@ -169,15 +167,11 @@ const projectlists = [
 
 
     {
-
-
-
-
-        starttime: '2024.12',
-        time: "3个月",
+        starttime: '2024.11',
+        time: "4个月",
         title: "领益智造 全球化 TMS 管理系统",
         company: '广东领益智造股份有限公司',
-        job: '开发工程师',
+        job: '开发工程师（全栈）',
         duty: ' 项目问题调研,核心功能重构和现有业务的痛点难点疏通,实现全球化印度地区独立上线,以及前后端 构建 测试 部署CICD',
         technology: ".net core 3,vue,mysql,redis,nginx,docker,git,Jenkins,layui,vue2,3,IView,Element-UI,Vuex,axios,webpack",
         people: '8人',
@@ -187,6 +181,7 @@ const projectlists = [
              '2.解决后端部分接口查询卡顿慢的问题，优化查询索引设置',
              '3.配合印度 信息审核, 前后端框架实现印度数据隔离， docker 部署前后端微服务 ',
              '4.前后端项目 基于jenkins 自动构建 自动部署 '
+             '5.领益物流微信小程序 开发 基于uniapp 实现 移动端  进出口复核 竞价 询价 等业务'
         ],
         picture: [
             require("@/static/project/tms/1 (1).png"),
@@ -213,11 +208,11 @@ const projectlists = [
 
 
     {
-        starttime: '2022.09',
+        starttime: '2022.10',
         time: "24个月",
         title: "领益智造 全球化分布式QMSWMS管理系统(QMSWMS3.0)",
         company: '广东领益智造股份有限公司',
-        job: '开发工程师',
+        job: '开发工程师（后端）',
         duty: '系统核心功能设计,详细设计,框架的搭建和所有功能模块的设计实现,对接集团内系统 SRM,OA,MES,ERP(SAP) 实现集团 数字化工厂总体目标,以及部署-发布-上线（devops）全流程',
         technology: ".net core 5,vue,Pgsql,redis,nginx,docker,git,Jenkins,portal,Prometheu,Grafana",
         people: '17人',
@@ -230,7 +225,7 @@ const projectlists = [
              '5.集团多工厂动态标签，跨组织数据共享，对接SRM系统 送货单,po单  标签打印 收货 出入库管理模块',
              '6.SAP-WMS 报关自动化称重管理模块',
              '7.电镀物料失效防呆模块',
-             '8.基于集团下不同厂区发料动态可配置 先进先出 规则 ',
+             '8.基于集团下 不同地区 不同厂区 不同业务 实现发料动态可配置 多维度（物料，工厂，日期，批次，供应商，客户，人员）先进先出  规则 ',
              '9.DDD-容器-库存结构 动态处理 集团内 冲压,模切,注塑,CNC 不同业务，相关库存不同物料属性存储，跨组织-跨业务-无差别共享识别标签',
              '10.标签配置化管理模块',
              '技术：',
@@ -238,7 +233,7 @@ const projectlists = [
              'YARP+AgileConfig动态配置的代理网关 ',
              '基于 minIO组件 分布式 文件服务',
              '基于当前服务器负载，动态配置 服务器，接口 读写分离 修改sugarsql orm',                        
-             'Prometheus+Grafana  docker 微服务 监控&告警',
+             'Prometheus+Grafana  docker 微服务 服务器 监控&告警',
              'redis热缓存,库存，标签，容器 冷热数据分离 历史数据归档处理',
         ],
         picture: [
@@ -255,13 +250,13 @@ const projectlists = [
     },
 
     {
-        starttime: '2022.06',
+        starttime: '2022.04',
         time: "6个月",
         title: "领益智造WMS2.0管理系统",
         company: '广东领益智造股份有限公司',
-        job: '开发工程师',
+        job: '开发工程师（全栈）',
         duty: '项目问题调研,核心功能重构和现有业务的痛点难点疏通,对接集团内系统（SRM,OA,MES,QMS,ERP(SAP)）,以及部署和上线',
-        technology: ".net core 3.1,Quzartz,vue,nginx,jQuery,IIS,",
+        technology: ".net core 3.1,Quzartz,sqlserver,swagger,vue,nginx,jQuery,IIS,",
         people: '9人',
         Projectmessage: [
             '1. wms sap 数据同步异常处理,OA WMS SAP 审批流程数据异常解决',
@@ -269,7 +264,7 @@ const projectlists = [
             '3.后台表结构数据优化-删除无效表，数据，字段调整，索引优化',
             '4.建立物料时效管理模块，在mes 生产 成品 半成品 原材料 入库出库时监控其有效期，并给到品质 进行审批是否放行',
             '5.解决前端PDA 扫描重复，识别条码异常，使用便捷性，流畅性，人机交互异常等问题',
-            '5.现场网络异常，人员使用操作异常整理和跟进' 
+            '5.现场业务异常，人员使用操作异常整理和跟进' 
         ],
         picture: [
             require("@/static/project/skccar/1.png"),
@@ -290,7 +285,7 @@ const projectlists = [
         time: "4个月",
         title: "SKC 商务派车及费用分摊管理系统",
         company: '京瓷信息系统(上海)有限公司-东莞分公司',
-        job: '开发工程师',
+        job: '开发工程师（全栈）',
         duty: '项目组织工作,开发工作量评估、开发任务分配,框架的搭建和重要功能模块的设计实现',
         technology: ".net core,Restful Api,EntityFrameWorkCore,SQL,Dapper,Quzartz,vue,IView,Element-UI,Vuex,axios,webpack",
         people: '5人',
@@ -346,7 +341,7 @@ const projectlists = [
         time: "6个月",
         title: "SKC固定资产管理系统-重构",
         company: '京瓷信息系统(上海)有限公司-东莞分公司',
-        job: '开发工程师',
+        job: '开发工程师（全栈）',
         duty: '项目组织工作,框架的搭建和重要功能模块的实现,',
         technology: ".net core,Restful Api,EntityFrameWorkCore,SQL,Dapper,Quzartz,vue,IView,Element-UI,Vuex,axios,webpack",
         people: '6人',
@@ -370,7 +365,7 @@ const projectlists = [
         time: "4个月",
         title: "SKC数据-RPA管理系统",
         company: '京瓷信息系统(上海)有限公司-东莞分公司',
-        job: '开发工程师',
+        job: '开发工程师（全栈）',
         duty: '项目需求调研,项目的功能设计,详细设计,框架的搭建和所有功能模块的设计实现,以及部署和上线',
         technology: ".net,Quzartz,python,图像处理,爬虫,PyPDF2,Pillow,pandas,BeautifulSoup",
         people: '3人',
@@ -390,7 +385,7 @@ const projectlists = [
         time: "4个月",
         title: "SKC-Bus约车管理系统",
         company: '京瓷信息系统(上海)有限公司-东莞分公司',
-        job: '开发工程师',
+        job: '开发工程师（全栈）',
         duty: '项目需求调研,项目的功能设计,详细设计,框架的搭建和重要功能模块的设计实现,以及部署和上线',
         technology: "微信小程序，.net core,vue,Restful Api,IView,axios,webpack,SQL,Dapper,Quzartz",
         people: '5人',
@@ -418,7 +413,7 @@ const projectlists = [
         time: "3个月",
         title: "电力可视化系统",
         company: '京瓷信息系统(上海)有限公司-东莞分公司',
-        job: '开发工程师',
+        job: '开发工程师（全栈）',
         people: '3人',
         duty: '根据influxdb和grafana进行框架的搭建,设计电流,电压,功率,用电情况的BI展示',
         technology: "influxdb,grafana,AJAX,.NET WebApi,Linux",
@@ -443,7 +438,7 @@ const projectlists = [
         title: "AEO体系管理系統",
         people: '3人',
         company: '京瓷信息系统(上海)有限公司-东莞分公司',
-        job: '开发工程师',
+        job: '开发工程师（全栈）',
         duty: '整体项目的评估、选择合适框架和组件,对卡顿的页面的和异常bug点进行重构和修改',
         technology: "ASP.net,ASP.net MVC,Web Api,bootstrap,JQuery,SQL",
         Projectmessage: [
@@ -463,7 +458,7 @@ const projectlists = [
         time: "12个月",
         title: "数码车间-MES精益製造執行系統",
         company: '东莞隽思印刷有限公司',
-        job: '高级工程师',
+        job: '高级开发工程师（全栈）',
         people: '8人',
         duty: '项目组织工作,项目需求调研,功能设计,详细设计,框架的搭建和重要功能模块的设计实现,以及部署和上线',
         technology: "ASP.net MVC,Spring.net,Nhibernate,Web Api,knockout.js,echarts,Ext.js,JQuery,light.7.css,SQL",
