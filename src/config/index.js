@@ -268,15 +268,14 @@ const projectlists = [
             '5.现场业务异常，人员使用操作异常整理和跟进' 
         ],
         picture: [
-            require("@/static/project/skccar/1.png"),
-            require("@/static/project/skccar/2.png"),
-            require("@/static/project/skccar/3.png"),
-            require("@/static/project/skccar/4.png"),
-            require("@/static/project/skccar/5.png"),
-            require("@/static/project/skccar/6.png"),
-            require("@/static/project/skccar/7.png"),
-            require("@/static/project/skccar/8.png"),
-            require("@/static/project/skccar/9.png"),
+            require("@/static/project/wms2/2-1 (1).png"),
+            require("@/static/project/wms2/2-1 (2).png"),
+            require("@/static/project/wms2/2-1 (3).png"),
+            require("@/static/project/wms2/2-1 (4).png"),
+            require("@/static/project/wms2/2-1 (5).png"),
+            require("@/static/project/wms2/2-1 (6).png"),
+            require("@/static/project/wms2/2-1 (7).png"),
+      
         ],
     },
 

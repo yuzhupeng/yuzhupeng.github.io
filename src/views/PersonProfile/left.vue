@@ -118,6 +118,20 @@
                  class="resource-link">https://github.com/yuzhupeng</a></p>
           </div>
           <div class="resource-item">
+            <b style="color: black"> 代码分析平台</b>
+            <p> <a href="https://deepwiki.com"
+                 target="_blank"
+                 class="resource-link">https://deepwiki.com</a></p>
+          </div>
+
+          <div class="resource-item">
+            <b style="color: black"> 代码审计分析工具</b>
+            <p> <a href="https://deepwiki.com"
+                 target="_blank"
+                 class="resource-link">https://github.com/sunmh207/AI-Codereview-Gitlab</a></p>
+          </div>
+
+          <div class="resource-item">
             <b style="color: black"> .NET Core高质量资源-#需FQ:</b>
             <p> <a href="https://yuzhupeng.github.io/DotNetGuide/"
                  target="_blank"
