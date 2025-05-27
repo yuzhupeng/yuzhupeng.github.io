@@ -24,7 +24,7 @@
       <p>{{ personalInfo.sex }} / {{ personalInfo.birthday }} / 32岁</p>
       <p>{{ personalInfo.university }} / {{ personalInfo.major }}</p>
       <p>{{ personalInfo.education }} / {{ personalInfo.graduation }}毕业</p>
-      <p>工作年限 / 8年</p>
+      <p>工作年限 / 9年</p>
       <!-- <p>英语 / {{ personalInfo.english }}</p> -->
     </div>
     <div style="margin-bottom: 40px">
@@ -82,9 +82,9 @@
         <h3 class="skill-category">DevOps与运维</h3>
         <ul class="skill-list">
           <li class="skill-item">容器化：Docker、Docker Compose</li>
-          <li class="skill-item">CI/CD：Jenkins</li>
+          <li class="skill-item">CI/CD：Jenkins、Gitlab </li>
           <li class="skill-item">监控：Prometheus、Grafana</li>
-          <li class="skill-item">版本控制：Git</li>
+          <li class="skill-item">版本控制：Git SVN</li>
           <li class="skill-item">代理与服务器：Nginx、IIS、YARP</li>
         </ul>
 
