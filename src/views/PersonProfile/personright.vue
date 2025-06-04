@@ -117,7 +117,7 @@ export default {
         66: "熟悉",
         100: "精通",
       },
-      pdfdownload,
+
     };
   },
   //监听属性 类似于data概念
