@@ -24,7 +24,7 @@
       <p>{{ personalInfo.sex }} / {{ personalInfo.birthday }} / 32岁</p>
       <p>{{ personalInfo.university }} / {{ personalInfo.major }}</p>
       <p>{{ personalInfo.education }} / {{ personalInfo.graduation }}毕业</p>
-      <p>工作年限 / 8年</p>
+      <p>工作年限 / 9年</p>
       <!-- <p>英语 / {{ personalInfo.english }}</p> -->
     </div>
     <div style="margin-bottom: 40px">
@@ -56,7 +56,7 @@
       <div class="skill-section">
         <h3 class="skill-category">前端技术</h3>
         <ul class="skill-list">
-          <li class="skill-item">框架：Vue2 3、React、微信小程序</li>
+          <li class="skill-item">框架：Vue2 3、Uni-app、微信小程序</li>
           <li class="skill-item">UI组件：Element-UI、IView、Layui、Bootstrap</li>
           <li class="skill-item">状态管理：Vuex、Mobx</li>
           <li class="skill-item">图表可视化：Echarts、Highcharts、Grafana</li>
@@ -65,8 +65,8 @@
 
         <h3 class="skill-category">后端技术</h3>
         <ul class="skill-list">
-          <li class="skill-item">框架：.NET Core、Python、JAVA SpringBoot</li>
-          <li class="skill-item">ORM：Entity Framework Core、Dapper、NHibernate</li>
+          <li class="skill-item">框架：.NET Core、Python、JAVA Spring Boot</li>
+          <li class="skill-item">ORM：Entity Framework Core、Dapper、NHibernate,Mybatis-Plus</li>
           <li class="skill-item">服务：Restful API、Web API</li>
           <li class="skill-item">任务调度：Quartz</li>
           <li class="skill-item">数据处理：Python生态(Pandas、BeautifulSoup等)</li>
@@ -75,16 +75,16 @@
         <h3 class="skill-category">数据库与中间件</h3>
         <ul class="skill-list">
           <li class="skill-item">关系型数据库：SQL Server、MySQL、PostgreSQL</li>
-          <li class="skill-item">非关系型数据库：Redis、MongoDB、InfluxDB</li>
+          <li class="skill-item">非关系型数据库：Redis、MongoDB、InfluxDB、ElasticSearch</li>
           <li class="skill-item">缓存：Redis</li>
         </ul>
 
         <h3 class="skill-category">DevOps与运维</h3>
         <ul class="skill-list">
           <li class="skill-item">容器化：Docker、Docker Compose</li>
-          <li class="skill-item">CI/CD：Jenkins</li>
+          <li class="skill-item">CI/CD：Jenkins、Gitlab </li>
           <li class="skill-item">监控：Prometheus、Grafana</li>
-          <li class="skill-item">版本控制：Git</li>
+          <li class="skill-item">版本控制：Git SVN</li>
           <li class="skill-item">代理与服务器：Nginx、IIS、YARP</li>
         </ul>
 
@@ -118,7 +118,7 @@
                  class="resource-link">https://github.com/yuzhupeng</a></p>
           </div>
           <div class="resource-item">
-            <b style="color: black"> 代码分析平台</b>
+            <b style="color: black"> 代码分析工具</b>
             <p> <a href="https://deepwiki.com"
                  target="_blank"
                  class="resource-link">https://deepwiki.com</a></p>

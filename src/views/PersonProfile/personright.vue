@@ -68,10 +68,12 @@
 
     <!-- 悬浮工具栏 -->
     <div class="floating-toolbar">
-      <a class="download-btn"
-         @click="download('fishyue.pdf', 'pdfdownload')">
-        <i class="el-icon-download"></i> PDF简历下载
-      </a>
+
+      <img :src="pdfdownload"
+           alt="PDF简历下载"
+           class="pdf-icon">
+      PDF简历下载
+
     </div>
   </div>
 </template>
@@ -117,7 +119,11 @@ export default {
         66: "熟悉",
         100: "精通",
       },
+<<<<<<< HEAD
 
+=======
+      pdfdownload: "",
+>>>>>>> 7f698190befaffec050e470bebe7452988a9a615
     };
   },
   //监听属性 类似于data概念
