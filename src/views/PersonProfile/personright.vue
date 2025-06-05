@@ -119,12 +119,7 @@ export default {
         66: "熟悉",
         100: "精通",
       },
-<<<<<<< HEAD
-
-=======
-      pdfdownload: "",
->>>>>>> 7f698190befaffec050e470bebe7452988a9a615
-    };
+    }
   },
   //监听属性 类似于data概念
   computed: {},

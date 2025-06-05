@@ -76,13 +76,13 @@
         <ul class="skill-list">
           <li class="skill-item">关系型数据库：SQL Server、MySQL、PostgreSQL</li>
           <li class="skill-item">非关系型数据库：Redis、MongoDB、InfluxDB、ElasticSearch</li>
-          <li class="skill-item">缓存：Redis</li>
+          <li class="skill-item">缓存：Redis memorycache</li>
         </ul>
 
         <h3 class="skill-category">DevOps与运维</h3>
         <ul class="skill-list">
           <li class="skill-item">容器化：Docker、Docker Compose</li>
-          <li class="skill-item">CI/CD：Jenkins、Gitlab </li>
+          <li class="skill-item">CI/CD：Jenkins、Gitlab Nexus Harbor</li>
           <li class="skill-item">监控：Prometheus、Grafana</li>
           <li class="skill-item">版本控制：Git SVN</li>
           <li class="skill-item">代理与服务器：Nginx、IIS、YARP</li>
