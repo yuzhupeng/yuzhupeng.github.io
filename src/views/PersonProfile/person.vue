@@ -41,10 +41,10 @@ export default {
   //生命周期 - 创建完成（可以访问当前this实例）
   created () {
     // 设置文档标题
-    document.title = '庾柱鹏 | 全栈工程师 - 数字化工厂专家（8年 数字化工厂 项目经验）';
+    document.title = '庾柱鹏 | 全栈工程师 - 数字化工厂专家（9年 数字化工厂 项目经验）';
 
     // 添加SEO元数据
-    this.addMetaTag('description', '庾柱鹏 - 8年数字化工厂及企业应用开发经验，精通.NET Core、Vue、微服务架构，领益智造、京瓷信息系统、东莞隽思印刷等企业工作经历');
+    this.addMetaTag('description', '庾柱鹏 - 9年数字化工厂及企业应用开发经验，精通.NET Core、Vue、微服务架构，领益智造、京瓷信息系统、东莞隽思印刷等企业工作经历');
     this.addMetaTag('keywords', '庾柱鹏,全栈工程师,数字化工厂,智能制造,.NET Core,Vue,微服务,DDD,DevOps');
     this.addMetaTag('format-detection', 'telephone=no');
   },

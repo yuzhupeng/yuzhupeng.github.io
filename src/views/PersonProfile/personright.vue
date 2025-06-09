@@ -67,14 +67,14 @@
     </Timeline-item>
 
     <!-- 悬浮工具栏 -->
-    <div class="floating-toolbar">
+    <!-- <div class="floating-toolbar">
 
       <img :src="pdfdownload"
            alt="PDF简历下载"
            class="pdf-icon">
       PDF简历下载
 
-    </div>
+    </div> -->
   </div>
 </template>
 

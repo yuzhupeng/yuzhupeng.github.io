@@ -7,6 +7,7 @@
            class="right-top__avatar" />
       <h1>{{ personalInfo.name }}</h1>
       <h3>{{ personalInfo.position }}</h3>
+      <h5>{{ personalInfo.personalInfo }}</h5>
     </div>
     <div class="right-link">
       <img align=""
@@ -56,7 +57,7 @@
       <div class="skill-section">
         <h3 class="skill-category">前端技术</h3>
         <ul class="skill-list">
-          <li class="skill-item">框架：Vue2 3、Uni-app、微信小程序</li>
+          <li class="skill-item">语言：Vue2 3、Uni-app、微信小程序</li>
           <li class="skill-item">UI组件：Element-UI、IView、Layui、Bootstrap</li>
           <li class="skill-item">状态管理：Vuex、Mobx</li>
           <li class="skill-item">图表可视化：Echarts、Highcharts、Grafana</li>
@@ -65,10 +66,10 @@
 
         <h3 class="skill-category">后端技术</h3>
         <ul class="skill-list">
-          <li class="skill-item">框架：.NET Core、Python、JAVA Spring Boot</li>
-          <li class="skill-item">ORM：Entity Framework Core、Dapper、NHibernate,Mybatis-Plus</li>
-          <li class="skill-item">服务：Restful API、Web API</li>
-          <li class="skill-item">任务调度：Quartz</li>
+          <li class="skill-item">语言：.NET Core、Python、JAVA Spring Boot</li>
+          <li class="skill-item">ORM：Entity Framework Core、Dapper、NHibernate, SqlSugar, Mybatis-Plus</li>
+          <li class="skill-item">服务：Restful API、Web API、WebSockets、gRPC</li>
+          <li class="skill-item">任务调度：Quartz XXL-JOB</li>
           <li class="skill-item">数据处理：Python生态(Pandas、BeautifulSoup等)</li>
         </ul>
 
@@ -132,35 +133,35 @@
           </div>
 
           <div class="resource-item">
-            <b style="color: black"> .NET Core高质量资源-#需FQ:</b>
-            <p> <a href="https://yuzhupeng.github.io/DotNetGuide/"
+            <b style="color: black"> .NET Core高质量资源:</b>
+            <p> <a href="https://yuzhupeng.top/DotNetGuide/"
                  target="_blank"
-                 class="resource-link">https://yuzhupeng.github.io/DotNetGuide/</a></p>
+                 class="resource-link">https://yuzhupeng.top/DotNetGuide/</a></p>
           </div>
           <div class="resource-item">
-            <b style="color: black"> 2025 NET er 路线-#需FQ:</b>
+            <b style="color: black"> 2025 NET er 路线:</b>
             <p> <a href="https://github.com/MoienTajik/AspNetCore-Developer-Roadmap/tree/master"
                  target="_blank"
                  class="resource-link">https://github.com/MoienTajik/AspNetCore-Developer-Roadmap/tree/master</a></p>
           </div>
 
           <div class="resource-item">
-            <b style="color: black"> JavaScript 资源大全中文版-#需FQ:</b>
-            <p> <a href="https://yuzhupeng.github.io/awesome-python-cn/"
+            <b style="color: black"> JavaScript 资源大全中文版:</b>
+            <p> <a href="https://yuzhupeng.top/awesome-python-cn/"
                  target="_blank"
-                 class="resource-link">https://yuzhupeng.github.io/awesome-python-cn/</a></p>
+                 class="resource-link">https://yuzhupeng.top/awesome-python-cn/</a></p>
           </div>
           <div class="resource-item">
-            <b style="color: black">深入理解Vue.js实战-#需FQ:</b>
-            <p> <a href="https://yuzhupeng.github.io/vue-ebook/vue-ebook/0.html"
+            <b style="color: black">深入理解Vue.js实战:</b>
+            <p> <a href="https://yuzhupeng.top/vue-ebook/vue-ebook/0.html"
                  target="_blank"
-                 class="resource-link">https://yuzhupeng.github.io/vue-ebook/vue-ebook/0.html</a></p>
+                 class="resource-link">https://yuzhupeng.top/vue-ebook/vue-ebook/0.html</a></p>
           </div>
           <div class="resource-item">
-            <b style="color: black"> Linux命令大全搜索工具-#需FQ:</b>
-            <p> <a href="https://yuzhupeng.github.io/linux-command/"
+            <b style="color: black"> Linux命令大全搜索工具:</b>
+            <p> <a href="https://yuzhupeng.top/linux-command/"
                  target="_blank"
-                 class="resource-link">https://yuzhupeng.github.io/linux-command/</a></p>
+                 class="resource-link">https://yuzhupeng.top/linux-command/</a></p>
           </div>
 
           <div class="resource-item">

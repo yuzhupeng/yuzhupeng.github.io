@@ -133,6 +133,7 @@ const personalInfo = {
     name: '庾柱鹏',
     sex: '男',
     position: '高级全栈工程师',
+    personalInfo: '9年数字化工厂及企业应用开发经验',
     birthday: '1992.09',
     university: '东莞理工学院城市学院',
     major: '软件工程',
@@ -145,12 +146,12 @@ const personalInfo = {
 //项目列表
 const projectlists = [
     {
-        starttime: '2025.03',
-        time: "2个月",
+        starttime: '2025.04',
+        time: "5个月~至今",
         title: "领益总务类费用化采购系统",
         company: '广东领益智造股份有限公司',
         job: '开发工程师（全栈）',
-        duty: ' 开源JAVA 多语言 分销 SAAS商城 本地化改造,集成OA SRM SAP系统,实现统一集团费用化采购审批流程,以及前后端 构建 测试 部署CICD',
+        duty: ' JAVA  分销 SAAS商城 集成OA SRM SAP系统,实现统一集团费用化采购审批流程,以及 前后端 构建 测试 部署CICD',
         technology: "vue 2,IView,Element-UI,Vuex,axios,webpack,Vue CLI 4,JAVA,Springboot,Maven,Mybatis-Plus,mysql,RocketMQ,redis,nginx,docker,docker-compose,git,Jenkins, ",
         people: '5人',
         Projectmessage: [
@@ -223,10 +224,10 @@ const projectlists = [
     {
         starttime: '2022.10',
         time: "24个月",
-        title: "领益智造 全球化分布式QMSWMS管理系统(QMSWMS3.0)",
+        title: "领益智造 全球化分布式 MOM-管理系统(QMSWMS3.0)",
         company: '广东领益智造股份有限公司',
         job: '开发工程师（后端）',
-        duty: '系统核心功能设计,详细设计,框架的搭建和所有功能模块的设计实现,对接集团内系统 SRM,OA,MES,ERP(SAP) 实现集团 数字化工厂总体目标,以及部署-发布-上线（devops）全流程',
+        duty: '系统核心功能设计,详细设计,框架的搭建和核心功能模块的设计实现,对接集团内系统 SRM,OA,ERP(SAP) 实现集团 数字化工厂总体目标,以及部署-发布-上线（devops）全流程',
         technology: ".net core 5,vue,Pgsql,redis,nginx,docker,git,Jenkins,portal,Prometheu,Grafana",
         people: '17人',
         Projectmessage: [
@@ -271,6 +272,11 @@ const projectlists = [
             require("@/static/project/wms3/19.jpg"),
             require("@/static/project/wms3/20.jpg"),
             require("@/static/project/wms3/21.png"),
+            require("@/static/project/wms3/22.jpg"),
+            require("@/static/project/wms3/23.jpg"),
+            require("@/static/project/wms3/24.png"),
+            
+
             
         ],
     },
