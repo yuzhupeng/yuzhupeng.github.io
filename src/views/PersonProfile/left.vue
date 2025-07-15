@@ -94,7 +94,6 @@
           <li class="skill-item">微服务架构</li>
           <li class="skill-item">分布式系统设计</li>
           <li class="skill-item">DDD领域驱动设计</li>
-          <li class="skill-item">高可用系统设计</li>
         </ul>
 
         <p class="summary">
