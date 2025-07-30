@@ -57,10 +57,10 @@
       <div class="skill-section">
         <h3 class="skill-category">前端技术</h3>
         <ul class="skill-list">
-          <li class="skill-item">语言：Vue2 3、Uni-app、微信小程序</li>
-          <li class="skill-item">UI组件：Element-UI、IView、Layui、Bootstrap</li>
+          <li class="skill-item">基础框架：Vue2 3、Uni-app、微信小程序</li>
+          <li class="skill-item">UI框架：Element-UI、IView、Layui、Bootstrap</li>
           <li class="skill-item">状态管理：Vuex、Mobx</li>
-          <li class="skill-item">图表可视化：Echarts、Highcharts、Grafana</li>
+          <li class="skill-item">可视化：Echarts、Highcharts、Grafana</li>
           <li class="skill-item">其他：jQuery、Webpack、CSS/LESS</li>
         </ul>
 
