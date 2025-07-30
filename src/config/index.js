@@ -173,6 +173,7 @@ const projectlists = [
              '基于当前服务器负载，动态配置 服务器，接口 读写分离 修改sugarsql orm',                        
              'Prometheus+Grafana  docker 微服务 服务器 监控&告警',
              'redis热缓存,库存，标签，容器 冷热数据分离 历史数据归档处理',
+             '抽象工厂模式 处理 sap单据领域模型，分布式锁处理 PDA 重复提交 和 单据重复创建'
         ],
         picture: [
             require("@/static/project/wms3/1.jpg"),
