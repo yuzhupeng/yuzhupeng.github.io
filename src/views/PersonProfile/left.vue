@@ -68,7 +68,7 @@
         <ul class="skill-list">
           <li class="skill-item">语言：.NET Core、Python、JAVA Spring Boot</li>
           <li class="skill-item">ORM：Entity Framework Core、Dapper、NHibernate, SqlSugar, Mybatis-Plus</li>
-          <li class="skill-item">服务：Restful API、Web API、WebSockets、gRPC</li>
+          <li class="skill-item">服务通讯协议：Restful API、Web API、WebSockets、gRPC</li>
           <li class="skill-item">任务调度：Quartz XXL-JOB</li>
           <li class="skill-item">数据处理：Python生态(Pandas、BeautifulSoup等)</li>
         </ul>
