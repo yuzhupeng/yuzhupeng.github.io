@@ -749,17 +749,17 @@ const projectlists = [
   {
     startTime: '2022.10',
     duration: '24个月',
-    title: '领益智造 全球化分布式 MOM（QMS/WMS3.0）【关键项目-置顶】',
+    title: '领益智造 全球化分布式 MOM（QMS/WMS3.0）【关键项目】',
     company: '广东领益智造股份有限公司',
     role: '开发工程师（后端）',
     teamSize: '17人',
     summary: '负责核心功能设计与微服务/集成架构，打通 SRM/OA/ERP(SAP)，建设追溯、标签、容器与看板体系，落地 DevOps 全链路。',
     technologyStack: {
-      backend: '.NET Core 5, SugarSQL（定制读写分离）',
+      backend: '.NET Core 5, SugarSQL（定制读写分离） Autofac',
       frontend: 'Vue, Portal',
       database: 'PostgreSQL, Redis',
       devops: 'Docker, Jenkins, Nginx, Prometheus, Grafana',
-      integration: 'SAP, SRM, OA, DingTalk, YARP + AgileConfig（动态网关）',
+      integration: 'SAP, SRM, OA, DingTalk, YARP + AgileConfig',
       others: 'minIO 文件服务, 分布式锁, 抽象工厂模式'
     },
     businessContext: '集团多工厂、多地区、多业务（冲压/模切/注塑/CNC）统一 WMS/QMS 能力，推进数字化工厂目标。',
@@ -1313,58 +1313,59 @@ const projectlists = [
   },
 
   {
-    startTime: '2018.08',
-    duration: '9个月',
-    title: 'OEM实时车间管理系统(APS)',
-    company: '东莞隽思印刷有限公司',
-    role: '软件工程师',
-    teamSize: '6人',
-    summary: '负责OEM车间管理系统开发,实现生产计划智能排程和实时监控。',
-    technologyStack: {
-      backend: 'ASP.NET MVC, Spring.NET, NHibernate, Web API',
-      frontend: 'WPF, Knockout.js, Ext.js, jQuery',
-      database: 'SQL Server',
-      devops: '',
-      integration: '',
-      others: 'Light.7.css'
-    },
-    businessContext: '需要建立智能排产系统,提升OEM订单生产效率。',
-    painPoints: [
-      '生产计划排程复杂,人工调度效率低。',
-      '缺乏实时监控手段,异常处理不及时。'
-    ],
-    challenges: [
-      '需要处理复杂的排产规则和约束条件。',
-      '实时数据展示要求高性能和稳定性。'
-    ],
-    solutions: [
-      '开发多个可视化看板,实现生产状态实时监控。',
-      '实现基于规则引擎的智能排产功能。',
-      '构建状态机和工厂日历等核心组件。'
-    ],
-    impact: [
-      '生产计划排程时间缩短70%。',
-      '异常处理响应时间减少50%。'
-    ],
-    outcomes: [
-      '系统稳定支撑三班生产运营。',
-      '显著提升生产计划执行效率。'
-    ],
-    details: [
-      '1. 系统主要功能模块:PMC车间管理模块、CTP看板、纸料看板、印刷实时显示目视化看板、OEM车间效率实时达成看板、异常追踪看板、后工序水塘产能看板。',
-      '2. 包含中间件：状态机组件,可配置工厂日历,基于业务的规则引擎组件。',
-      '3. 项目目标：管理人员通过印刷实时显示目视化看板,OEM车间效率实时达成看板,异常追踪看板等看板,监控订单的进度,根据印刷物料状态实时调控订单生产进度,并对异常订单及时跟进保证三班的生产效率。',
-      '4. PMC导入MPS的计划生产订单到系统,系统根据业务规则（物料状态,物料配套,当前车间产能情况）和印刷部的印刷规则来调控OEM订单的生产顺序。'
-    ],
-    pictures: [
-      require("@/static/project/control/8-1-lg.jpg"),
-      require("@/static/project/control/8-2-lg.jpg"),
-      require("@/static/project/control/8-3-lg.jpg"),
-      require("@/static/project/control/8-4-lg.jpg"),
-      require("@/static/project/control/8-5-lg.jpg"),
-      require("@/static/project/control/8-6-lg.jpg")
-    ]
+  startTime: '2018.08',
+  duration: '9个月',
+  title: 'OEM实时车间管理系统(APS)',
+  company: '东莞隽思印刷有限公司',
+  role: '软件工程师',
+  teamSize: '6人',
+  summary: '负责OEM车间管理系统的开发，实现生产计划智能排程与实时监控。',
+  technologyStack: {
+    backend: 'ASP.NET MVC, Spring.NET, NHibernate, Web API',
+    frontend: 'WPF, Knockout.js, Ext.js, jQuery',
+    database: 'SQL Server',
+    devops: '',
+    integration: '',
+    others: 'Light.7.css'
   },
+  businessContext: '打造智能排产系统，提升OEM订单的生产效率。',
+  painPoints: [
+    '生产计划排程复杂，人工调度效率低',
+    '缺乏实时监控手段，异常处理不及时'
+  ],
+  challenges: [
+    '处理复杂的排产规则和约束条件',
+    '实时数据展示要求高性能与稳定性'
+  ],
+  solutions: [
+    '开发可视化看板，实现生产状态的实时监控',
+    '基于规则引擎实现智能排产功能',
+    '构建状态机、可配置工厂日历等核心组件'
+  ],
+  impact: [
+    '生产计划排程时间缩短70%',
+    '异常处理响应时间降低50%'
+  ],
+  outcomes: [
+    '系统稳定支撑三班制生产运营',
+    '显著提升生产计划执行效率'
+  ],
+  details: [
+    '系统主要功能模块包括：PMC车间管理、CTP看板、纸料看板、印刷实时显示可视化看板、OEM车间效率实时达成看板、异常追踪看板、后工序水塘产能看板。',
+    '中间件实现了状态机组件、可配置工厂日历及基于业务的规则引擎。',
+    '项目目标是通过上述看板实时监控订单进度，并依据物料状态和车间产能动态调度生产，保障三班制的生产效率。',
+    'PMC将MPS计划订单导入系统，系统依据物料状态、配套情况及车间产能等业务规则自动调整OEM订单的生产顺序。'
+  ],
+  pictures: [
+    require("@/static/project/control/8-1-lg.jpg"),
+    require("@/static/project/control/8-2-lg.jpg"),
+    require("@/static/project/control/8-3-lg.jpg"),
+    require("@/static/project/control/8-4-lg.jpg"),
+    require("@/static/project/control/8-5-lg.jpg"),
+    require("@/static/project/control/8-6-lg.jpg")
+  ]
+}
+,
 
   {
     startTime: '2017.09',

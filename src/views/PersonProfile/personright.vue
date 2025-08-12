@@ -64,14 +64,17 @@
             <li v-for="(x, i) in item.solutions" :key="'so'+i">{{ x }}</li>
           </ul>
         </div>
-        <div class="project-description" v-if="item.impact && item.impact.length">
+        <!-- <div class="project-description" v-if="item.impact && item.impact.length">
           <span class="info-label">效果：</span>
           <ul style="margin:0;padding-left:18px;">
             <li v-for="(x, i) in item.impact" :key="'im'+i">{{ x }}</li>
           </ul>
-        </div>
+        </div> -->
         <div class="project-description" v-if="item.outcomes && item.outcomes.length">
           <span class="info-label">项目成果：</span>
+                <ul style="margin:0;padding-left:18px;">
+            <li v-for="(x, i) in item.impact" :key="'im'+i">{{ x }}</li>
+          </ul>
           <ul style="margin:0;padding-left:18px;">
             <li v-for="(x, i) in item.outcomes" :key="'oc'+i">{{ x }}</li>
           </ul>
