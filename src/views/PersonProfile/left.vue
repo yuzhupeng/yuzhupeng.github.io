@@ -49,6 +49,10 @@
         </div>
       </div>
     </div>
+
+    s
+
+
     <div class="right-skill">
       <p class="section-title">&nbsp;<img v-bind:src="logo2" /><strong>技术栈</strong></p>
       <!-- <a v-for="(item, index) in personalInfo.skillList" :key="index">{{
@@ -87,6 +91,7 @@
           <li class="skill-item">监控：Prometheus、Grafana</li>
           <li class="skill-item">版本控制：Git SVN</li>
           <li class="skill-item">代理与服务器：Nginx、IIS、YARP</li>
+       <li class="skill-item">AI IDE：Cursor、Augment、Kiro</li>
         </ul>
 
         <h3 class="skill-category">架构设计</h3>

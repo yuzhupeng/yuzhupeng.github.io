@@ -2,79 +2,119 @@
 <template>
   <div>
     <Timeline-item class="timeline-item"
-                   v-for="(item, findex) in projectlists"
-                   :key="findex">
+                   v-for="(item, idx) in projectlists"
+                   :key="idx">
       <div>
-        <span class="bg-light-blue">{{item.starttime}}</span>
+        <span class="bg-light-blue">{{ item.startTime }}</span>
       </div>
-      <Card class="project-card"
-            style="width: 100%">
-        <p slot="title"
-           class="titles">
+
+      <!-- 基本信息 -->
+      <Card class="project-card" style="width: 100%">
+        <p slot="title" class="titles">
           <Icon type="ios-film-outline"></Icon>
           {{ item.title }}
         </p>
-        <a href="#"
-           slot="extra">
+        <a href="#" slot="extra">
           <Icon type="ios-bookmarks-outline"></Icon>
-          持续时间：{{ item.time }}
+          持续时间：{{ item.duration }}
         </a>
+
         <p class="project-info"><span class="info-label">所在公司：</span>{{ item.company }}</p>
-        <p class="project-info"><span class="info-label">项目职务：</span>{{ item.job }}</p>
-        <p class="project-info"><span class="info-label">项目职责：</span>{{ item.duty }}</p>
-        <p class="project-info"><span class="info-label">项目技术：</span>{{ item.technology }}</p>
-      </Card>
-      <BR />
-      <Card class="project-card"
-            style="width: 100%">
-        <p slot="title">
-          <Icon type="ios-film-outline"></Icon>
-          项目描述：
+        <p class="project-info"><span class="info-label">项目职务：</span>{{ item.role }}</p>
+        <p class="project-info" v-if="item.teamSize"><span class="info-label">规模：</span>{{ item.teamSize }}</p>
+        <p class="project-info" v-if="item.summary"><span class="info-label">摘要：</span>{{ item.summary }}</p>
+        <p class="project-info" v-if="item.technologyStack">
+          <span class="info-label">项目技术：</span>
+          <span>
+            <template v-if="item.technologyStack.backend">后端：{{ item.technologyStack.backend }}；</template>
+            <template v-if="item.technologyStack.frontend">前端：{{ item.technologyStack.frontend }}；</template>
+            <template v-if="item.technologyStack.database">数据库：{{ item.technologyStack.database }}；</template>
+            <template v-if="item.technologyStack.devops">DevOps：{{ item.technologyStack.devops }}；</template>
+            <template v-if="item.technologyStack.integration">集成：{{ item.technologyStack.integration }}；</template>
+          </span>
         </p>
-        <a href="#"
-           slot="extra">
-          <Icon type="ios-bookmarks-outline"></Icon>
-          规模：{{item.people}}
-        </a>
-        <div class="project-description"
-             v-for="(point, index) in item.Projectmessage"
-             :key="index">
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <span class="left__personal-point" />{{point}}
+      </Card>
+
+      <BR/>
+
+      <!-- 四段式卡片 -->
+      <Card class="project-card" style="width: 100%">
+        <p slot="title">
+          <Icon type="ios-construct-outline"></Icon>
+          关键说明（痛点 / 难点 / 方案 / 效果）
+        </p>
+        <div class="project-description" v-if="item.businessContext">
+          <span class="info-label">背景：</span>{{ item.businessContext }}
+        </div>
+        <div class="project-description" v-if="item.painPoints && item.painPoints.length">
+          <span class="info-label">业务痛点：</span>
+          <ul style="margin:0;padding-left:18px;">
+            <li v-for="(x, i) in item.painPoints" :key="'pp'+i">{{ x }}</li>
+          </ul>
+        </div>
+        <div class="project-description" v-if="item.challenges && item.challenges.length">
+          <span class="info-label">技术难点：</span>
+          <ul style="margin:0;padding-left:18px;">
+            <li v-for="(x, i) in item.challenges" :key="'ch'+i">{{ x }}</li>
+          </ul>
+        </div>
+        <div class="project-description" v-if="item.solutions && item.solutions.length">
+          <span class="info-label">解决方案：</span>
+          <ul style="margin:0;padding-left:18px;">
+            <li v-for="(x, i) in item.solutions" :key="'so'+i">{{ x }}</li>
+          </ul>
+        </div>
+        <div class="project-description" v-if="item.impact && item.impact.length">
+          <span class="info-label">效果：</span>
+          <ul style="margin:0;padding-left:18px;">
+            <li v-for="(x, i) in item.impact" :key="'im'+i">{{ x }}</li>
+          </ul>
+        </div>
+        <div class="project-description" v-if="item.outcomes && item.outcomes.length">
+          <span class="info-label">项目成果：</span>
+          <ul style="margin:0;padding-left:18px;">
+            <li v-for="(x, i) in item.outcomes" :key="'oc'+i">{{ x }}</li>
+          </ul>
         </div>
       </Card>
-      <BR />
-      <Card class="project-card"
-            style="width: 100%">
+
+      <BR/>
+
+      <!-- 原 Projectmessage（优化后 details） -->
+      <Card class="project-card" style="width: 100%">
         <p slot="title">
           <Icon type="ios-film-outline"></Icon>
-          效果预览：
+          项目描述
+        </p>
+        <div class="project-description"
+             v-for="(point, index) in item.details"
+             :key="index">
+          <span class="left__personal-point" /> {{ point }}
+        </div>
+      </Card>
+
+      <BR/>
+
+      <!-- 效果预览 -->
+      <Card class="project-card" style="width: 100%">
+        <p slot="title">
+          <Icon type="ios-images-outline"></Icon>
+          效果预览
         </p>
         <div>
-          <el-row :gutter="20"
-                  class="preview-row">
+          <el-row :gutter="20" class="preview-row">
             <el-col :span="6"
-                    v-for="(items, indexs) in item.picture"
-                    :key="indexs"
+                    v-for="(img, i2) in item.pictures"
+                    :key="i2"
                     class="preview-col">
               <img class="preview-image"
-                   v-bind:src="items"
-                   @click="viewImg(items)" />
+                   :src="img"
+                   @click="viewImg(img)" />
             </el-col>
           </el-row>
         </div>
       </Card>
     </Timeline-item>
-
-    <!-- 悬浮工具栏 -->
-    <!-- <div class="floating-toolbar">
-
-      <img :src="pdfdownload"
-           alt="PDF简历下载"
-           class="pdf-icon">
-      PDF简历下载
-
-    </div> -->
   </div>
 </template>
 
