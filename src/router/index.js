@@ -55,6 +55,7 @@ const router = new VueRouter({
                 anonymous: true
             }
         },
+
         {
             path: '*',
             component: () =>

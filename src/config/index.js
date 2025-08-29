@@ -1054,7 +1054,7 @@ const projectlists = [
     teamSize: '3人',
     summary: '负责RPA自动化系统的设计与实现，打造发票处理、数据采集、简历处理等自动化流程。',
     technologyStack: {
-      backend: '.NET, Quartz',
+      backend: '.NET, Quartz Python, PyPDF2, Pillow, Pandas, BeautifulSoup',
       frontend: '',
       database: '',
       devops: '',
