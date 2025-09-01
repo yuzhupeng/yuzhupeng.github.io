@@ -30,11 +30,11 @@
         </div>
         <div class="skill-category">
           <h4>后端技术</h4>
-          <p>.NET Core、Python、JAVA Spring Boot、Entity Framework、Dapper等</p>
+          <p>.NET Core、Python、JAVA Spring Boot等</p>
         </div>
         <div class="skill-category">
           <h4>数据库与中间件</h4>
-          <p>SQL Server、MySQL、Redis、MongoDB、ElasticSearch等</p>
+          <p>SQL Server、MySQL、PostgreSQL、Redis、MongoDB、ElasticSearch等</p>
         </div>
         <div class="skill-category">
           <h4>DevOps与运维</h4>
@@ -62,6 +62,15 @@
           <span class="work-time">2016.03 - 2020.01</span>
           <p>东莞隽思印刷有限公司</p>
         </div>
+
+
+        <div class="work-item">
+          <span class="work-time">2015.07 - 2015.11</span>
+          <p>东莞申翔网络公司-实习</p>
+        </div>
+     
+        
+
       </div>
     </div>
 

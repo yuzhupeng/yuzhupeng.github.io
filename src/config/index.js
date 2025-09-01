@@ -616,7 +616,7 @@ const personalInfo = {
 const projectlists = [
   {
     startTime: '2025.04',
-    duration: '5个月~至今',
+    duration: '5个月',
     title: '领益多组织-总务类费用化采购系统（MRO）',
     company: '广东领益智造股份有限公司',
     role: '开发工程师（全栈）',
@@ -641,7 +641,7 @@ const projectlists = [
     ],
     solutions: [
       'API 分层：buyer-api/seller-api/common-api/manager-api 拆分服务边界，配合 RocketMQ 处理异步状态流转（订单变更、OA 审批、预算锁定）。',
-      '对接策略化：按组织维度封装预算检查/锁定策略，统一幂等与重试；引入分布式事务编排（基于事件+补偿）。',
+      '对接策略化：按组织维度封装预算检查/锁定策略，统一幂等与重试；引入事务编排（基于事件+补偿）。',
       '搜索与可观测：Elasticsearch 做商品检索；Spring Boot Admin + 链路日志补齐监控与告警；XXL-JOB 定时校验与重试。'
     ],
     impact: [
