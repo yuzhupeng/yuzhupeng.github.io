@@ -30,7 +30,7 @@
         </div>
         <div class="skill-category">
           <h4>后端技术</h4>
-          <p>.NET Core、Python、JAVA Spring Boot等</p>
+          <p>.NET Core、WPF、 Python、JAVA 等</p>
         </div>
         <div class="skill-category">
           <h4>数据库与中间件</h4>
@@ -39,6 +39,11 @@
         <div class="skill-category">
           <h4>DevOps与运维</h4>
           <p>Docker、Jenkins、Gitlab、Prometheus、Grafana、Nginx等</p>
+        </div>
+        <div class="skill-category">
+          <h4>架构设计</h4>
+          <p> 通过以下项目经历，我积累了丰富的全栈开发经验，也主导过 数据量上亿级别，在线人数4000+ 的工业系统 的前后端架构搭建，尤其在企业级应用开发、系统集成、性能优化和架构设计方面有深入的实践。
+            在技术上不断学习新的框架和工具，能够根据业务需求选择合适的技术栈实现解决方案。 </p>
         </div>
       </div>
     </div>
