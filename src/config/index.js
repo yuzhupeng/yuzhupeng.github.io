@@ -1,83 +1,11 @@
 //项目经历
-const projectList = [{
-    id: 0,
-    name: '银河智投',
-    date: '2017-11',
-    link: 'http://yh178178.com',
-    detail: '/yh',
-    account: 13266705799,
-    password: 123456,
-    dec: `银河智投是个金属交易所网站,主要功能有交易、平仓、出入金、展示行情数据、图示化数据等。
-主要技术栈: React+Mobx+Typescript
-组件样式: antd+less。`,
-    points: [
-        'mobx状态管理库管理数据,实现多组件数据同步,实时更新。',
-        '使用typescript增加类型检查,提高开发和维护的效率。',
-        'less提取公共样式,cssModules限制组件样式作用域。',
-        '基于react-helmet实现黑白主题。',
-        '基于react-stockchart定制了股票图表。',
-        '实现路由按需加载。',
-    ],
-}, {
-    id: 1,
-    name: '基于vue后台管理模版',
-    date: '2017-10',
-    link: 'https://github.com/tossers/vue-template-backstage',
-    detail: '/yh',
-    account: '',
-    password: '',
-    dec: '基于Vue+Mockjs+ElementUI+echarts后台管理模板.',
-    points: [
-        '基于vue,vuex,Mock后台管理模版实践。',
-        '基于elementUI,echart,提供后台管理常见使用场景。',
-        '使用vuex管理状态,vue-router实现路由按需加载。',
-        '使用mock实现脱离后端开发。',
-        '使用rem单位实现浅度自适应。',
-    ],
-}, {
-    id: 2,
-    name: '摩尔交易所',
-    date: '2017-8',
-    link: 'https://trade.moer.pro',
-    detail: '/yh',
-    account: 13266705799,
-    password: 123456,
-    dec: `摩尔交易所是个交易所网站,主要功能有交易,平仓,出入金,展示行情数据,图示化数据等。
-主要技术栈: React+Mobx
-组件样式: antd+less。`,
-    points: [
-        'mobx状态管理库管理数据,实现多组件数据同步,实时更新。',
-        '基于Echarts定制股票图表。',
-        '使用react-intl实现多语言功能。',
-        'less提取公共样式,cssModules限制组件样式作用域。',
-        '根据路由按需加载。',
-        '数据节流,优化websocket实时推送带来的频繁渲染。',
-    ],
-}, {
-    id: 3,
-    name: '交易所后台展板',
-    date: '2017-6',
-    link: 'http://dashboard.quant.tuling.me',
-    detail: '/yh',
-    account: 'cds',
-    password: 123456,
-    dec: `这是监控数据的内部网站,主要功能是后台数据展示,图示化数据,对数据进行增删改查操作等。
-主要技术栈: React+dva,
-组件样式: antd+highchart+css。`,
-    points: [
-        '使用阿里开源项目dva手脚架',
-        '使用highcharts图示化数据。',
-    ],
-}];
+const projectList = [ ];
+
 //个人特点
 const traitList = [
-    '深入前端工程化,拥抱组件化和函数式编程,有dry编程习惯。',
-    '会总结项目开发和维护的难点痛点,思考解决方案。',
-    '认真负责,有较强的学习能力,对新事物有较强的接受能力。',
-    '有时间观念,能在规定时间内完成任务。',
-    '知乎,github重度使用者,关注前端技术的最新发展,会收听技术大牛的Live。',
-    '热爱阅读技术书籍,喜欢的书目有《深入浅出React和Redux》,《你不知道的JavaScript》。',
+    
 ];
+
 //技术栈
 const skillList = [
     '.net core',
@@ -96,38 +24,10 @@ const skillList = [
     'echarts',
     'Dapper',
 ];
+
 //社交链接
-const social = [{
-    id: 0,
-    name: '博客',
-    url: '//tossers.github.io',
-    icon: '/blog.png',
-    text: '//tossers.github.io',
-}, {
-    id: 1,
-    name: 'GitHub',
-    url: '//github.com/tossers',
-    icon: '/github.png',
-    text: '//github.com/tossers'
-}, {
-    id: 2,
-    name: '知乎',
-    url: '//www.zhihu.com/people/wo-shi-you-xiang/activities',
-    icon: '/zhihu.png',
-    text: '//www.zhihu.com/people/wo-shi-you-xiang/activities'
-}, {
-    id: 3,
-    name: '邮箱',
-    url: '',
-    icon: '/email.png',
-    text: '371777394@qq.com'
-}, {
-    id: 4,
-    name: '电话',
-    url: '',
-    icon: '/phone.png',
-    text: '13266705799',
-}];
+const social = [ ];
+
 //个人信息
 const personalInfo = {
     name: '庾柱鹏',
@@ -613,7 +513,13 @@ const personalInfo = {
 //     },
 // ];
 
-const projectlists = [
+// 獲取當前語言的項目列表
+function getProjectLists(locale = 'zh-CN') {
+  return locale === 'en-US' ? projectlists_en : projectlists_zh
+}
+
+// 中文項目列表
+const projectlists_zh = [
   {
     startTime: '2025.04',
     duration: '5个月',
@@ -1474,12 +1380,875 @@ const projectlists = [
 ];
 
 
+
+
+// 英文項目資料
+const projectlists_en = [
+  {
+    startTime: '2025.04',
+    duration: '5 months',
+    title: 'Lingyi Multi-Organization MRO Procurement System',
+    company: 'Lingyi Intelligent Manufacturing Co., Ltd.',
+    role: 'Full-Stack Developer',
+    teamSize: '5 people',
+    summary: 'Responsible for core business and front-end/back-end implementation of MRO procurement platform, integrating OA/SRM/SAP, building unified budget validation and approval workflow with CICD implementation.',
+    technologyStack: {
+      backend: 'Java, Spring Boot, MyBatis-Plus, Maven',
+      frontend: 'Vue 2, Element-UI / iView, Vuex, Axios, Webpack, Vue CLI 4',
+      database: 'MySQL, Redis, MongoDB',
+      devops: 'Nginx, Docker, Docker Compose, Jenkins, XXL-JOB, Spring Boot Admin',
+      integration: 'SAP Budget Check/Lock, OA Approval, SRM, RocketMQ',
+      others: 'Elasticsearch (Product Search), Domain-Driven Design (DDD)'
+    },
+    businessContext: 'Unify group general expense procurement processes, build configurable budget validation, locking and cross-organization approval mechanisms to reduce decentralized procurement and reconciliation costs.',
+    painPoints: [
+      'Multi-organization (Group/Salcomp) budget interface differences, scattered historical processes, inconsistent data standards.',
+      'Complex procurement order and budget validation timing, OA approval and order status synchronization often out of sync.'
+    ],
+    challenges: [
+      'Cross-organization integration: Different organization budget/approval interface protocols, authentication, idempotency differences.',
+      'Consistency and observability: Order and budget validation, locking, rollback chains need reliable tracking.'
+    ],
+    solutions: [
+      'API layering: buyer-api/seller-api/common-api/manager-api service boundary separation, with RocketMQ handling async status transitions (order changes, OA approval, budget locking).',
+      'Integration strategy: Encapsulate budget check/lock strategies by organization dimension, unify idempotency and retry; introduce transaction orchestration (event-based + compensation).',
+      'Search and observability: Elasticsearch for product search; Spring Boot Admin + trace logs for monitoring and alerting; XXL-JOB for scheduled validation and retry.'
+    ],
+    impact: [
+      'End-to-end time from order → budget validation → locking → OA approval stabilized at minute level, exception orders trackable and traceable.',
+      'After encapsulating multi-organization differences, new organization/category integration costs reduced (mainly configuration).'
+    ],
+    outcomes: [
+      'Covered Group and Salcomp organizations; achieved unified budget standards and approval closed-loop.',
+      'Platform runs stably, supporting peak order processing.'
+    ],
+    details: [
+      'Business: General expense procurement system, integrating OA/SRM/SAP, building MRO order and budget modules based on process applications.',
+      '1. Shopping cart order → SAP information validation → temporary order draft (budget check and lock) → create regular order.',
+      '2. Budget validation: Call different budget interfaces by organization (Salcomp/Group) and unify return standards.',
+      '3. Data synchronization: Sync cost centers, material groups, factories, asset categories, material information, budget codes from SAP.',
+      '4. OA transfer: Async send transfer messages, write back order status after approval completion and link inventory/financial standards.',
+      'Technology: API layering (buyer/seller/common/manager); core business in framework; Redis+MongoDB cache; RocketMQ async; XXL-JOB scheduled tasks; Spring Boot Admin monitoring; DDD design; Elasticsearch product search.'
+    ],
+    pictures: [
+      require("@/static/project/mro/1.png"),
+      require("@/static/project/mro/2.png"),
+      require("@/static/project/mro/3.png"),
+      require("@/static/project/mro/4.png"),
+      require("@/static/project/mro/5.png"),
+      require("@/static/project/mro/6.png"),
+      require("@/static/project/mro/7.png"),
+      require("@/static/project/mro/8.png"),
+      require("@/static/project/mro/9.png"),
+      require("@/static/project/mro/10.png"),
+      require("@/static/project/mro/11.png"),
+      require("@/static/project/mro/12.png"),
+      require("@/static/project/mro/13.png"),
+      require("@/static/project/mro/14.png"),
+      require("@/static/project/mro/15.png"),
+      require("@/static/project/mro/16.png"),
+    ],
+  },
+  {
+    startTime: '2024.11',
+    duration: '4 months',
+    title: 'Lingyi Intelligent Manufacturing Global TMS Management System',
+    company: 'Lingyi Intelligent Manufacturing Co., Ltd.',
+    role: 'Full-Stack Developer',
+    teamSize: '8 people',
+    summary: 'Focused on pain point analysis and core module refactoring, completed independent launch in India region and full-link performance optimization, built automated front-end and back-end build and deployment.',
+    technologyStack: {
+      backend: '.NET Core 3',
+      frontend: 'Vue 2/3, iView, Element-UI, Layui, Axios, Webpack',
+      database: 'MySQL, Redis',
+      devops: 'Nginx, Docker, Jenkins (Automated Front-end/Back-end Build & Deployment)',
+      integration: 'WeChat Work / WeChat Mini Program (Uniapp)'
+    },
+    businessContext: 'TMS covers backend, equipment handling, reports, PC/mobile; needs to support multi-region network and data isolation, resolve lag and stability issues.',
+    painPoints: [
+      'Slow CDN resource loading and numerous front-end errors in overseas factories, leading to page lag on first screen and interaction.',
+      'Missing indexes and poor SQL in some interfaces caused slow queries, affecting waybill/handling dispatch efficiency.'
+    ],
+    challenges: [
+      'Uneven network quality across regions, lacking static resource acceleration and degradation strategies.',
+      'India region compliance and data isolation requirements, necessitating rapid replication and stable launch.'
+    ],
+    solutions: [
+      'Frontend: Split large bundles, on-demand loading for routes/components, local mirroring and proximity caching for CDN resources; fixed JS errors and optimized layout and state management.',
+      'Backend: Completed core table indexes, rewrote slow SQL; cached hot interfaces; refined interface timeout and retry strategies.',
+      'Multi-region: Achieved data isolation based on environment variables and container orchestration; Jenkins + Docker for one-click packaging and distribution.'
+    ],
+    impact: [
+      'Core page first screen time significantly reduced (↓40%); interface latency decreased.',
+      'Independent and stable launch in India region, reduced release failure rate, more controllable rollbacks.'
+    ],
+    outcomes: [
+      'Completed independent deployment and operational monitoring for India site; launch cycle reduced from days to hours.',
+      'Stably supported handling/reporting/mobile business after launch; Mini Program enabled import/export review, bidding/inquiry and other mobile scenarios.'
+    ],
+    details: [
+      'Business: TMS backend, equipment handling, mobile (Uniapp), PC, reports, transport capacity resources.',
+      '1. Resolved CDN resource loading lag in overseas factories, fixed numerous front-end JS errors and UI layout issues.',
+      '2. Refactored core backend interfaces and optimized indexes to resolve lag issues.',
+      '3. Data isolation and microservice containerization deployment for India region.',
+      '4. Jenkins automated build and deployment; Mini Program development covered review, bidding, inquiry, etc.'
+    ],
+    pictures: [
+      require("@/static/project/tms/1 (1).png"),
+      require("@/static/project/tms/1 (2).png"),
+      require("@/static/project/tms/1 (3).png"),
+      require("@/static/project/tms/1 (4).png"),
+      require("@/static/project/tms/1 (5).png"),
+      require("@/static/project/tms/1 (6).png"),
+      require("@/static/project/tms/1 (7).png"),
+      require("@/static/project/tms/1 (8).png"),
+      require("@/static/project/tms/1 (9).png"),
+      require("@/static/project/tms/1 (10).png"),
+      require("@/static/project/tms/1 (11).png"),
+      require("@/static/project/tms/1 (12).png"),
+      require("@/static/project/tms/1 (13).png"),
+      require("@/static/project/tms/1 (14).png"),
+      require("@/static/project/tms/1 (15).png"),
+      require("@/static/project/tms/1 (16).png"),
+      require("@/static/project/tms/1 (17).png"),
+      require("@/static/project/tms/1 (18).png"),
+    ],
+  },
+  {
+    startTime: '2022.10',
+    duration: '24 months',
+    title: 'Lingyi Intelligent Manufacturing Global Distributed MOM (QMS/WMS3.0) [Key Project]',
+    company: 'Lingyi Intelligent Manufacturing Co., Ltd.',
+    role: 'Backend Developer',
+    teamSize: '17 people',
+    summary: 'Responsible for core functional design and microservice/integration architecture, integrating SRM/OA/ERP(SAP), building traceability, labeling, container, and Kanban systems, and implementing full-link DevOps.',
+    technologyStack: {
+      backend: '.NET Core 5, SugarSQL (Custom Read/Write Splitting), Autofac',
+      frontend: 'Vue, Portal',
+      database: 'PostgreSQL, Redis',
+      devops: 'Docker, Jenkins, Nginx, Prometheus, Grafana',
+      integration: 'SAP, SRM, OA, DingTalk, YARP + AgileConfig',
+      others: 'minIO File Service, Distributed Lock, Abstract Factory Pattern'
+    },
+    businessContext: 'Unified WMS/QMS capabilities for multi-factory, multi-region, multi-business (stamping/die-cutting/injection molding/CNC) within the group, advancing digital factory goals.',
+    painPoints: [
+      'Inconsistent labeling and inventory standards across factories/organizations, making data sharing difficult.',
+      'Complex rules like traceability, multi-dimensional FIFO, and customs declaration automation were difficult to implement and faced high performance pressure.'
+    ],
+    challenges: [
+      'Complex domain models for containers-inventory-batches, cross-organization sharing, and permission boundary governance.',
+      'High-concurrency label printing/inventory changes/traceability queries required low latency and high availability.'
+    ],
+    solutions: [
+      'Service-oriented: WMS/QMS/Interface/Base/BI microservice splitting; YARP+AgileConfig for dynamic proxy gateway and grayscale release.',
+      'Domain Modeling: Implemented container-inventory structure with DDD, abstract factory encapsulated SAP document domain model; distributed lock prevented PDA duplicate submissions and document creation.',
+      'Performance and Observability: Redis hot cache + hot/cold data separation + historical archiving; Prometheus+Grafana for unified monitoring and alerting; ORM modified for read/write splitting.'
+    ],
+    impact: [
+      'Cross-organization label and inventory data achieved "undifferentiated sharing" with controllable permissions, traceability query latency reduced (< 200ms).',
+      'Multi-dimensional FIFO (material/factory/date/batch/supplier/customer/personnel) became configurable, improving material issuance strategy implementation efficiency.'
+    ],
+    outcomes: [
+      'Launched across multiple regions and factories globally for the group (100+ factories); paperless document ratio significantly increased (90%+).',
+      'Inventory discrepancy rate decreased after launch (around 0.3%), and key process automation (customs declaration/weighing) was implemented.'
+    ],
+    details: [
+      'Business: SAP document management, material/finished product inbound/outbound, distribution management, inventory counting, minimum packaging containers, paperless processes, customs declaration automation, etc.',
+      'Features: Master data, inventory management, split/merge boxes, label printing, reports, data initialization, quality management, Kanban, location management.',
+      'Traceability: Trace manufacturing process by batch/container; Kanban adaptive templates (paperless efficiency, fixed-point delivery, workstation operations, logistics instructions).',
+      'Cross-organization: Dynamic labels, cross-organization data sharing; integrated SRM (delivery notes/PO), inbound/outbound management; SAP-WMS customs declaration weighing automation; anti-error for plating material expiration.',
+      'FIFO: Multi-dimensional configurable First-In-First-Out rules (material/factory/date/batch/supplier/customer/personnel).',
+      'Key Technologies: Distributed microservices (WMS/QMS/Interface/Base/BI), YARP+AgileConfig, minIO, read/write splitting refactoring, Prometheus+Grafana, Redis hot cache/historical archiving, Abstract Factory Pattern and distributed locks.'
+    ],
+    pictures: [
+      require("@/static/project/wms3/1.jpg"),
+      require("@/static/project/wms3/2.jpg"),
+      require("@/static/project/wms3/3.jpg"),
+      require("@/static/project/wms3/4.jpg"),
+      require("@/static/project/wms3/5.jpg"),
+      require("@/static/project/wms3/6.jpg"),
+      require("@/static/project/wms3/7.jpg"),
+      require("@/static/project/wms3/8.jpg"),
+      require("@/static/project/wms3/9.jpg"),
+      require("@/static/project/wms3/10.jpg"),
+      require("@/static/project/wms3/11.png"),
+      require("@/static/project/wms3/12.png"),
+      require("@/static/project/wms3/13.png"),
+      require("@/static/project/wms3/14.png"),
+      require("@/static/project/wms3/15.png"),
+      require("@/static/project/wms3/16.png"),
+      require("@/static/project/wms3/17.png"),
+      require("@/static/project/wms3/18.jpg"),
+      require("@/static/project/wms3/19.jpg"),
+      require("@/static/project/wms3/20.jpg"),
+      require("@/static/project/wms3/21.png"),
+      require("@/static/project/wms3/22.jpg"),
+      require("@/static/project/wms3/23.jpg"),
+      require("@/static/project/wms3/24.png"),
+    ],
+  },
+  {
+    startTime: '2022.04',
+    duration: '6 months',
+    title: 'Lingyi Intelligent Manufacturing WMS2.0 Management System',
+    company: 'Lingyi Intelligent Manufacturing Co., Ltd.',
+    role: 'Full-Stack Developer',
+    teamSize: '9 people',
+    summary: 'Focused on existing system quality and stability, streamlined SAP/OA/MES/QMS integration exceptions, completed performance and structural optimization, and supplemented key modules like timeliness and inventory counting.',
+    technologyStack: {
+      backend: '.NET Core 3.1, Quartz',
+      frontend: 'Vue, jQuery',
+      database: 'SQL Server',
+      devops: 'Nginx, IIS',
+      integration: 'SRM, OA, MES, QMS, ERP(SAP)',
+      others: 'Swagger'
+    },
+    businessContext: 'Heavy historical burden, required fixing freezes and exceptions, improving material timeliness and inbound/outbound processes without downtime, ensuring business continuity.',
+    painPoints: [
+      'Frequent exceptions in SAP/OA approval workflows, high concurrency during WMS posting caused database lock waits and even freezes.',
+      'Poor PDA scanning experience, repeated barcode recognition exceptions, affecting frontline efficiency.'
+    ],
+    challenges: [
+      'Performing online optimization and defect fixing on an existing system with a not entirely reasonable data structure.',
+      'High volume of inventory postings during peak periods, requiring careful management of transaction boundaries and lock granularity.'
+    ],
+    solutions: [
+      'Database Governance: Cleaned invalid tables/fields, rebuilt indexes, optimized critical SQL; added covering indexes for high-frequency tables.',
+      'Link Governance: Compensation and retry mechanisms to handle SAP/OA exceptions; added observable logs to inbound/outbound processes.',
+      'PDA Side: Barcode parsing fault tolerance and deduplication, simplified interaction processes to improve human-machine efficiency.',
+      'Quality: Established material timeliness management, real-time validation in inbound/outbound/production stages, and introduced quality release.'
+    ],
+    impact: [
+      'Eliminated inventory posting peak freezes, significantly reduced exceptions; increased approval workflow success rate (actual numbers supplemented).',
+      'Improved PDA one-time scan success rate (98%+).'
+    ],
+    outcomes: [
+      'Existing system ran stably, paving the way for subsequent WMS3.0 upgrade.',
+      'Inventory accuracy improved after key modules (timeliness/inventory counting) went live.'
+    ],
+    details: [
+      '1. WMS-SAP data synchronization exception governance; fixed OA/WMS/SAP approval data consistency.',
+      '2. Identified and resolved lock contention issues caused by large-volume inventory postings.',
+      '3. Table structure optimization and index governance; removed invalid tables/fields, improved performance.',
+      '4. Material timeliness management: Validation in inbound/outbound/production stages and quality release approval.',
+      '5. PDA scan deduplication and barcode recognition fault tolerance; optimized human-machine interaction experience.',
+      '6. Categorized on-site exceptions and misoperations, standardized processes.'
+    ],
+    pictures: [
+      require("@/static/project/wms2/2-1 (1).png"),
+      require("@/static/project/wms2/2-1 (2).png"),
+      require("@/static/project/wms2/2-1 (3).png"),
+      require("@/static/project/wms2/2-1 (4).png"),
+      require("@/static/project/wms2/2-1 (5).png"),
+      require("@/static/project/wms2/2-1 (6).png"),
+      require("@/static/project/wms2/2-1 (7).png"),
+      require("@/static/project/wms2/2-1 (8).png"),
+      require("@/static/project/wms2/2-1 (9).png"),
+      require("@/static/project/wms2/2-1 (10).png"),
+      require("@/static/project/wms2/2-1 (11).png"),
+      require("@/static/project/wms2/2-1 (12).png"),
+    ],
+  },
+  {
+    startTime: '2022.02',
+    duration: '4 months',
+    title: 'SKC Business Vehicle Dispatch and Expense Allocation Management System',
+    company: 'Kyocera Information Systems (Shanghai) Co., Ltd. - Dongguan Branch',
+    role: 'Full-Stack Developer',
+    teamSize: '5 people',
+    summary: 'Responsible for overall system framework construction and main functional module implementation, covering core processes such as vehicle request, BWF data retrieval, expense allocation, and SMS reminders.',
+    technologyStack: {
+      backend: '.NET Core, RESTful API, EntityFrameworkCore, SQL, Dapper, Quartz',
+      frontend: 'Vue, iView, Element-UI, Vuex, Axios, Webpack',
+      database: 'SQL Server',
+      devops: '',
+      integration: 'Alibaba Cloud SMS Platform, Baidu Maps API',
+      others: ''
+    },
+    businessContext: 'To improve corporate vehicle usage efficiency and expense visualization accuracy, built a unified vehicle request and expense allocation system to enhance dispatch and settlement efficiency.',
+    painPoints: [
+      'BWF data required manual organization, slow synchronization of driver and passenger information, inconsistent processes.',
+      'Original vehicle usage process had low informatization, expense allocation lacked basis and transparency.'
+    ],
+    challenges: [
+      'Data retrieval required process monitoring, exception validation, and high-frequency synchronization.',
+      'Allocation model needed to be dynamically linked to departments, mileage, and time periods, and be traceable.'
+    ],
+    solutions: [
+      'Developed BWF data crawler module and integrated it into the approval workflow, automatically calculated mileage using Baidu Maps API.',
+      'Built modules for vehicle request form maintenance, SMS notifications, vehicle/driver dispatch, location, and expense allocation, established configurable allocation algorithms.'
+    ],
+    impact: [
+      'Vehicle dispatch efficiency improved after digitizing the process, manual dispatch reduced by over 80%.',
+      'After the expense allocation model went live, inter-departmental account clarity significantly improved.'
+    ],
+    outcomes: [
+      'Achieved 100% systematized processing of vehicle requests, dispatch record accuracy improved to 99%.',
+      'Driver SMS notification timeliness reached over 95%.'
+    ],
+    details: [
+      '1. BWF Approval Form Data Retrieval Module: Periodically retrieved approved forms, called Baidu Maps API to calculate distance, and created request forms.',
+      '2. SMS Notification Module: Automatically retrieved driver/passenger information, sent vehicle usage reminder SMS to Alibaba Cloud platform.',
+      '3. Vehicle and Personnel Dispatch Module: Supported maintenance of location, time, vehicle type, etc.; allocation coefficients dynamically generated based on mileage and usage time.',
+      '4. All major modules were developed by me, realizing digitized processes and transparent expenses for the entire system.'
+    ],
+    pictures: [
+      require('@/static/project/skccar/1.png'),
+      require('@/static/project/skccar/2.png'),
+      require('@/static/project/skccar/3.png'),
+      require('@/static/project/skccar/4.png'),
+      require('@/static/project/skccar/5.png'),
+      require('@/static/project/skccar/6.png'),
+      require('@/static/project/skccar/7.png'),
+      require('@/static/project/skccar/8.png'),
+      require('@/static/project/skccar/9.png')
+    ]
+  },
+  {
+    startTime: '2020.12',
+    duration: '6 months',
+    title: 'Global Cryptocurrency Exchange - Data Collection System',
+    company: 'Personal Project',
+    role: 'Individual',
+    teamSize: '1 person',
+    summary: 'Implemented multi-exchange digital asset data collection, cleaning, and market data display, providing fundamental support for subsequent trading analysis and chart visualization.',
+    technologyStack: {
+      backend: 'Python, Websocket, C#, WebAPI',
+      frontend: '',
+      database: 'SQL Server, MongoDB, Redis',
+      devops: '',
+      integration: 'Exchange API, VarN Proxy',
+      others: 'Pandas, Pillow, BeautifulSoup, PyPDF2'
+    },
+    businessContext: 'The cryptocurrency field has huge trading volumes and severe data fragmentation; building a unified collection platform can support automated trading and visualization.',
+    painPoints: [
+      'Exchange API protocols varied, data formats inconsistent, making collection difficult.',
+      'High-frequency market data fluctuated significantly, hourly data volume could reach billions, leading to high processing pressure.'
+    ],
+    challenges: [
+      'Ensuring collection timeliness, consistency, and high availability, avoiding packet loss.',
+      'Data cleaning and processing logic needed to support dynamic fields and custom rules.'
+    ],
+    solutions: [
+      'Real-time collection of all trading pair market data (spot/perpetual/futures) from platforms like Binance, Bitmex, FTX via WebSocket long connections.',
+      'Built a queue consumption model, separated collection and processing, used Redis as an intermediate buffer to improve stability.',
+      'Data cleaning module performed uniqueness validation, numerical standardization, forced liquidation record identification, and trading pair aggregation.'
+    ],
+    impact: [
+      'Multi-platform, multi-type market data could be collected and displayed in real-time, providing fundamental data for subsequent algorithmic trading model training.',
+      'System ran stably long-term, supporting minute-level and hourly aggregation.'
+    ],
+    outcomes: [
+      'Covered mainstream global exchanges like Binance, Bitmex, OKEX, FTX, achieving 24/7 uninterrupted collection.',
+      'Completed three core modules: data collection, cleaning, and aggregation, with future plans to integrate chart visualization and backtesting system.'
+    ],
+    details: [
+      '1. Real-time market data collection for trading pairs (spot, contract, perpetual) on mainstream global exchanges, supporting second-level push.',
+      '2. Collected data processed asynchronously via message queue, improving system resilience and data integrity.',
+      '3. Cleaning module implemented uniqueness validation and multi-dimensional aggregation (trading volume, net turnover, average price, etc.).',
+      '4. Aggregation module summarized transaction data for each trading pair on an hourly basis, outputting to MongoDB for subsequent use.',
+      '5. Reserved chart visualization module interface to display price/depth trends using Echarts/Kibana.'
+    ],
+    pictures: [
+      require("@/static/project/projectcoindata/1.png"),
+      require("@/static/project/projectcoindata/2.png"),
+      require("@/static/project/projectcoindata/3.png"),
+      require("@/static/project/projectcoindata/4.png"),
+      require("@/static/project/projectcoindata/5.png"),
+      require("@/static/project/projectcoindata/6.png")
+    ]
+  },
+  {
+    startTime: '2021.11',
+    duration: '6 months',
+    title: 'SKC Fixed Asset Management System - Refactoring',
+    company: 'Kyocera Information Systems (Shanghai) Co., Ltd. - Dongguan Branch',
+    role: 'Full-Stack Developer',
+    teamSize: '6 people',
+    summary: 'Responsible for refactoring the old system to a new architecture, implementing full fixed asset lifecycle management using Vue + .NET Core.',
+    technologyStack: {
+      backend: '.NET Core, RESTful API, EntityFrameworkCore, Dapper, Quartz',
+      frontend: 'Vue, Element-UI, iView, Vuex, Axios, Webpack',
+      database: 'SQL Server',
+      devops: '',
+      integration: '',
+      others: ''
+    },
+    businessContext: 'The original system was a WinForm architecture, with low page interaction and maintenance efficiency, requiring refactoring towards web-based and componentized architecture.',
+    painPoints: [
+      'Original WinForm system was inconvenient to operate, pages were inconsistent, and logic was highly coupled.',
+      'Asset lifecycle involved multiple stages, business validation was complex and lacked unified encapsulated logic.'
+    ],
+    challenges: [
+      'Refactoring 37 pages from scratch, requiring assurance of full functionality and stable performance.',
+      'Poor reusability needed to be addressed by encapsulation to improve componentization.'
+    ],
+    solutions: [
+      'Refactored pages based on Vue, encapsulated logic and UI by module; unified maintenance of asset data structure and lifecycle operation flow.',
+      'Optimized form components, pop-ups, and list pages into reusable components; improved code maintainability.'
+    ],
+    impact: [
+      'Page access speed increased by 40% after refactoring, improving user satisfaction.',
+      'Operations and maintenance costs significantly decreased, code module reusability increased to 70%.'
+    ],
+    outcomes: [
+      'System successfully replaced the old platform and ran stably, now supporting 100% of fixed asset transfer processes.',
+      'Asset management data accuracy improved to 99% after business processes went live.'
+    ],
+    details: [
+      '1. Project included: AX data import, fixed asset maintenance, changes/disposal, label printing, inventory counting, totaling 37 pages.',
+      '2. All page UIs were refactored by me into Vue pages, backend functions were rewritten by module, and interfaces were uniformly encapsulated.',
+      '3. Encapsulated common components and generic validation logic, achieving unified front-end and back-end logic.'
+    ],
+    pictures: [
+      require("@/static/project/projectassest/1.png"),
+      require("@/static/project/projectassest/2.png"),
+      require("@/static/project/projectassest/3.png"),
+      require("@/static/project/projectassest/4.png"),
+      require("@/static/project/projectassest/5.png"),
+      require("@/static/project/projectassest/6.png"),
+      require("@/static/project/projectassest/7.png")
+    ]
+  },
+ 
+  {
+    startTime: '2021.05',
+    duration: '4 months',
+    title: 'SKC Data - RPA Management System',
+    company: 'Kyocera Information Systems (Shanghai) Co., Ltd. - Dongguan Branch',
+    role: 'Full-Stack Developer',
+    teamSize: '3 people',
+    summary: 'Responsible for the design and implementation of the RPA automation system, creating automated processes for invoice processing, data collection, resume handling, etc.',
+    technologyStack: {
+      backend: '.NET, Quartz, Python, PyPDF2, Pillow, Pandas, BeautifulSoup',
+      frontend: '',
+      database: '',
+      devops: '',
+      integration: '',
+      others: 'Python, PyPDF2, Pillow, Pandas, BeautifulSoup, Image Processing, Web Scraper'
+    },
+    businessContext: 'Multiple business scenarios required manual repetitive data processing, which was inefficient and error-prone, necessitating automation through RPA technology.',
+    painPoints: [
+      'Invoice data required manual download and organization, which was time-consuming and prone to errors.',
+      'Procurement order processing was cumbersome, with frequent manual operations.',
+      'Resume photo processing required manual cropping and standardization.'
+    ],
+    challenges: [
+      'Data formats across multiple platforms were inconsistent, requiring standardized processing.',
+      'Automated processes needed to consider exception handling and retry mechanisms.',
+      'Ensuring accuracy and completeness of data processing was crucial.'
+    ],
+    solutions: [
+      'Developed an invoice website crawler module to automate invoice download, PDF parsing, and Excel generation.',
+      'Built a KPTG automation processing module, integrating procurement order download, inspection receipt printing, and email sending.',
+      'Implemented resume system automation, including Questionnaire Star API integration, photo processing, and standardization.'
+    ],
+    impact: [
+      'Invoice processing time reduced from 2 hours manually to 5 minutes, accuracy improved to 99%.',
+      'Procurement order processing efficiency increased by 80%, significantly reducing manual intervention.',
+      'Resume photo processing speed increased by 90%, and standardization significantly improved.'
+    ],
+    outcomes: [
+      'Successfully automated 3 core business scenarios, significantly improving work efficiency.',
+      'System ran stably with an error rate below 1%, receiving positive user feedback.'
+    ],
+    details: [
+      '1. Project included: Invoice website data crawling module, KPTG data automation processing module, resume system automation module, scheduled task management module.',
+      '2. Invoice website data crawling module: Batch crawled invoice information by month, bulk merged invoice PDFs, read invoice PDF information, merged and summarized to generate invoice amount EXCEL.',
+      '3. KPTG data automation processing module: Automated procurement order download, integrated automatic inspection receipt printing, automated email sending for downloaded procurement order data.',
+      '4. Resume system automation module: Questionnaire Star recruitment signature batch automatic download API, Sony camera photo API integration, Python processing for passport photo cropping.'
+    ],
+    pictures: []
+  },
+ 
+  {
+    startTime: '2021.02',
+    duration: '4 months',
+    title: 'SKC-Bus Booking Management System',
+    company: 'Kyocera Information Systems (Shanghai) Co., Ltd. - Dongguan Branch',
+    role: 'Full-Stack Developer',
+    teamSize: '5 people',
+    summary: 'Responsible for the development of the enterprise bus booking system\'s WeChat Mini Program and backend services, implementing core functionalities such as route booking and shift management.',
+    technologyStack: {
+      backend: '.NET Core, RESTful API, Dapper, Quartz',
+      frontend: 'Vue, iView, Axios, Webpack',
+      database: 'SQL Server',
+      devops: '',
+      integration: 'WeChat Mini Program',
+      others: ''
+    },
+    businessContext: 'Enterprise employees needed a convenient bus booking system for commuting, enabling mobile operations for route booking and shift management.',
+    painPoints: [
+      'Traditional bus booking process was cumbersome, requiring manual coordination and notification.',
+      'Shift information was not updated promptly, leading to low seat utilization.'
+    ],
+    challenges: [
+      'Required simultaneous data synchronization between the Mini Program and the administration backend.',
+      'Message pushes needed to be timely and reliable, avoiding missed deliveries.'
+    ],
+    solutions: [
+      'Implemented mobile bus booking features based on WeChat Mini Program, including route inquiry and shift booking.',
+      'Built backend microservices to handle core logic such as data synchronization and message pushing.',
+      'Implemented supporting functionalities like work calendar maintenance and user permission management.'
+    ],
+    impact: [
+      'Bus booking process reduced from 5-10 minutes manually to completion within 1 minute by the system.',
+      'Seat utilization increased by 30%, significantly reducing empty seat waste.'
+    ],
+    outcomes: [
+      'System received over 90% positive user feedback after launch.',
+      'Significantly improved enterprise commute management efficiency and reduced labor costs.'
+    ],
+    details: [
+      '1. Project included: WeChat Mini Program module, backend microservices, backend data management module.',
+      '2. WeChat Mini Program: Route maintenance, booking overview, work calendar maintenance, booking bus shifts, message push & automatic push, user information, role permission editing.',
+      '3. Backend Data Microservices: Upload calendar, upload user information, retrieve shift information, retrieve route information, retrieve booking information, etc.',
+      '4. My main responsibilities: Backend microservices, backend data report management module, designing Mini Program UI interface.'
+    ],
+    pictures: [
+      require("@/static/project/skcbus/1.png"),
+      require("@/static/project/skcbus/2.png"),
+      require("@/static/project/skcbus/3.png"),
+      require("@/static/project/skcbus/4.png"),
+      require("@/static/project/skcbus/5.png"),
+      require("@/static/project/skcbus/6.png"),
+      require("@/static/project/skcbus/7.png"),
+      require("@/static/project/skcbus/8.png"),
+      require("@/static/project/skcbus/9.png")
+    ]
+  },
+ 
+  {
+    startTime: '2020.11',
+    duration: '3 months',
+    title: 'Electricity Visualization System',
+    company: 'Kyocera Information Systems (Shanghai) Co., Ltd. - Dongguan Branch',
+    role: 'Full-Stack Developer',
+    teamSize: '3 people',
+    summary: 'Built an electricity monitoring and visualization platform based on InfluxDB and Grafana, achieving real-time monitoring and analysis of power consumption data.',
+    technologyStack: {
+      backend: '.NET WebApi',
+      frontend: 'AJAX',
+      database: 'InfluxDB',
+      devops: 'Linux',
+      integration: 'Grafana',
+      others: ''
+    },
+    businessContext: 'The enterprise needed real-time monitoring of transformer power consumption, analysis of consumption trends, and timely detection of anomalies.',
+    painPoints: [
+      'Power consumption data was scattered, lacking a unified monitoring platform.',
+      'Electricity bill calculation was complex, requiring consideration of peak and off-peak tariffs.'
+    ],
+    challenges: [
+      'Required processing large volumes of time-series data, ensuring query performance.',
+      'Visualization display needed to support multi-dimensional analysis.'
+    ],
+    solutions: [
+      'Used InfluxDB for time-series data storage, Grafana for visualization display.',
+      'Developed an electricity bill calculation module, supporting automatic calculation of peak, shoulder, and off-peak tariffs.',
+      'Implemented threshold monitoring and SMS alert functionality.'
+    ],
+    impact: [
+      'Achieved real-time monitoring of 13 transformers, reducing anomaly response time by 80%.',
+      'Electricity bill calculation accuracy reached 99.9%, significantly reducing manual accounting work.'
+    ],
+    outcomes: [
+      'System ran stably, supporting multi-dimensional power consumption analysis.',
+      'Anomaly early warning mechanism effectively prevented power accidents.'
+    ],
+    details: [
+      '1. Smart electricity meter data collection module, Grafana chart display module (ABC current, ABC voltage, power consumption statistics, calculation of peak/shoulder/off-peak tariffs), SMS alarm module.',
+      '2. Based on three-phase meters, ABC current, ABC voltage, and power, separately calculated power consumption for 13 transformers; computed daily and monthly power consumption based on industrial electricity tariff tiers, and summarized to generate comparative charts for the same day across different years.',
+      '3. Monitored voltage, current, and power for thirteen transformers, sending SMS alerts when exceeding set thresholds.',
+      '4. My main responsibilities: Grafana chart creation, including writing InfluxDB SQL, and calculating peak/shoulder/off-peak tariffs.'
+    ],
+    pictures: [
+      require("@/static/project/projectelect/1.png"),
+      require("@/static/project/projectelect/2.png"),
+      require("@/static/project/projectelect/3.png"),
+      require("@/static/project/projectelect/4.png"),
+      require("@/static/project/projectelect/5.png")
+    ]
+  },
+ 
+  {
+    startTime: '2020.08',
+    duration: '3 months',
+    title: 'AEO System Management System',
+    company: 'Kyocera Information Systems (Shanghai) Co., Ltd. - Dongguan Branch',
+    role: 'Full-Stack Developer',
+    teamSize: '3 people',
+    summary: 'Performed performance optimization and functional expansion on the existing AEO system, achieving multi-company data management.',
+    technologyStack: {
+      backend: 'ASP.NET MVC, Web API',
+      frontend: 'Bootstrap, jQuery',
+      database: 'SQL Server',
+      devops: '',
+      integration: '',
+      others: ''
+    },
+    businessContext: 'The system needed to support multi-company business scenarios while addressing existing performance issues.',
+    painPoints: [
+      'System response speed was slow, especially with large data volumes.',
+      'Incomplete data isolation for multiple companies posed security risks.'
+    ],
+    challenges: [
+      'Required optimizing performance while ensuring functional completeness.',
+      'Multi-database operations needed to ensure data consistency.'
+    ],
+    solutions: [
+      'Refactored the interface using Bootstrap Table TreeTable to optimize data loading.',
+      'Implemented multi-company data isolation to ensure access security.'
+    ],
+    impact: [
+      'System response speed improved by 50%, significantly enhancing user experience.',
+      'Successfully supported independent operations for multiple companies, ensuring data security.'
+    ],
+    outcomes: [
+      'System performance issues were fundamentally resolved.',
+      'Supported multi-company business scenarios, meeting expansion requirements.'
+    ],
+    details: [
+      '1. Modified multi-company module functionalities in the existing AEO system, handling multi-database operations under a multi-company modularization.',
+      '2. Optimized the system management audit module\'s lag issues by using Bootstrap table TreeTable.'
+    ],
+    pictures: [
+      require("@/static/project/projectaeo/1.png"),
+      require("@/static/project/projectaeo/12.png"),
+      require("@/static/project/projectaeo/13.png"),
+      require("@/static/project/projectaeo/14.png"),
+      require("@/static/project/projectaeo/15.png")
+    ]
+  },
+ 
+  {
+    startTime: '2019.12',
+    duration: '12 months',
+    title: 'Digital Workshop - MES Lean Manufacturing Execution System',
+    company: 'Dongguan Chunsi Printing Co., Ltd.',
+    role: 'Senior Full-Stack Developer',
+    teamSize: '8 people',
+    summary: 'Responsible for core module development of the MES system, achieving digital management of production processes, assisting the enterprise in its Industry 4.0 transformation.',
+    technologyStack: {
+      backend: 'ASP.NET MVC, Spring.NET, NHibernate, Web API',
+      frontend: 'Knockout.js, ECharts, Ext.js, jQuery',
+      database: 'SQL Server',
+      devops: '',
+      integration: '',
+      others: 'Light.7.css'
+    },
+    businessContext: 'The enterprise needed to build a modern MES system to achieve lean management of production processes and meet Industry 4.0 certification requirements.',
+    painPoints: [
+      'Production process data collection was not timely, leading to low management efficiency.',
+      'Lacked real-time monitoring and analysis capabilities.'
+    ],
+    challenges: [
+      'Numerous system modules required ensuring coordination among them.',
+      'Required supporting real-time data display and analysis.'
+    ],
+    solutions: [
+      'Implemented core modules such as order management, production management, and quality management.',
+      'Developed real-time monitoring dashboards, supporting production data visualization.',
+      'Built middleware components such as state machines and dynamic reports.'
+    ],
+    impact: [
+      'Production efficiency increased by 30%, management costs reduced by 20%.',
+      'Data collection achieved automation, with an accuracy rate of 99%.'
+    ],
+    outcomes: [
+      'System successfully launched and obtained Industry 4.0 certification.',
+      'Supported the company\'s digital requirements for Hong Kong listing.'
+    ],
+    details: [
+      '1. Main system functional modules: Including basic settings, order module, work ticket module, production order management module, replenishment module, quality module, KPI module, MTS material picking module, shelf module, report module, resource management module, APS production planning management module, etc.',
+      '2. Included middleware: Real-time display shelf module, state machine component, SQL dynamic configurable reports, ECharts-based configurable chart components.',
+      '3. Project goal: Achieve Industry 4.0 certification to support the company\'s listing in Hong Kong.',
+      '4. My main responsibilities: Basic settings, order module, work ticket module, MTS material picking module, shelf module.'
+    ],
+    pictures: [
+      require("@/static/project/control/9-1-lg.jpg"),
+      require("@/static/project/control/9-2-lg.jpg"),
+      require("@/static/project/control/9-3-lg.jpg"),
+      require("@/static/project/control/9-4-lg.jpg"),
+      require("@/static/project/control/9-5-lg.jpg"),
+      require("@/static/project/control/9-6-lg.jpg"),
+      require("@/static/project/control/9-7-lg.jpg"),
+      require("@/static/project/control/9-8-lg.jpg"),
+      require("@/static/project/control/9-9-lg.jpg")
+    ]
+  },
+ 
+  {
+    startTime: '2018.08',
+    duration: '9 months',
+    title: 'OEM Real-time Workshop Management System (APS)',
+    company: 'Dongguan Chunsi Printing Co., Ltd.',
+    role: 'Software Engineer',
+    teamSize: '6 people',
+    summary: 'Responsible for the development of the OEM workshop management system, achieving intelligent production scheduling and real-time monitoring.',
+    technologyStack: {
+      backend: 'ASP.NET MVC, Spring.NET, NHibernate, Web API',
+      frontend: 'WPF, Knockout.js, Ext.js, jQuery',
+      database: 'SQL Server',
+      devops: '',
+      integration: '',
+      others: 'Light.7.css'
+    },
+    businessContext: 'To build an intelligent scheduling system to improve the production efficiency of OEM orders.',
+    painPoints: [
+      'Complex production planning and scheduling, low efficiency of manual dispatch.',
+      'Lack of real-time monitoring tools, untimely handling of exceptions.'
+    ],
+    challenges: [
+      'Handling complex scheduling rules and constraints.',
+      'Real-time data display required high performance and stability.'
+    ],
+    solutions: [
+      'Developed visual dashboards to achieve real-time monitoring of production status.',
+      'Implemented intelligent scheduling functionality based on a rules engine.',
+      'Built core components such as state machines and configurable factory calendars.'
+    ],
+    impact: [
+      'Production plan scheduling time reduced by 70%.',
+      'Anomaly handling response time reduced by 50%.'
+    ],
+    outcomes: [
+      'System stably supported three-shift production operations.',
+      'Significantly improved production plan execution efficiency.'
+    ],
+    details: [
+      'Main system functional modules included: PMC workshop management, CTP Kanban, paper material Kanban, real-time printing visualization Kanban, OEM workshop efficiency real-time achievement Kanban, anomaly tracking Kanban, post-process buffer capacity Kanban.',
+      'Middleware implemented state machine components, configurable factory calendars, and a business-based rules engine.',
+      'The project goal was to real-time monitor order progress through the above Kanbans, and dynamically schedule production based on material status and workshop capacity, ensuring the efficiency of three-shift production.',
+      'PMC imported MPS planned orders into the system, which automatically adjusted the production sequence of OEM orders based on business rules such as material status, matching conditions, and workshop capacity.'
+    ],
+    pictures: [
+      require("@/static/project/control/8-1-lg.jpg"),
+      require("@/static/project/control/8-2-lg.jpg"),
+      require("@/static/project/control/8-3-lg.jpg"),
+      require("@/static/project/control/8-4-lg.jpg"),
+      require("@/static/project/control/8-5-lg.jpg"),
+      require("@/static/project/control/8-6-lg.jpg")
+    ]
+  },
+ 
+  {
+    startTime: '2017.09',
+    duration: '5 months',
+    title: 'Mattel FVT Project',
+    company: 'Dongguan Chunsi Printing Co., Ltd.',
+    role: 'Software Engineer',
+    teamSize: '4 people',
+    summary: 'Developed a material traceability system to achieve full traceability of production raw materials and reduce quality risks.',
+    technologyStack: {
+      backend: 'ASP.NET, Web API, NHibernate',
+      frontend: 'jQuery, JavaScript, CSS',
+      database: 'SQL Server',
+      devops: '',
+      integration: '',
+      others: ''
+    },
+    businessContext: 'The client needed to establish a material traceability system to reduce quality risks and testing costs.',
+    painPoints: [
+      'Lack of traceability during material usage.',
+      'Difficulty in quickly pinpointing the source of quality issues.'
+    ],
+    challenges: [
+      'Required complete recording of the entire material flow process.',
+      'System required high reliability and data accuracy.'
+    ],
+    solutions: [
+      'Implemented full material batch tracking functionality.',
+      'Developed work instruction execution and recording modules.',
+      'Built comprehensive query and statistics functionalities.'
+    ],
+    impact: [
+      'Material traceability time reduced from hours to minutes.',
+      'Testing costs reduced by 30%, quality risks significantly lowered.'
+    ],
+    outcomes: [
+      'System ran stably, traceability accuracy reached 99%.',
+      'Successfully reduced product testing frequency and costs.'
+    ],
+    details: [
+      '1. Main system functional modules: Logistics instruction outflow, logistics instruction inflow, work instruction label on-machine execution, work instruction label off-machine completion, material outbound, process record query, material query, area setting, draft bag entry, Mattel raw material batch report module.',
+      '2. Project goal: Trace raw material batch information used during the production of manufacturing orders, prevent the use of incorrect raw materials in the production process, and immediately trace raw material batch information if any material anomaly occurs.',
+      '3. Agreed with the client that being able to trace material batch information would reduce the testing frequency of finished/semi-finished products, thereby lowering testing costs.'
+    ],
+    pictures: [
+      require("@/static/project/control/7-1-lg.jpg"),
+      require("@/static/project/control/7-2-lg.jpg"),
+      require("@/static/project/control/7-3-lg.jpg"),
+      require("@/static/project/control/7-4-lg.jpg"),
+      require("@/static/project/control/7-5-lg.jpg"),
+      require("@/static/project/control/7-6-lg.jpg")
+    ]
+  },
+ 
+  {
+    startTime: '2017.03',
+    duration: '8 months',
+    title: 'PMS Project Management System',
+    company: 'Dongguan Chunsi Printing Co., Ltd.',
+    role: 'Intern Engineer',
+    teamSize: '4 people',
+    summary: 'Participated in project management system development, responsible for the development and maintenance of data interaction modules between sub-systems.',
+    technologyStack: {
+      backend: 'WPF, Web API, NHibernate, Spring.NET',
+      frontend: '',
+      database: 'SQL Server',
+      devops: '',
+      integration: 'SSO',
+      others: ''
+    },
+    businessContext: 'Needed to establish a unified project management platform to standardize project management processes.',
+    painPoints: [
+      'Project management processes were not standardized.',
+      'Low efficiency of data interaction between systems.'
+    ],
+    challenges: [
+      'Required handling complex project management business logic.',
+      'Ensuring reliability of data interaction between systems.'
+    ],
+    solutions: [
+      'Implemented full project lifecycle management functionality.',
+      'Developed data interaction modules between systems.',
+      'Optimized code structure to improve system performance.'
+    ],
+    impact: [
+      'Data interaction efficiency between systems improved by 40%.',
+      'Degree of project management process standardization increased.'
+    ],
+    outcomes: [
+      'System ran stably, supporting daily project management.',
+      'Significantly improved project management efficiency.'
+    ],
+    details: [
+      '1. Main system functional modules: Project management, task management, calendar settings, project template management, resource management, user management, report management.',
+      '2. My main responsibilities: Encapsulated and maintained data interaction modules between sub-processes in the task workflow and the PE design management system, updated the codebase according to business requirements, corrected errors in business code, and improved program performance.'
+    ],
+    pictures: [
+      require("@/static/project/control/5-1-lg.jpg"),
+      require("@/static/project/control/5-2-lg.jpg"),
+      require("@/static/project/control/5-3-lg.jpg"),
+      require("@/static/project/control/5-4-lg.jpg"),
+      require("@/static/project/control/5-5-lg.jpg"),
+      require("@/static/project/control/5-6-lg.jpg")
+    ]
+  }
+ ]
+
+
 //最后修改时间
 const lastUpdate = '2018-02-10';
+// 動態獲取項目列表
+const projectlists = getProjectLists(localStorage.getItem('language') || 'zh-CN')
+
 export default {
     projectlists,
     traitList,
     projectList,
     personalInfo,
     lastUpdate,
+    getProjectLists, // 導出函數供組件使用
 };

@@ -5,9 +5,9 @@
          style="background-color: #2B3A67; color: white; border-radius: 8px; padding: 20px;">
       <img v-bind:src="avatarreal"
            class="right-top__avatar" />
-      <h1>{{ personalInfo.name }}</h1>
-      <h3>{{ personalInfo.position }}</h3>
-      <h5>{{ personalInfo.personalInfo }}</h5>
+      <h1>{{ $t('personalInfo.name') }}</h1>
+      <h3>{{ $t('personalInfo.position') }}</h3>
+      <h5>{{ $t('personalInfo.description') }}</h5>
     </div>
     <div class="right-link">
       <img align=""
@@ -22,44 +22,41 @@
       <!-- <p><img v-bind:src="phones" alt="" /><a>13266705799</a></p> -->
     </div>
     <div class="right-info">
-      <p>{{ personalInfo.sex }} / {{ personalInfo.birthday }} / 32岁</p>
-      <p>{{ personalInfo.university }} / {{ personalInfo.major }}</p>
-      <p>{{ personalInfo.education }} / {{ personalInfo.graduation }}毕业</p>
-      <p>工作年限 / 9年</p>
+      <p>{{ $t('personalInfo.sex') }} / {{ $t('personalInfo.birthday') }} / {{ $t('personalInfo.age') }}</p>
+      <p>{{ $t('personalInfo.university') }} / {{ $t('personalInfo.major') }}</p>
+      <p>{{ $t('personalInfo.education') }} / {{ $t('personalInfo.graduation') }}{{ $t('personalInfo.graduationSuffix') }}</p>
+      <p>{{ $t('workExperience.title') }} / {{ $t('personalInfo.workExperience') }}</p>
       <!-- <p>英语 / {{ personalInfo.english }}</p> -->
     </div>
     <div style="margin-bottom: 40px">
-      <strong class="section-title">工作经历</strong>
+      <strong class="section-title">{{ $t('workExperience.title') }}</strong>
       <div style="padding: 8px">
         <div>
-          <span style="color: gray">2015.07 - 2015.11</span>
-          <p style="margin-left: 16px">东莞申翔网络公司-实习</p>
+          <span style="color: gray">{{ $t('workExperience.companies.shenxiang.period') }}</span>
+          <p style="margin-left: 16px">{{ $t('workExperience.companies.shenxiang.name') }}</p>
         </div>
         <div>
-          <span style="color: gray">2016.03 - 2020.01</span>
-          <p style="margin-left: 16px">东莞隽思印刷有限公司</p>
+          <span style="color: gray">{{ $t('workExperience.companies.juansi.period') }}</span>
+          <p style="margin-left: 16px">{{ $t('workExperience.companies.juansi.name') }}</p>
         </div>
         <div>
-          <span style="color: gray">2020.05 - 2022-03</span>
-          <p style="margin-left: 16px">京瓷信息系统(上海)有限公司</p>
+          <span style="color: gray">{{ $t('workExperience.companies.kyocera.period') }}</span>
+          <p style="margin-left: 16px">{{ $t('workExperience.companies.kyocera.name') }}</p>
         </div>
         <div>
-          <span style="color: gray">2022.03 - 至今</span>
-          <p style="margin-left: 16px">广东领益智造股份有限公司</p>
+          <span style="color: gray">{{ $t('workExperience.companies.lingyi.period') }}</span>
+          <p style="margin-left: 16px">{{ $t('workExperience.companies.lingyi.name') }}</p>
         </div>
       </div>
     </div>
 
-    s
-
-
     <div class="right-skill">
-      <p class="section-title">&nbsp;<img v-bind:src="logo2" /><strong>技术栈</strong></p>
+      <p class="section-title">&nbsp;<img v-bind:src="logo2" /><strong>{{ $t('skills.title') }}</strong></p>
       <!-- <a v-for="(item, index) in personalInfo.skillList" :key="index">{{
         item
       }}</a> -->
       <div class="skill-section">
-        <h3 class="skill-category">前端技术</h3>
+        <h3 class="skill-category">{{ $t('skills.categories.frontend.title') }}</h3>
         <ul class="skill-list">
           <li class="skill-item">基础框架：Vue2 3、Uni-app、微信小程序</li>
           <li class="skill-item">UI框架：Element-UI、IView、Layui、Bootstrap</li>
@@ -68,7 +65,7 @@
           <li class="skill-item">其他：jQuery、Webpack、CSS/LESS</li>
         </ul>
 
-        <h3 class="skill-category">后端技术</h3>
+        <h3 class="skill-category">{{ $t('skills.categories.backend.title') }}</h3>
         <ul class="skill-list">
           <li class="skill-item">语言：.NET Core、Python、JAVA Spring Boot</li>
           <li class="skill-item">ORM：Entity Framework Core、Dapper、NHibernate, SqlSugar, Mybatis-Plus</li>
@@ -77,24 +74,24 @@
           <li class="skill-item">数据处理：Python生态(Pandas、BeautifulSoup等)</li>
         </ul>
 
-        <h3 class="skill-category">数据库与中间件</h3>
+        <h3 class="skill-category">{{ $t('skills.categories.database.title') }}</h3>
         <ul class="skill-list">
           <li class="skill-item">关系型数据库：SQL Server、MySQL、PostgreSQL</li>
           <li class="skill-item">非关系型数据库：Redis、MongoDB、InfluxDB、ElasticSearch</li>
           <li class="skill-item">缓存：Redis memorycache</li>
         </ul>
 
-        <h3 class="skill-category">DevOps与运维</h3>
+        <h3 class="skill-category">{{ $t('skills.categories.devops.title') }}</h3>
         <ul class="skill-list">
           <li class="skill-item">容器化：Docker、Docker Compose</li>
           <li class="skill-item">CI/CD：Jenkins、Gitlab Nexus Harbor</li>
           <li class="skill-item">监控：Prometheus、Grafana</li>
           <li class="skill-item">版本控制：Git SVN</li>
           <li class="skill-item">代理与服务器：Nginx、IIS、YARP</li>
-       <li class="skill-item">AI IDE：Cursor、Augment、Kiro</li>
+          <li class="skill-item">AI IDE：Cursor、Augment、Kiro</li>
         </ul>
 
-        <h3 class="skill-category">架构设计</h3>
+        <h3 class="skill-category">{{ $t('skills.categories.architecture.title') }}</h3>
         <ul class="skill-list">
           <li class="skill-item">微服务架构</li>
           <li class="skill-item">分布式系统设计</li>
@@ -102,13 +99,12 @@
         </ul>
 
         <p class="summary">
-          通过以上项目经历，我积累了丰富的全栈开发经验，主导过 数据量上亿级别，在线人数4000+ 的工业系统 的前后端架构搭建，尤其在企业级应用开发、系统集成、性能优化和架构设计方面有深入的实践。
-          在技术上不断学习新的框架和工具，能够根据业务需求选择合适的技术栈实现解决方案。 
+          {{ $t('skills.categories.architecture.description') }}
         </p>
       </div>
 
       <div class="right-skills">
-        <p class="section-title">&nbsp;<img v-bind:src="logo1" /><strong>个人资料:</strong></p>
+        <p class="section-title">&nbsp;<img v-bind:src="logo1" /><strong>{{ $t('personalResources.title') }}:</strong></p>
 
         <div style="padding: 8px">
           <div class="resource-item">
@@ -200,6 +196,7 @@ let imgUrl12 = require("@/assets/imgs/12.png");
 let imgUrl13 = require("@/assets/imgs/13.png");
 
 import configs from "@/config/index.js";
+
 const { personalInfo } = configs;
 export default {
   //import引入的组件需要注入到对象中才能使用

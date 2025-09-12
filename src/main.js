@@ -12,6 +12,7 @@ import http from './api/http'
 import permission from './api/permission'
 import store from './store/index'
 import base from './utilities/common'
+import i18n from './i18n/'
 // import NProgress from 'nprogress'
 // import 'nprogress/nprogress.css'
 // import Vuex from 'vuex'
@@ -33,6 +34,7 @@ var vue = new Vue({
         el: '#app',
         store,
         router,
+        i18n,
         components: { App },
         template: '<App/>'
     })

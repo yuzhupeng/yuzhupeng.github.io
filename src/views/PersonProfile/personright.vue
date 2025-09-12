@@ -9,21 +9,27 @@
       </div>
 
       <!-- 基本信息 -->
-      <Card class="project-card" style="width: 100%">
-        <p slot="title" class="titles">
+      <Card class="project-card"
+            style="width: 100%">
+        <p slot="title"
+           class="titles">
           <Icon type="ios-film-outline"></Icon>
           {{ item.title }}
         </p>
-        <a href="#" slot="extra">
+        <a href="#"
+           slot="extra">
           <Icon type="ios-bookmarks-outline"></Icon>
           持续时间：{{ item.duration }}
         </a>
 
         <p class="project-info"><span class="info-label">所在公司：</span>{{ item.company }}</p>
         <p class="project-info"><span class="info-label">项目职务：</span>{{ item.role }}</p>
-        <p class="project-info" v-if="item.teamSize"><span class="info-label">规模：</span>{{ item.teamSize }}</p>
-        <p class="project-info" v-if="item.summary"><span class="info-label">摘要：</span>{{ item.summary }}</p>
-        <p class="project-info" v-if="item.technologyStack">
+        <p class="project-info"
+           v-if="item.teamSize"><span class="info-label">规模：</span>{{ item.teamSize }}</p>
+        <p class="project-info"
+           v-if="item.summary"><span class="info-label">摘要：</span>{{ item.summary }}</p>
+        <p class="project-info"
+           v-if="item.technologyStack">
           <span class="info-label">项目技术：</span>
           <span>
             <template v-if="item.technologyStack.backend">后端：{{ item.technologyStack.backend }}；</template>
@@ -35,33 +41,41 @@
         </p>
       </Card>
 
-      <BR/>
+      <BR />
 
       <!-- 四段式卡片 -->
-      <Card class="project-card" style="width: 100%">
+      <Card class="project-card"
+            style="width: 100%">
         <p slot="title">
           <Icon type="ios-construct-outline"></Icon>
           关键说明（痛点 / 难点 / 方案 / 效果）
         </p>
-        <div class="project-description" v-if="item.businessContext">
+        <div class="project-description"
+             v-if="item.businessContext">
           <span class="info-label">背景：</span>{{ item.businessContext }}
         </div>
-        <div class="project-description" v-if="item.painPoints && item.painPoints.length">
+        <div class="project-description"
+             v-if="item.painPoints && item.painPoints.length">
           <span class="info-label">业务痛点：</span>
           <ul style="margin:0;padding-left:18px;">
-            <li v-for="(x, i) in item.painPoints" :key="'pp'+i">{{ x }}</li>
+            <li v-for="(x, i) in item.painPoints"
+                :key="'pp'+i">{{ x }}</li>
           </ul>
         </div>
-        <div class="project-description" v-if="item.challenges && item.challenges.length">
+        <div class="project-description"
+             v-if="item.challenges && item.challenges.length">
           <span class="info-label">技术难点：</span>
           <ul style="margin:0;padding-left:18px;">
-            <li v-for="(x, i) in item.challenges" :key="'ch'+i">{{ x }}</li>
+            <li v-for="(x, i) in item.challenges"
+                :key="'ch'+i">{{ x }}</li>
           </ul>
         </div>
-        <div class="project-description" v-if="item.solutions && item.solutions.length">
+        <div class="project-description"
+             v-if="item.solutions && item.solutions.length">
           <span class="info-label">解决方案：</span>
           <ul style="margin:0;padding-left:18px;">
-            <li v-for="(x, i) in item.solutions" :key="'so'+i">{{ x }}</li>
+            <li v-for="(x, i) in item.solutions"
+                :key="'so'+i">{{ x }}</li>
           </ul>
         </div>
         <!-- <div class="project-description" v-if="item.impact && item.impact.length">
@@ -70,21 +84,25 @@
             <li v-for="(x, i) in item.impact" :key="'im'+i">{{ x }}</li>
           </ul>
         </div> -->
-        <div class="project-description" v-if="item.outcomes && item.outcomes.length">
+        <div class="project-description"
+             v-if="item.outcomes && item.outcomes.length">
           <span class="info-label">项目成果：</span>
-                <ul style="margin:0;padding-left:18px;">
-            <li v-for="(x, i) in item.impact" :key="'im'+i">{{ x }}</li>
+          <ul style="margin:0;padding-left:18px;">
+            <li v-for="(x, i) in item.impact"
+                :key="'im'+i">{{ x }}</li>
           </ul>
           <ul style="margin:0;padding-left:18px;">
-            <li v-for="(x, i) in item.outcomes" :key="'oc'+i">{{ x }}</li>
+            <li v-for="(x, i) in item.outcomes"
+                :key="'oc'+i">{{ x }}</li>
           </ul>
         </div>
       </Card>
 
-      <BR/>
+      <BR />
 
       <!-- 原 Projectmessage（优化后 details） -->
-      <Card class="project-card" style="width: 100%">
+      <Card class="project-card"
+            style="width: 100%">
         <p slot="title">
           <Icon type="ios-film-outline"></Icon>
           项目描述
@@ -96,16 +114,18 @@
         </div>
       </Card>
 
-      <BR/>
+      <BR />
 
       <!-- 效果预览 -->
-      <Card class="project-card" style="width: 100%">
+      <Card class="project-card"
+            style="width: 100%">
         <p slot="title">
           <Icon type="ios-images-outline"></Icon>
           效果预览
         </p>
         <div>
-          <el-row :gutter="20" class="preview-row">
+          <el-row :gutter="20"
+                  class="preview-row">
             <el-col :span="6"
                     v-for="(img, i2) in item.pictures"
                     :key="i2"
@@ -126,15 +146,14 @@
 //例如：import 《组件名称》 from '《组件路径》';
 import configs from "@/config/index.js";
 
-const { projectlists } = configs;
+const { getProjectLists } = configs;
 
 export default {
   //import引入的组件需要注入到对象中才能使用
-  components: { projectlists },
   data () {
     //这里存放数据
     return {
-      projectlists,
+      projectlists: getProjectLists(localStorage.getItem('language') || 'zh-CN'),
       addressa: [
         {
           starttime: '2017.03',
@@ -164,6 +183,18 @@ export default {
       },
     }
   },
+  created () {
+    // 監聽語言切換事件
+    this.$parent.$on('language-changed', (lang) => {
+      this.projectlists = getProjectLists(lang)
+
+      this.$forceUpdate()
+    })
+  },
+  beforeDestroy () {
+    // 清理事件監聽
+    this.$parent.$off('language-changed')
+  },
   //监听属性 类似于data概念
   computed: {},
   //监控data中的数据变化
@@ -181,8 +212,6 @@ export default {
       a.click();
     },
   },
-  //生命周期 - 创建完成（可以访问当前this实例）
-  created () { },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted () { },
   beforeCreate () { }, //生命周期 - 创建之前

@@ -5,45 +5,44 @@
     <div class="mobile-header">
       <div class="avatar-section">
         <img :src="avatarreal" class="avatar" />
-        <h1>{{ personalInfo.name }}</h1>
-        <h3>{{ personalInfo.position }}</h3>
+        <h1>{{ $t('personalInfo.name') }}</h1>
+        <h3>{{ $t('personalInfo.position') }}</h3>
       </div>
       
       <div class="contact-info">
         <p><i class="el-icon-message"></i> 364466548@qq.com</p>
         <p><i class="el-icon-phone-outline"></i> 13794928207</p>
-        <p>{{ personalInfo.sex }} / {{ personalInfo.birthday }} / 32岁</p>
-        <p>工作年限 / 9年</p>
+        <p>{{ $t('personalInfo.sex') }} / {{ $t('personalInfo.birthday') }} / {{ $t('personalInfo.age') }}</p>
+        <p>{{ $t('workExperience.title') }} / {{ $t('personalInfo.workExperience') }}</p>
       </div>
     </div>
 
     <!-- 技能栈 - 可折叠 -->
     <div class="mobile-section">
       <div class="section-header" @click="toggleSection('skills')">
-        <h2><i class="el-icon-star-on"></i> 技术栈</h2>
+        <h2><i class="el-icon-star-on"></i> {{ $t('skills.title') }}</h2>
         <i :class="['el-icon-arrow-down', { 'rotate': showSections.skills }]"></i>
       </div>
       <div v-show="showSections.skills" class="section-content">
         <div class="skill-category">
-          <h4>前端技术</h4>
-          <p>Vue2/3、Uni-app、微信小程序、Element-UI、IView、Vuex、Echarts等</p>
+          <h4>{{ $t('skills.categories.frontend.title') }}</h4>
+          <p>{{ $t('skills.categories.frontend.description') }}</p>
         </div>
         <div class="skill-category">
-          <h4>后端技术</h4>
-          <p>.NET Core、WPF、 Python、JAVA 等</p>
+          <h4>{{ $t('skills.categories.backend.title') }}</h4>
+          <p>{{ $t('skills.categories.backend.description') }}</p>
         </div>
         <div class="skill-category">
-          <h4>数据库与中间件</h4>
-          <p>SQL Server、MySQL、PostgreSQL、Redis、MongoDB、ElasticSearch等</p>
+          <h4>{{ $t('skills.categories.database.title') }}</h4>
+          <p>{{ $t('skills.categories.database.description') }}</p>
         </div>
         <div class="skill-category">
-          <h4>DevOps与运维</h4>
-          <p>Docker、Jenkins、Gitlab、Prometheus、Grafana、Nginx等</p>
+          <h4>{{ $t('skills.categories.devops.title') }}</h4>
+          <p>{{ $t('skills.categories.devops.description') }}</p>
         </div>
         <div class="skill-category">
-          <h4>架构设计</h4>
-          <p> 通过以下项目经历，我积累了丰富的全栈开发经验，也主导过 数据量上亿级别，在线人数4000+ 的工业系统 的前后端架构搭建，尤其在企业级应用开发、系统集成、性能优化和架构设计方面有深入的实践。
-            在技术上不断学习新的框架和工具，能够根据业务需求选择合适的技术栈实现解决方案。 </p>
+          <h4>{{ $t('skills.categories.architecture.title') }}</h4>
+          <p>{{ $t('skills.categories.architecture.description') }}</p>
         </div>
       </div>
     </div>
@@ -51,27 +50,25 @@
     <!-- 工作经历 - 可折叠 -->
     <div class="mobile-section">
       <div class="section-header" @click="toggleSection('work')">
-        <h2><i class="el-icon-office-building"></i> 工作经历</h2>
+        <h2><i class="el-icon-office-building"></i> {{ $t('workExperience.title') }}</h2>
         <i :class="['el-icon-arrow-down', { 'rotate': showSections.work }]"></i>
       </div>
       <div v-show="showSections.work" class="section-content">
         <div class="work-item">
-          <span class="work-time">2022.03 - 至今</span>
-          <p>广东领益智造股份有限公司</p>
+          <span class="work-time">{{ $t('workExperience.companies.lingyi.period') }}</span>
+          <p>{{ $t('workExperience.companies.lingyi.name') }}</p>
         </div>
         <div class="work-item">
-          <span class="work-time">2020.05 - 2022.03</span>
-          <p>京瓷信息系统(上海)有限公司</p>
+          <span class="work-time">{{ $t('workExperience.companies.kyocera.period') }}</span>
+          <p>{{ $t('workExperience.companies.kyocera.name') }}</p>
         </div>
         <div class="work-item">
-          <span class="work-time">2016.03 - 2020.01</span>
-          <p>东莞隽思印刷有限公司</p>
+          <span class="work-time">{{ $t('workExperience.companies.juansi.period') }}</span>
+          <p>{{ $t('workExperience.companies.juansi.name') }}</p>
         </div>
-
-
         <div class="work-item">
-          <span class="work-time">2015.07 - 2015.11</span>
-          <p>东莞申翔网络公司-实习</p>
+          <span class="work-time">{{ $t('workExperience.companies.shenxiang.period') }}</span>
+          <p>{{ $t('workExperience.companies.shenxiang.name') }}</p>
         </div>
      
         
@@ -82,7 +79,7 @@
     <!-- 项目经历 -->
     <div class="mobile-section">
       <div class="section-header" @click="toggleSection('projects')">
-        <h2><i class="el-icon-folder-opened"></i> 项目经历</h2>
+        <h2><i class="el-icon-folder-opened"></i> {{ $t('projects.title') }}</h2>
         <i :class="['el-icon-arrow-down', { 'rotate': showSections.projects }]"></i>
       </div>
       <div v-show="showSections.projects" class="section-content">
@@ -93,14 +90,14 @@
           </div>
           
           <div class="project-info">
-            <p><strong>公司：</strong>{{ item.company }}</p>
-            <p><strong>职务：</strong>{{ item.role }}</p>
-            <p v-if="item.duration"><strong>持续时间：</strong>{{ item.duration }}</p>
+            <p><strong>{{ $t('projects.company') }}：</strong>{{ item.company }}</p>
+            <p><strong>{{ $t('projects.role') }}：</strong>{{ item.role }}</p>
+            <p v-if="item.duration"><strong>{{ $t('projects.duration') }}：</strong>{{ item.duration }}</p>
           </div>
 
           <!-- 技术栈 -->
           <div v-if="item.technologyStack" class="tech-stack">
-            <p><strong>技术栈：</strong></p>
+            <p><strong>{{ $t('projects.technology') }}：</strong></p>
             <div class="tech-tags">
               <span v-if="item.technologyStack.backend" class="tech-tag">{{ item.technologyStack.backend }}</span>
               <span v-if="item.technologyStack.frontend" class="tech-tag">{{ item.technologyStack.frontend }}</span>
@@ -111,26 +108,26 @@
           <!-- 项目描述 - 可展开 -->
           <div class="project-details">
             <div class="detail-toggle" @click="toggleProject(idx)">
-              <span>项目详情</span>
+              <span>{{ $t('projects.details') }}</span>
               <i :class="['el-icon-arrow-down', { 'rotate': expandedProjects[idx] }]"></i>
             </div>
             
             <div v-show="expandedProjects[idx]" class="detail-content">
               <!-- 背景和痛点 -->
               <div v-if="item.businessContext" class="detail-section">
-                <h4>项目背景</h4>
+                <h4>{{ $t('projects.background') }}</h4>
                 <p>{{ item.businessContext }}</p>
               </div>
               
               <div v-if="item.painPoints && item.painPoints.length" class="detail-section">
-                <h4>业务痛点</h4>
+                <h4>{{ $t('projects.painPoints') }}</h4>
                 <ul>
                   <li v-for="(point, i) in item.painPoints" :key="i">{{ point }}</li>
                 </ul>
               </div>
 
               <div v-if="item.solutions && item.solutions.length" class="detail-section">
-                <h4>解决方案</h4>
+                <h4>{{ $t('projects.solutions') }}</h4>
                 <ul>
                   <li v-for="(solution, i) in item.solutions" :key="i">{{ solution }}</li>
                 </ul>
@@ -138,7 +135,7 @@
 
               <!-- 项目描述 -->
               <div v-if="item.details && item.details.length" class="detail-section">
-                <h4>项目描述</h4>
+                <h4>{{ $t('projects.details') }}</h4>
                 <ul>
                   <li v-for="(detail, i) in item.details" :key="i">{{ detail }}</li>
                 </ul>
@@ -149,7 +146,7 @@
           <!-- 图片预览 - 点击查看 -->
           <div v-if="item.pictures && item.pictures.length" class="image-section">
             <div class="image-toggle" @click="toggleImages(idx)">
-              <span>效果预览 ({{ item.pictures.length }}张)</span>
+              <span>{{ $t('projects.preview') }} ({{ item.pictures.length }}{{ $t('projects.pictures') }})</span>
               <i :class="['el-icon-picture', showImages[idx] ? 'el-icon-arrow-up' : 'el-icon-arrow-down']"></i>
             </div>
             
@@ -176,14 +173,14 @@
 <script>
 import configs from "@/config/index.js";
 
-const { personalInfo, projectlists } = configs;
+const { personalInfo, getProjectLists } = configs;
 let avatar_real = require("@/static/images/me.png");
 
 export default {
   data() {
     return {
       personalInfo,
-      projectlists,
+      projectlists: getProjectLists(localStorage.getItem('language') || 'zh-CN'),
       avatarreal: avatar_real,
       fullImageSrc: null,
       showSections: {
@@ -194,6 +191,17 @@ export default {
       expandedProjects: {},
       showImages: {}
     };
+  },
+  created() {
+    // 監聽語言切換事件
+    this.$root.$on('language-changed', (lang) => {
+      this.projectlists = getProjectLists(lang)
+      this.$forceUpdate()
+    })
+  },
+  beforeDestroy() {
+    // 清理事件監聽
+    this.$root.$off('language-changed')
   },
   methods: {
     toggleSection(section) {

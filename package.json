@@ -26,6 +26,7 @@
     "vue": "^2.5.2",
     "vue-count-to": "^1.0.13",
     "vue-gemini-scrollbar": "^2.0.0",
+    "vue-i18n": "^8.22.4",
     "vue-router": "^3.0.1",
     "vuex": "^3.1.1",
     "wangeditor": "^4.7.7"
