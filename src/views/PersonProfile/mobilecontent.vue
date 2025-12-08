@@ -54,6 +54,12 @@
         <i :class="['el-icon-arrow-down', { 'rotate': showSections.work }]"></i>
       </div>
       <div v-show="showSections.work" class="section-content">
+      <div class="work-item">
+          <span class="work-time">{{ $t('workExperience.companies.goertek.period') }}</span>
+          <p>{{ $t('workExperience.companies.goertek.name') }}</p>
+        </div>
+
+
         <div class="work-item">
           <span class="work-time">{{ $t('workExperience.companies.lingyi.period') }}</span>
           <p>{{ $t('workExperience.companies.lingyi.name') }}</p>

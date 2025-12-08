@@ -13,7 +13,7 @@ export default {
     graduation: '2016年',
     graduationSuffix: '毕业',
     workExperience: '9年',
-    age: '32岁',
+    age: '33岁',
     email: '364466548@qq.com',
     phone: '13794928207'
   },
@@ -22,9 +22,13 @@ export default {
   workExperience: {
     title: '工作经历',
     companies: {
+      goertek: {
+        name: '歌尔股份有限公司',
+        period: '2025.09 - 至今'
+      },
       lingyi: {
         name: '广东领益智造股份有限公司',
-        period: '2022.03 - 至今'
+        period: '2022.03 - 2025.09'
       },
       kyocera: {
         name: '京瓷信息系统(上海)有限公司',

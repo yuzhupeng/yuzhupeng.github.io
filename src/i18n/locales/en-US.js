@@ -22,9 +22,14 @@ export default {
   workExperience: {
     title: 'Work Experience',
     companies: {
+      goertek: {
+        name: 'Goertek Co., Ltd.',
+        period: '2025.09 - Present'
+      },
+
       lingyi: {
         name: 'Lingyi Intelligent Manufacturing Co., Ltd.',
-        period: '2022.03 - Present'
+        period: '2022.03 - 2025.09'
       },
       kyocera: {
         name: 'Kyocera Information Systems (Shanghai) Co., Ltd.',

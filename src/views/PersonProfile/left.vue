@@ -47,6 +47,11 @@
           <span style="color: gray">{{ $t('workExperience.companies.lingyi.period') }}</span>
           <p style="margin-left: 16px">{{ $t('workExperience.companies.lingyi.name') }}</p>
         </div>
+      <div>
+                <span style="color: gray">{{ $t('workExperience.companies.goertek.period') }}</span>
+          <p style="margin-left: 16px">{{ $t('workExperience.companies.goertek.name') }}</p>
+      </div>
+
       </div>
     </div>
 
