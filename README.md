@@ -1,6 +1,8 @@
 personal site
 https://yuzhupeng.top
-
+## 20+ version
+## npm install -g gh-pages
+## gh-pages -d dist
 
 
 ## git add .
