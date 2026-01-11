@@ -12,3 +12,13 @@ https://yuzhupeng.top
 
 ## git push origin --delete gh-pages
 ## git subtree push --prefix dist origin gh-pages
+
+
+// 清理缓存
+npm cache clean --force
+// powershell 执行递归删除node_modules文件夹
+rd -r node_modules
+// 删除包版本锁
+ri package-lock.json
+// 安装npm
+npm install

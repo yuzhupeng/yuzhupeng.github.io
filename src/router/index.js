@@ -2,50 +2,11 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from '@/store';
 
-import exampleRouter from './example';
-import redirect from './redirect';
-import viewgird from './viewGird';
-import h5 from './h5';
-import form from './form';
-import formsMulti from './formsMulti';
-import charts from './charts';
-import tables from './tables';
-import documents from './documents';
-import workFlow from './workFlow';
-
 Vue.use(VueRouter);
 
 const router = new VueRouter({
     mode: 'history',
     routes: [
-        ...exampleRouter,
-        // ...h5,
-        ...documents,
-        // {
-        //     path: '/bigdata',
-        //     name: 'bigdata',
-        //     component: () =>
-        //         import ('@/views/charts/bigdata.vue')
-        // },
-        {
-            path: '/yyds',
-            name: 'fishyueyyds',
-            component: () =>
-                import ('@/views/Contract.vue'),
-            meta: {
-                anonymous: true
-            }
-        }, 
-        {
-            path: '/Work',
-            name: 'Work',
-            component: () =>
-                import ('@/views/PersonProfile/person.vue'),
-            meta: {
-                anonymous: true
-            }
-        },
-  
         {
             path: '/',
             name: 'Index',
@@ -55,68 +16,10 @@ const router = new VueRouter({
                 anonymous: true
             }
         },
-
         {
             path: '*',
-            component: () =>
-                import ('@/views/redirect/404.vue')
-        },
-        // {
-        //     path: '/',
-        //     name: 'Index',
-        //     component: () =>
-        //         import ('@/views/Index'),
-        //     redirect: '/home',
-        //     children: [
-        //         ...viewgird, //代码生成的后配置菜单的路由
-        //         ...redirect, //401,404,500等路由
-        //         ...form, //Demo表单路由
-        //         ...formsMulti, //Demo一对多表单路由
-        //         ...charts, //Demo图表单路由
-        //         ...tables,
-        //         ...workFlow,
-        //         {
-        //             path: '/home',
-        //             name: 'home',
-        //             component: () =>
-        //                 import ('@/views/home.vue')
-        //         }, 
-        //         {
-        //             path: '/UserInfo',
-        //             name: 'UserInfo',
-        //             component: () =>
-        //                 import ('@/views/system/UserInfo.vue')
-        //         }, 
-        //         {
-        //             path: '/coder',
-        //             name: 'coder',
-        //             component: () =>
-        //                 import ('@/views/builder/coder.vue')
-        //         }, 
-        //         {
-        //             path: '/sysMenu',
-        //             name: 'sysMenu',
-        //             component: () =>
-        //                 import ('@/views/system/Sys_Menu.vue')
-        //         }, 
-        //         {
-        //             path: '/permission',
-        //             name: 'permission',
-        //             component: () =>
-        //                 import ('@/views/system/Permission.vue')
-        //         }
-        //     ]
-        // },
-        {
-            path: '/login',
-            name: 'login',
-            component: () =>
-                import ('@/views/Login.vue'),
-            meta: {
-                anonymous: true
-            }
+            redirect: '/'
         }
-
     ]
 });
 
