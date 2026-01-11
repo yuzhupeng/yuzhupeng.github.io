@@ -13,7 +13,7 @@ export default {
     graduation: '2016',
     graduationSuffix: ' graduate',
     workExperience: '9 years',
-    age: '32 years old',
+    age: '33 years old',
     email: '364466548@qq.com',
     phone: '13794928207'
   },
