@@ -75,16 +75,26 @@ export default {
   // 项目经历
   projects: {
     title: '项目经历',
-    details: '项目详情',
+    details: '项目描述',
     preview: '效果预览',
-    company: '公司',
-    role: '职务',
+    company: '所在公司',
+    role: '项目职务',
     duration: '持续时间',
-    technology: '技术栈',
-    background: '项目背景',
+    teamSize: '规模',
+    summary: '摘要',
+    technology: '项目技术',
+    backend: '后端',
+    frontend: '前端',
+    database: '数据库',
+    devops: 'DevOps',
+    integration: '集成',
+    background: '背景',
     painPoints: '业务痛点',
+    challenges: '技术难点',
     solutions: '解决方案',
+    impact: '效果',
     outcomes: '项目成果',
+    keyPoints: '关键说明（痛点 / 难点 / 方案 / 效果）',
     pictures: '张'
   },
 
@@ -102,6 +112,42 @@ export default {
     linuxCommand: 'Linux命令大全搜索工具',
     pythonAlgorithms: 'Python 中文算法教程-#需FQ',
     pythonResources: 'Python资源库大全-#需FQ'
+  },
+
+  // 技能详情
+  skillDetails: {
+    frontend: {
+      frameworks: '基础框架：Vue2 3、Uni-app、微信小程序',
+      ui: 'UI框架：Element-UI、IView、Layui、Bootstrap',
+      state: '状态管理：Vuex、Mobx',
+      visualization: '可视化：Echarts、Highcharts、Grafana',
+      others: '其他：jQuery、Webpack、CSS/LESS'
+    },
+    backend: {
+      languages: '语言：.NET Core、Python、JAVA Spring Boot',
+      orm: 'ORM：Entity Framework Core、Dapper、NHibernate, SqlSugar, Mybatis-Plus',
+      protocols: '服务通讯协议：Restful API、Web API、WebSockets、gRPC',
+      scheduling: '任务调度：Quartz XXL-JOB',
+      dataProcessing: '数据处理：Python生态(Pandas、BeautifulSoup等)'
+    },
+    database: {
+      relational: '关系型数据库：SQL Server、MySQL、PostgreSQL',
+      nonRelational: '非关系型数据库：Redis、MongoDB、InfluxDB、ElasticSearch',
+      cache: '缓存：Redis memorycache'
+    },
+    devops: {
+      containerization: '容器化：Docker、Docker Compose',
+      cicd: 'CI/CD：Jenkins、Gitlab Nexus Harbor',
+      monitoring: '监控：Prometheus、Grafana',
+      versionControl: '版本控制：Git SVN',
+      proxy: '代理与服务器：Nginx、IIS、YARP',
+      ide: 'AI IDE：Cursor、Augment、Kiro'
+    },
+    architecture: {
+      microservices: '微服务架构',
+      distributed: '分布式系统设计',
+      ddd: 'DDD领域驱动设计'
+    }
   },
 
   // 通用

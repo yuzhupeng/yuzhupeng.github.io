@@ -63,44 +63,44 @@
       <div class="skill-section">
         <h3 class="skill-category">{{ $t('skills.categories.frontend.title') }}</h3>
         <ul class="skill-list">
-          <li class="skill-item">基础框架：Vue2 3、Uni-app、微信小程序</li>
-          <li class="skill-item">UI框架：Element-UI、IView、Layui、Bootstrap</li>
-          <li class="skill-item">状态管理：Vuex、Mobx</li>
-          <li class="skill-item">可视化：Echarts、Highcharts、Grafana</li>
-          <li class="skill-item">其他：jQuery、Webpack、CSS/LESS</li>
+          <li class="skill-item">{{ $t('skillDetails.frontend.frameworks') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.frontend.ui') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.frontend.state') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.frontend.visualization') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.frontend.others') }}</li>
         </ul>
 
         <h3 class="skill-category">{{ $t('skills.categories.backend.title') }}</h3>
         <ul class="skill-list">
-          <li class="skill-item">语言：.NET Core、Python、JAVA Spring Boot</li>
-          <li class="skill-item">ORM：Entity Framework Core、Dapper、NHibernate, SqlSugar, Mybatis-Plus</li>
-          <li class="skill-item">服务通讯协议：Restful API、Web API、WebSockets、gRPC</li>
-          <li class="skill-item">任务调度：Quartz XXL-JOB</li>
-          <li class="skill-item">数据处理：Python生态(Pandas、BeautifulSoup等)</li>
+          <li class="skill-item">{{ $t('skillDetails.backend.languages') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.backend.orm') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.backend.protocols') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.backend.scheduling') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.backend.dataProcessing') }}</li>
         </ul>
 
         <h3 class="skill-category">{{ $t('skills.categories.database.title') }}</h3>
         <ul class="skill-list">
-          <li class="skill-item">关系型数据库：SQL Server、MySQL、PostgreSQL</li>
-          <li class="skill-item">非关系型数据库：Redis、MongoDB、InfluxDB、ElasticSearch</li>
-          <li class="skill-item">缓存：Redis memorycache</li>
+          <li class="skill-item">{{ $t('skillDetails.database.relational') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.database.nonRelational') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.database.cache') }}</li>
         </ul>
 
         <h3 class="skill-category">{{ $t('skills.categories.devops.title') }}</h3>
         <ul class="skill-list">
-          <li class="skill-item">容器化：Docker、Docker Compose</li>
-          <li class="skill-item">CI/CD：Jenkins、Gitlab Nexus Harbor</li>
-          <li class="skill-item">监控：Prometheus、Grafana</li>
-          <li class="skill-item">版本控制：Git SVN</li>
-          <li class="skill-item">代理与服务器：Nginx、IIS、YARP</li>
-          <li class="skill-item">AI IDE：Cursor、Augment、Kiro</li>
+          <li class="skill-item">{{ $t('skillDetails.devops.containerization') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.devops.cicd') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.devops.monitoring') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.devops.versionControl') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.devops.proxy') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.devops.ide') }}</li>
         </ul>
 
         <h3 class="skill-category">{{ $t('skills.categories.architecture.title') }}</h3>
         <ul class="skill-list">
-          <li class="skill-item">微服务架构</li>
-          <li class="skill-item">分布式系统设计</li>
-          <li class="skill-item">DDD领域驱动设计</li>
+          <li class="skill-item">{{ $t('skillDetails.architecture.microservices') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.architecture.distributed') }}</li>
+          <li class="skill-item">{{ $t('skillDetails.architecture.ddd') }}</li>
         </ul>
 
         <p class="summary">

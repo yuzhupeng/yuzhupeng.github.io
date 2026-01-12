@@ -81,11 +81,21 @@ export default {
     company: 'Company',
     role: 'Role',
     duration: 'Duration',
+    teamSize: 'Team Size',
+    summary: 'Summary',
     technology: 'Technology Stack',
+    backend: 'Backend',
+    frontend: 'Frontend',
+    database: 'Database',
+    devops: 'DevOps',
+    integration: 'Integration',
     background: 'Project Background',
     painPoints: 'Business Pain Points',
+    challenges: 'Technical Challenges',
     solutions: 'Solutions',
+    impact: 'Impact',
     outcomes: 'Project Outcomes',
+    keyPoints: 'Key Points (Pain Points / Challenges / Solutions / Impact)',
     pictures: 'pictures'
   },
 
@@ -103,6 +113,42 @@ export default {
     linuxCommand: 'Linux Command Search Tool',
     pythonAlgorithms: 'Python Chinese Algorithm Tutorial - Requires VPN',
     pythonResources: 'Python Resources Collection - Requires VPN'
+  },
+
+  // Technical Skills Details
+  skillDetails: {
+    frontend: {
+      frameworks: 'Frameworks: Vue2/3, Uni-app, WeChat Mini Program',
+      ui: 'UI Frameworks: Element-UI, IView, Layui, Bootstrap',
+      state: 'State Management: Vuex, Mobx',
+      visualization: 'Visualization: Echarts, Highcharts, Grafana',
+      others: 'Others: jQuery, Webpack, CSS/LESS'
+    },
+    backend: {
+      languages: 'Languages: .NET Core, Python, JAVA Spring Boot',
+      orm: 'ORM: Entity Framework Core, Dapper, NHibernate, SqlSugar, Mybatis-Plus',
+      protocols: 'Communication Protocols: Restful API, Web API, WebSockets, gRPC',
+      scheduling: 'Task Scheduling: Quartz, XXL-JOB',
+      dataProcessing: 'Data Processing: Python Ecosystem (Pandas, BeautifulSoup, etc.)'
+    },
+    database: {
+      relational: 'Relational Databases: SQL Server, MySQL, PostgreSQL',
+      nonRelational: 'Non-Relational Databases: Redis, MongoDB, InfluxDB, ElasticSearch',
+      cache: 'Cache: Redis, Memorycache'
+    },
+    devops: {
+      containerization: 'Containerization: Docker, Docker Compose',
+      cicd: 'CI/CD: Jenkins, Gitlab, Nexus, Harbor',
+      monitoring: 'Monitoring: Prometheus, Grafana',
+      versionControl: 'Version Control: Git, SVN',
+      proxy: 'Proxy & Servers: Nginx, IIS, YARP',
+      ide: 'AI IDE: Cursor, Augment, Kiro'
+    },
+    architecture: {
+      microservices: 'Microservices Architecture',
+      distributed: 'Distributed System Design',
+      ddd: 'Domain-Driven Design (DDD)'
+    }
   },
 
   // Common

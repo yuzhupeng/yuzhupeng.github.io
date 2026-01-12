@@ -19,24 +19,24 @@
         <a href="#"
            slot="extra">
           <Icon type="ios-bookmarks-outline"></Icon>
-          持续时间：{{ item.duration }}
+          {{ $t('projects.duration') }}：{{ item.duration }}
         </a>
 
-        <p class="project-info"><span class="info-label">所在公司：</span>{{ item.company }}</p>
-        <p class="project-info"><span class="info-label">项目职务：</span>{{ item.role }}</p>
+        <p class="project-info"><span class="info-label">{{ $t('projects.company') }}：</span>{{ item.company }}</p>
+        <p class="project-info"><span class="info-label">{{ $t('projects.role') }}：</span>{{ item.role }}</p>
         <p class="project-info"
-           v-if="item.teamSize"><span class="info-label">规模：</span>{{ item.teamSize }}</p>
+           v-if="item.teamSize"><span class="info-label">{{ $t('projects.teamSize') }}：</span>{{ item.teamSize }}</p>
         <p class="project-info"
-           v-if="item.summary"><span class="info-label">摘要：</span>{{ item.summary }}</p>
+           v-if="item.summary"><span class="info-label">{{ $t('projects.summary') }}：</span>{{ item.summary }}</p>
         <p class="project-info"
            v-if="item.technologyStack">
-          <span class="info-label">项目技术：</span>
+          <span class="info-label">{{ $t('projects.technology') }}：</span>
           <span>
-            <template v-if="item.technologyStack.backend">后端：{{ item.technologyStack.backend }}；</template>
-            <template v-if="item.technologyStack.frontend">前端：{{ item.technologyStack.frontend }}；</template>
-            <template v-if="item.technologyStack.database">数据库：{{ item.technologyStack.database }}；</template>
-            <template v-if="item.technologyStack.devops">DevOps：{{ item.technologyStack.devops }}；</template>
-            <template v-if="item.technologyStack.integration">集成：{{ item.technologyStack.integration }}；</template>
+            <template v-if="item.technologyStack.backend">{{ $t('projects.backend') }}：{{ item.technologyStack.backend }}；</template>
+            <template v-if="item.technologyStack.frontend">{{ $t('projects.frontend') }}：{{ item.technologyStack.frontend }}；</template>
+            <template v-if="item.technologyStack.database">{{ $t('projects.database') }}：{{ item.technologyStack.database }}；</template>
+            <template v-if="item.technologyStack.devops">{{ $t('projects.devops') }}：{{ item.technologyStack.devops }}；</template>
+            <template v-if="item.technologyStack.integration">{{ $t('projects.integration') }}：{{ item.technologyStack.integration }}；</template>
           </span>
         </p>
       </Card>
@@ -48,15 +48,15 @@
             style="width: 100%">
         <p slot="title">
           <Icon type="ios-construct-outline"></Icon>
-          关键说明（痛点 / 难点 / 方案 / 效果）
+          {{ $t('projects.keyPoints') }}
         </p>
         <div class="project-description"
              v-if="item.businessContext">
-          <span class="info-label">背景：</span>{{ item.businessContext }}
+          <span class="info-label">{{ $t('projects.background') }}：</span>{{ item.businessContext }}
         </div>
         <div class="project-description"
              v-if="item.painPoints && item.painPoints.length">
-          <span class="info-label">业务痛点：</span>
+          <span class="info-label">{{ $t('projects.painPoints') }}：</span>
           <ul style="margin:0;padding-left:18px;">
             <li v-for="(x, i) in item.painPoints"
                 :key="'pp'+i">{{ x }}</li>
@@ -64,7 +64,7 @@
         </div>
         <div class="project-description"
              v-if="item.challenges && item.challenges.length">
-          <span class="info-label">技术难点：</span>
+          <span class="info-label">{{ $t('projects.challenges') }}：</span>
           <ul style="margin:0;padding-left:18px;">
             <li v-for="(x, i) in item.challenges"
                 :key="'ch'+i">{{ x }}</li>
@@ -72,21 +72,21 @@
         </div>
         <div class="project-description"
              v-if="item.solutions && item.solutions.length">
-          <span class="info-label">解决方案：</span>
+          <span class="info-label">{{ $t('projects.solutions') }}：</span>
           <ul style="margin:0;padding-left:18px;">
             <li v-for="(x, i) in item.solutions"
                 :key="'so'+i">{{ x }}</li>
           </ul>
         </div>
         <!-- <div class="project-description" v-if="item.impact && item.impact.length">
-          <span class="info-label">效果：</span>
+          <span class="info-label">{{ $t('projects.impact') }}：</span>
           <ul style="margin:0;padding-left:18px;">
             <li v-for="(x, i) in item.impact" :key="'im'+i">{{ x }}</li>
           </ul>
         </div> -->
         <div class="project-description"
              v-if="item.outcomes && item.outcomes.length">
-          <span class="info-label">项目成果：</span>
+          <span class="info-label">{{ $t('projects.outcomes') }}：</span>
           <ul style="margin:0;padding-left:18px;">
             <li v-for="(x, i) in item.impact"
                 :key="'im'+i">{{ x }}</li>
@@ -105,7 +105,7 @@
             style="width: 100%">
         <p slot="title">
           <Icon type="ios-film-outline"></Icon>
-          项目描述
+          {{ $t('projects.details') }}
         </p>
         <div class="project-description"
              v-for="(point, index) in item.details"
@@ -121,7 +121,7 @@
             style="width: 100%">
         <p slot="title">
           <Icon type="ios-images-outline"></Icon>
-          效果预览
+          {{ $t('projects.preview') }}
         </p>
         <div>
           <el-row :gutter="20"
