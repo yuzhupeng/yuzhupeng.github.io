@@ -32,7 +32,7 @@ const social = [ ];
 const personalInfo = {
     name: '庾柱鹏',
     sex: '男',
-    position: '高级全栈工程师',
+    position: 'AI全栈工程师',
     personalInfo: '9年数字化工厂及企业应用开发经验',
     birthday: '1992.09',
     university: '东莞理工学院城市学院',
@@ -520,7 +520,703 @@ function getProjectLists(locale = 'zh-CN') {
 
 // 中文項目列表
 const projectlists_zh = [
+
   {
+    startTime: '2026.06',
+    duration: '2个月',
+    title: 'SMA 实时 IO Agent',
+    company: '歌尔股份有限公司',
+    role: 'ITBP',
+    teamSize: '独立',
+    isAI: true,
+    summary: '独立设计并交付 SMA SMT 产线实时 IO（投入产出）报表 Agent 系统。采用双版本架构——版本 A 确定性状态机算法（22 槽时间模型，按 UPH×效率×实际工时逐槽计算每小时计划产出）作为生产主力，版本 B 基于 Harness Engineering 六层架构的 LLM Agent（9 工具+DeepSeek-V4）用于复杂场景推理与交叉验证。支持 CLI/Flask API/定时任务三种触发方式，Excel 多线体合并报表输出，MySQL 事务幂等写入。',
+    technologyStack: {
+      backend: 'Python 3.10+, Flask, OpenAI SDK（DeepSeek-V4）, pymysql, DBUtils, openpyxl, pytest',
+      frontend: '',
+      database: 'MySQL（3 张表）',
+      devops: 'Windows Task Scheduler / Linux cron',
+      integration: '',
+      others: '双版本 Agent 架构, 22 槽时间模型状态机, Harness Engineering 六层架构, Mem0 长期记忆, Guardrail 护栏, 3 个 Skill, ~10,474 行 Python, 52 个文件'
+    },
+    businessContext: '歌尔 SMA SMT 产线 IO 报表在 MOM 系统中无法直观看到实时达成状况，缺少基于 UPH、换线标准时间、班次效率系数、生产顺序的逐小时计划产出自动计算能力。制造部部长提出需建设小时 IO 报表，实时显示达成状况/小时达成率/累计达成率（预计收益 6,900 元/月）。',
+    painPoints: [
+      'MOM 系统 IO 报表不能直观看到实时达成状况，缺少逐小时计划产出自动计算能力。',
+      '人工统计 SMT 产线每小时 IO 达成率，耗时且易出错，无法覆盖全时段。',
+      '换线时间、班次效率、生产顺序等因素未被纳入计划产出计算模型。'
+    ],
+    challenges: [
+      '22 槽连续时间模型：设计 8:00~次日 7:00 共 22 个连续时间槽（不分白晚班），需处理跨槽换线（carryover 机制）、槽内换线、提前分完、末槽 dump、整槽换线占满等复杂边界。',
+      '双版本 Agent 设计：版本 A 确定性算法保证生产可靠性，版本 B LLM Agent 用于异常推理与交叉验证。',
+      '班次效率建模：白班/晚班各时段效率不同（如午休 0.50），需按区域（DG/VN）独立配置。'
+    ],
+    solutions: [
+      '版本 A 确定性状态机：核心公式"每小时计划产出 = UPH × 对应小时效率 × 实际生产时间"，状态机变量（idx/remaining/carryover）驱动 22 槽连续计算。12/12 料号验证通过，4 条线体真实数据验证（190,417 计划产量/57,221 产出）。',
+      '版本 B LLM Agent（Harness 六层）：L1 信息边界→L2 工具系统（9 个工具：read_plan_config/calculate_line_output/write_results/compare_with_version_a 等）→L3 执行编排（Agent Loop，max_turns=50）→L4 Mem0 向量记忆→L5 Verifier 交叉验证→L6 AGENTS.md 8 条防错规则+Guardrail 双重护栏。',
+      'MOM 页面配置：C# MVC 侧改造排产配置表（新增 5 字段+约束校验）+ 新建班次效率表+计算结果表，jqGrid + ECharts 实现 UPH 产出报表页面。',
+      'Excel 报表导出：openpyxl 多线体合并，3 个 Sheet（按时间段/按线体/按料号），每料号 6 行明细。',
+      '三种触发方式：CLI 命令行 + Flask API（/api/v1/calculate）+ Windows Task Scheduler 定时任务，dry-run 预览模式。'
+    ],
+    impact: [
+      'SMT IO 从人工统计→自动实时监控，预计减少人力成本 6,900 元/月。',
+      '22 槽时间模型覆盖全天连续生产，计划产出计算准确率经真实数据验证。',
+      '双版本交叉验证确保输出可靠，Harness 六层架构的企业级 Agent 实践验证。'
+    ],
+    outcomes: [
+      '~10,474 行 Python，52 个文件，3 个 Skill，9 个 Agent 工具，完整的 Harness Engineering 实现。',
+      'MOM 系统 3 张新表 + 配置页面改造完成，Excel 多维度报表输出。',
+      'Phase 0-1 已完成，Phase 2（版本 B LLM Agent 19/22 项已完成）。'
+    ],
+    details: [
+      '【版本 A 状态机】22 槽连续时间模型，核心公式"计划产出=UPH×效率×实际工时"，idx/remaining/carryover 三变量状态机，5 种边界处理。',
+      '【版本 B Harness Agent】L1-L6 六层架构：system_prompt 角色定义→9 工具+Schema 校验→Agent Loop（max_turns=50）→Mem0 向量记忆→Verifier 交叉验证→AGENTS.md 8 条防错规则+Guardrail 双重护栏。',
+      '【MOM 页面配置】C# MVC 改造排产配置表（5 字段新增+约束校验）+ 新建班次效率表 + 计算结果表 + jqGrid+ECharts 报表页面。',
+      '【Excel 导出】openpyxl 多线体合并，3 Sheet，每料号 6 行明细（含 UPH/效率/换线损耗/实际工时/计划产出/计划数量）。',
+      '技术栈：Python + Flask + DeepSeek-V4 + MySQL + openpyxl + DBUtils + Mem0 + pytest。'
+    ],
+    pictures: []
+  },
+  {
+    startTime: '2026.06',
+    duration: '2个月',
+    title: '切片报告自动化 Agent 系统',
+    company: '歌尔股份有限公司',
+    role: 'ITBP',
+    teamSize: '独立',
+    isAI: true,
+    summary: '独立设计并交付基于 Harness Engineering 六层架构的切片报告自动化 Agent 系统。采用双模式架构（LLM Agent + 确定性流水线），通过 DeepSeek-OCR API 自动识别切片图片标注数据，经 OCR 纠正器处理后，按 SMT/UF/Encap/Coating 四种工艺模板（19~304 列）自动生成 Excel 报告，含图片嵌入、Spec 判断、条件格式、Summary Sheet、历史数据对比与 MySQL 持久化。275 个测试用例全量通过，PyInstaller 打包为可分发 exe。',
+    technologyStack: {
+      backend: 'Python 3.10, OpenAI SDK（DeepSeek-V4/DeepSeek-OCR）, openpyxl, Pillow, mysql-connector-python, pytest',
+      frontend: 'tkinter（GUI 桌面端）',
+      database: 'MySQL（3 张表）',
+      devops: 'PyInstaller（exe 打包）',
+      integration: 'DeepSeek-OCR API',
+      others: 'Harness Engineering 六层架构, 双模式架构, OCR 纠正器（粘连拆分/缺括号/去重）, 4 种工艺 Skill, Guardrail 护栏, ContextCompactor（40% 阈值）, ~15,000+ 行代码, 275 测试用例'
+    },
+    businessContext: '歌尔品质部标准化管理岗负责切片实验数据汇总整理，每项目 2 人投入。需人工查看切片图片→手工记录 OCR 标注数据→手工排版报告→手工判断数据合格性，四种工艺各有独立复杂报告模板（19~304 列），人工处理一份完整报告需数小时，重复性高、易出错。',
+    painPoints: [
+      '切片实验数据汇总由标准化管理岗全职负责，每项目 2 人投入，人工看图→记录→排版→判断全流程耗时数小时。',
+      '四种工艺报告模板结构差异极大（SMT 49 列/UF 304 列/Encap 19 列/Coating 93 列），手工排版繁琐易出错。',
+      'Spec 合格性判断依赖人工记忆阈值，无系统化校验。'
+    ],
+    challenges: [
+      'OCR 数据质量问题：切片图片标注格式 [1] 173.64um，OCR 识别常出现粘连（[12.97um]→需拆分为 [1]2.97um）、缺括号、重复值。',
+      'LLM Agent 可靠性：旧版 GAN 闭环模式最高 66 轮 LLM 调用，需优化为线性流水线（≤3 次 LLM 调用）并保留无 LLM 的确定性流水线作为生产主力。',
+      'Excel 报告精度：需精确嵌入图片到单元格（OneCellAnchor），公式自动化，条件格式（超出 Spec→黄色背景），非 Python 硬编码值。'
+    ],
+    solutions: [
+      '双模式架构：LLM Agent 模式（7 步线性流水线：FolderParser→LLM 验证→OCR 循环→LLM 纠正→ExcelBuilder→LLM 验证→DatabaseWriter，≤3 次 LLM 调用）用于复杂场景；确定性流水线模式（无 LLM，纯规则）用于稳定生产。两模式共用核心模块。',
+      'OCR 纠正器：正则解析，粘连拆分（标签合并检测+正则切分）、缺括号补全、重复值去重，失败自动重试 2 次，仍失败填 "N/A" 不阻塞流程。',
+      'Harness Engineering 六层架构：L1 信息边界（SKILL.md）→L2 工具系统（8 工具）→L3 执行编排（Agent Loop，max_turns=50）→L4 记忆状态→L5 评估观测（Evaluator 独立验证）→L6 约束恢复（AGENTS.md 防错规则+ContextCompactor 40% 阈值）。',
+      'Excel 报告引擎：openpyxl 生成，OneCellAnchor 精确图片定位，Excel 公式自动计算，条件格式自动标注 Spec 超标，Summary Sheet + 历史数据对比。'
+    ],
+    impact: [
+      '切片报告生成从数小时→数分钟，替代标准化管理岗 2 人全职工作。',
+      '275 个测试用例全量通过，覆盖全部 4 种工艺模板。',
+      '双模式架构同时兼顾准确性（确定性流水线）和智能化（LLM Agent 异常处理）。'
+    ],
+    outcomes: [
+      '~15,000+ 行 Python 代码，45 个源文件，275 个测试用例全部通过。',
+      '4 种工艺 Skill（SMT/UF/Encap/Coating），覆盖 6,700+ 张切片图片。',
+      'PyInstaller 打包为 slice_report.exe，2026 年 7 月上线。'
+    ],
+    details: [
+      '【LLM Agent 模式】7 步线性流水线：FolderParser→Planner LLM 验证→OCR 循环→Generator LLM 纠正→ExcelBuilder 生成报告+图片嵌入+公式+条件格式→Evaluator LLM 验证→DatabaseWriter，LLM 总调用 ≤3 次。',
+      '【确定性流水线】无 LLM 纯规则模式，FolderParser→OCRClient→OCRCorrector→SpecJudge→ExcelBuilder→Validator（4 项规则检查）→DatabaseWriter，生产主力。',
+      '【四种工艺 Skill】SMT（焊点 49 列）、UF（304 列）、Encap（19 列）、Coating（93 列），YAML frontmatter + 独立 template.py。',
+      '【Harness 六层架构】L1-L6 完整实现，Guardrail 双重护栏 + ContextCompactor 40% 触发 + AGENTS.md 持续防错。',
+      '技术栈：Python + DeepSeek-V4/DeepSeek-OCR + openpyxl + Pillow + MySQL + tkinter + pytest + PyInstaller。'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2026.06',
+    duration: '1个月',
+    title: 'EE-AI — BOM极性器件清单自动生成 Skill',
+    company: '歌尔股份有限公司',
+    role: 'ITBP',
+    teamSize: '独立',
+    isAI: true,
+    summary: '基于 Hiagent 平台开发 BOM 极性器件清单自动生成 Skill，采用规则引擎（已知器件类型匹配）+ LLM 联网搜索（未知器件查询）混合架构，自动判断 BOM 中每颗器件的极性（方向性），输出含极性标注与判断依据的标准 Excel 清单。覆盖 10+ 大类器件，准确率 99%+。',
+    technologyStack: {
+      backend: 'Python, openpyxl, pandas, OpenAI SDK（LLM）',
+      frontend: '',
+      database: '',
+      devops: 'Hiagent Skill 平台部署',
+      integration: 'Bing/LCSC/Alldatasheet 联网搜索, Hiagent Skill API',
+      others: '规则引擎 + LLM 混合决策, 列自动匹配, C/D 等级分类, 5 列追加输出'
+    },
+    businessContext: '歌尔 SMT/DIP 产线 DFM 审查需对每份 BOM 的数百颗器件逐一判断极性（正负极/方向性），确保贴装方向正确。传统方式：EE 工程师人工查阅每颗器件数据手册或联网搜索，BOM 220 行需 1-2 小时，容易遗漏。',
+    painPoints: [
+      'BOM 极性分析依赖人工逐颗判断，220 行 BOM 耗时 1-2 小时，重复性极高。',
+      '部分 IC/特殊器件极性判断需联网查数据手册，人工搜索效率低。',
+      '极性判断结果无标准化输出格式，不同工程师输出不一致。'
+    ],
+    challenges: [
+      '多类型器件覆盖：需覆盖 10+ 大类（电阻/电容/二极管/MOSFET/IC/连接器/电感/磁珠/振荡器/传感器等），每类判断逻辑不同。',
+      '规则引擎精度：90% 器件可通过类型+封装规则判断，剩余 10% 需 LLM 联网搜索确认。',
+      '列自动匹配：不同项目 BOM 列名不统一，需自动识别映射。'
+    ],
+    solutions: [
+      '规则引擎 + LLM 混合决策：规则引擎处理已知类型（贴片电阻/陶瓷电容→无极性，二极管/钽电容/铝电解→有极性），C 级置信度；LLM 联网搜索兜底未知型号（连接器/音频功放/过流保护 IC 等），D 级置信度。',
+      '三类数据源联网搜索：Bing 搜索引擎 + LCSC（立创商城）+ Alldatasheet 数据手册，综合判断后给出依据。',
+      '标准化输出：在原 BOM 右侧追加 5 列——是否有极性、判断依据、判断依据等级（C/D）、正负极标识方法、备注。额外生成"极性器件"独立 Sheet 供 SMT 重点管控。',
+      'Hiagent 平台部署：用户上传 BOM Excel→Agent 自动列匹配→规则引擎批量判断→LLM 联网搜索兜底→输出分析结果 Excel。'
+    ],
+    impact: [
+      'BOM 极性分析从 1-2 小时/份→3 分钟/份，效率提升 95%+。',
+      '规则引擎覆盖 90% 常见器件，LLM 兜底 10% 特殊型号，综合准确率 99%+。',
+      '输出格式标准化，DFM 审查质量一致性大幅提升。'
+    ],
+    outcomes: [
+      'Skill 部署至 Hiagent 平台，217 行真实 BOM 测试通过（24 有极性/54 无极性/2 需复核）。',
+      '覆盖 10+ 大类器件类型，5 列标准化追加输出 + 独立极性器件 Sheet。'
+    ],
+    details: [
+      '【规则引擎】类型规则（二极管类→有极性，电阻类/陶瓷电容→无极性）+ 封装规则（SOD-123→有极性）+ 型号规则（前缀/后缀匹配），C 级置信度。',
+      '【LLM 联网搜索】Bing + LCSC + Alldatasheet 三源综合判断，无法规则判断时自动触发，输出判断依据链接，D 级置信度。',
+      '【输出格式】5 列追加：是否有极性/判断依据/判断依据等级/正负极标识方法/备注，额外生成"极性器件"独立 Sheet。',
+      '技术栈：Python + openpyxl + pandas + LLM（DeepSeek-V4）+ Hiagent Skill API。'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2026.06',
+    duration: '1个月',
+    title: 'EE-AI — PCB贴装图自动生成 Skill',
+    company: '歌尔股份有限公司',
+    role: 'ITBP',
+    teamSize: '独立',
+    isAI: true,
+    summary: '基于 Hiagent 平台开发 PCB 贴装图自动生成 Skill，将 EE 工程师的多份输入资料（拼板2D PDF、单板2D PDF、PCB 正反面贴装图 PDF）按 GTK 四页模板自动汇编为标准化贴装图文档，含模板信息自动填充（版本/日期/材料/镀涂/厚度等），从 2-4 小时/款→5 分钟/款。',
+    technologyStack: {
+      backend: 'Python, Pillow, ReportLab, openpyxl',
+      frontend: '',
+      database: '',
+      devops: 'Hiagent Skill 平台部署',
+      integration: 'Hiagent Skill API',
+      others: '多 Unit 拼板算法, PDF 汇编, GTK 四页模板, 坐标变换'
+    },
+    businessContext: '歌尔 EE 部门需为每款产品制作 PCB 贴装图（GTK 标准格式），传统流程：从 PCB 设计文件导出位置图→手动标注位号/极性→按拼板排布多单板→按 GTK 四页模板汇编→填写模板信息→导出 PDF，每款产品耗时 2-4 小时。',
+    painPoints: [
+      'PCB 贴装图制作依赖 EE 工程师手工汇编多份 PDF + 模板信息填写，每款产品 2-4 小时。',
+      'GTK 模板字段（版本/日期/材料/镀涂/厚度/图纸编号等）需逐页重复填写，易遗漏。',
+      '拼板多 Unit 排布时坐标变换和位号标注依赖人工计算，效率低。'
+    ],
+    challenges: [
+      '多源 PDF 汇编：将拼板2D、单板2D、PCB 正反面贴装图按 GTK 四页顺序自动拼接为单一 PDF。',
+      '模板信息自动填充：每页相同字段自动填入，技术要求字段保留工程师手动输入。',
+      '多 Unit 拼板算法：从拼板配置 JSON 读取 Panel 布局，计算每个 Unit 在 Panel 上的精确位置并排布。'
+    ],
+    solutions: [
+      'GTK 四页自动汇编：第1页拼板2D→第2页单板2D→第3页 PCB 正面贴装→第4页 PCB 反面贴装，按模板顺序合并。',
+      '模板信息填充：从配置读取固定字段，自动填入每页对应位置。',
+      '多 Unit 拼板生成：读取 setting.json 拼板配置→按 Unit 坐标计算 Panel 位置→Pillow 合成多 Unit 图像→叠加位号标注→导出 PDF/PNG。',
+      '特殊情况处理：A4/A3 纸看不清时 PCB 正反面贴装图自动拆分放大。',
+      'Hiagent 平台部署：Skill 定义（skill.md）+ 核心逻辑上传至 Hiagent 智能体中心，自然语言对话触发运行。'
+    ],
+    impact: [
+      'PCB 贴装图制作从 2-4 小时/款→5 分钟/款，效率提升 95%+。',
+      'GTK 模板信息自动填充消除人工遗漏风险，标准化率 100%。',
+      'EE 工程师无需编程，通过 Hiagent 自然语言即可调用。'
+    ],
+    outcomes: [
+      'Skill 部署至 Hiagent 平台，通过 Agent 对话即可生成 GTK 标准贴装图。',
+      '支持任意拼板布局的多 Unit 排布，真实产品（Earbud Main Board）验证通过。'
+    ],
+    details: [
+      '【GTK 四页模板】拼板2D→单板2D→PCB正面贴装→PCB反面贴装，自动汇编为单一 PDF。',
+      '【模板信息填充】版本/日期/适用机种/材料/镀涂/厚度/图纸编号/纸幅/比例/单位，自动填入。',
+      '【多 Unit 拼板】JSON 配置 Panel 尺寸/Unit 行列数/坐标/旋转角度/工艺边/坏板标记，Pillow 合成+位号标注。',
+      '技术栈：Python + Pillow + ReportLab + openpyxl + Hiagent Skill API。'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2026.06',
+    duration: '进行中',
+    title: 'MOM 越南 T 项目 — 人力监控系统',
+    company: '歌尔股份有限公司',
+    role: 'ITBP',
+    teamSize: '独立',
+    summary: '负责 MOM 越南 T 项目独立部署，并主导设计交付人力监控系统（HRMManage），实现基于 EAV 模式的员工人天精力值（FTE）多维度管理与可视化监控看板，覆盖 11 个 Controller + 10 个 AppService + 月度快照机制 + 行级数据权限控制。',
+    technologyStack: {
+      backend: 'ASP.NET MVC 5, .NET Framework 4.8, Dapper, Web API, Mapster',
+      frontend: 'jQuery, jqGrid, LayUI, ECharts, Bootstrap, Select2',
+      database: 'MySQL',
+      devops: 'IIS, Git, Windows Server',
+      integration: '',
+      others: 'EAV 模式（实体-属性-值）, 月度快照机制, 行级数据权限, Excel 批量导入校验（20+字段）, EPPlus + NPOI, ~95,000 行 C#, 828 commits'
+    },
+    businessContext: '歌尔越南工厂需独立部署 MOM-T 系统，同时 U01 项目人力分配缺乏系统化工具——员工按项目/部门/序列的精力值（FTE）分配依赖 Excel 手工统计，需建设系统化人力监控能力。人力监控核心规则：每位员工所有项目精力值 + 支援/产假值 = 1（100% FTE），数据按月快照，支持 Excel 批量导入与在线编辑。',
+    painPoints: [
+      '越南工厂需要独立的 MOM-T 系统，从零搭建部署环境与配置体系。',
+      '人力精力值分配依赖 Excel 手工统计，数百名员工 × 多项目 × 月度快照，数据透视复杂、汇总易出错。',
+      '缺乏行级数据权限控制，不同部门/项目只能看到自己范围的人力数据。'
+    ],
+    challenges: [
+      'EAV 数据透视表：行=员工信息（18 个固定字段），列=动态项目名，值=精力值（0~1），需按序列映射（管理技术→MTP/技师→T3/一线管理→O1/操作→O2）+ 三类人群分类（共用/专用/盈余）+ 人员状态（正常/支援外BG/支援内BG/产假）。',
+      'Excel 批量导入校验：逐行 20+ 字段校验、合法值域校验、精力值合计 = 1 一致性校验，校验失败需精确定位到行+列+错误原因。',
+      '月度快照机制：每月数据先全量初始化快照（t_hrm_roster），再增量导入精力值（t_hrm_roster_effort），支持实时/快照双模式查询。'
+    ],
+    solutions: [
+      'MOM-T 独立部署：独立 MySQL 实例 + IIS 站点，配置文件分离（dev/test/prod），数据库快照还原实现快速环境搭建与销毁。',
+      '人力监控核心：11 个 Controller（花名册管理/人天精力值维护/人员状态查询/监控报表/部门映射/项目映射/项目目标/外BG借入/部门汇总/查看权限）+ 10 个 AppService，覆盖从花名册同步到精力值多维分析的全流程。',
+      'EAV 精力值维护：t_hrm_roster_effort 表存储动态项目列值，每月快照全量初始化→增量导入→合计校验（Σ精力值=1），支持 Excel 批量导入（20+字段逐行校验+合法值域校验+合计一致性校验）+ 在线单员工编辑。',
+      '行级数据权限：ViewPermissionApp 基于"大部门+小部门+项目"三元组配置用户可见范围，权限范围内的部门自动合并到前端筛选下拉，管理员拥有全量访问。',
+      '监控报表看板：ECharts 按部门展示目标 vs 实际 vs 缺口（GAP）分析，按项目/部门/序列/时间段多维统计人天精力值占比与利用率。'
+    ],
+    impact: [
+      'MOM-T 独立上线，越南工厂实现系统化管理。',
+      '人力精力值统计从每天 1 小时→5 分钟，数据准确率 100%（合计 = 1 强制校验）。',
+      '月度快照机制支持历史数据回溯，行级权限确保数据安全合规。'
+    ],
+    outcomes: [
+      'MOM-T 系统 17 个 Area 模块，~95,000 行 C#，828 commits。',
+      '人力监控子系统 11 个 Controller + 10 个 AppService，覆盖 U01 项目全部人员。',
+      '系统持续迭代中（截至 2026-08 仍有变更日志）。'
+    ],
+    details: [
+      '【MOM-T 独立部署】独立 MySQL 实例 + IIS 站点，dev/test/prod 三套配置分离，数据库快照还原支持快速环境搭建。',
+      '【花名册管理】HR 同步花名册主表 + 月度业务字段快照，支持按部门/序列/状态多维度筛选。',
+      '【人天精力值维护】EAV 模式存储动态项目精力值，月度快照全量初始化→Excel 批量导入（20+字段逐行校验+合计=1强制校验）→在线编辑，序列映射+三类人群分类。',
+      '【监控报表】ECharts 看板：部门目标 vs 实际 vs GAP，按项目/部门/序列/时间段多维分析人天利用率。',
+      '【数据权限】"大部门+小部门+项目"三元组行级权限，权限范围自动合并到前端筛选下拉。技术栈：ASP.NET MVC 5 + Dapper + MySQL + jqGrid + ECharts + LayUI。'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2026.04',
+    duration: '1个月',
+    title: 'YOLO 工位行为检测工站（AI Camera）',
+    company: '歌尔股份有限公司',
+    role: 'ITBP',
+    teamSize: '独立',
+    isAI: true,
+    summary: '独立设计并交付基于 YOLOv11x 的工业视觉行为检测系统（AI Camera），覆盖 SC440（物料装箱+盖盒+机械臂操作）和 SC480（镜面+治具操作）两种工站。实现从数据采集标注→AIHub 云端训练→ONNX 导出量化→OpenCV 实时推理→Flask API 与 MES 集成→四阶段状态机工序验证→异常视频保存与 NG 上报的完整闭环，PyQt5 GUI + PyInstaller exe 部署。',
+    technologyStack: {
+      backend: 'Python 3.10+, PyTorch, ultralytics (YOLOv11x), OpenCV, ONNX Runtime, Flask, NumPy, PyYAML',
+      frontend: 'PyQt5（桌面 GUI）',
+      database: '',
+      devops: 'PyInstaller（Windows exe 打包）, AIHub 智算平台（GPU 集群训练）',
+      integration: 'MES 系统（HTTP POST SN+StationCode）, RTSP 摄像头',
+      others: '四阶段状态机工序验证, 状态缓冲防抖（30帧/75帧）, 工序依赖约束, 多线程架构（QThread×4）, 模板方法模式（SC440/SC480 派生）'
+    },
+    businessContext: '歌尔 U01 产线 SC440/SC480 工站的操作合规依赖人工巡检，无法 7×24 覆盖。需通过 AI 视觉实时监控操作人员是否按 SOP 完成每个动作，未按规定操作判为 NG 并保存视频证据自动上报 MES。SC440 工序为"物料放入→盖上盒盖→机械臂操作"三阶段，SC480 工序为"使用镜子→使用治具"二阶段，均需验证工序顺序依赖。',
+    painPoints: [
+      '工位操作合规依赖人工巡检，无法 7×24 覆盖，违规操作发现滞后。',
+      '操作人员可能跳过或颠倒工序步骤（如提前盖盒），人工无法逐帧审查。',
+      '异常事件缺乏视频证据留存，难以追溯与培训改进。'
+    ],
+    challenges: [
+      'YOLO 模型训练：需从产线摄像头采集视频→抽帧→POI 裁剪→手工标注 4 个类别，训练数据量有限。',
+      '工序依赖验证：closethebox 必须在 putmateril 之后检测才有效，需状态机实现前置条件约束。',
+      '实时性与防抖：YOLOv11x 在工位机（无 GPU）上推理需保证帧率，状态切换需连续 N 帧确认防止单帧误判。',
+      '进程间通信：MES 通过 HTTP POST 下发扫描枪 SN，Flask API 接收后需可靠传递给主检测进程（共享日志文件 + tail 监听）。'
+    ],
+    solutions: [
+      '模型训练与部署：工位摄像头录制视频→clip_video_poi.py 抽帧+POI 裁剪→手工标注→AIHub 智算平台 YOLOv11x 训练（640x1280, 300 epoch, AdamW）→ONNX 导出量化→OpenCV ONNX Runtime 实时推理。',
+      '四阶段状态机：待机→扫描枪 SN 触发检测→四阶段追踪（emptybox→putmateril→closethebox→useroboticarm，含前置依赖校验）→再次 emptybox 触发节拍结束→工序验证（全完成=OK / 缺失=NG 保存视频+上报 MES）→复位。',
+      '状态缓冲防抖：连续 30 帧确认状态切换，75 帧确认节拍结束，85 秒超时强制 NG，有效过滤单帧误检。',
+      '多线程架构：主检测线程（QThread，frame_gap=5 帧推理）→帧缓存到 VideoSaverThread（异步保存 NG 视频）→ListenerThread（日志文件监听 MES 信号）→Flask API（:40001），IPC 通过共享日志文件实现进程解耦。',
+      '模板方法模式：BaseAICamera 基类定义检测骨架，U01SC440AIMonitor/U01SC480AIMonitor 子类重写业务逻辑，易于扩展新工站。'
+    ],
+    impact: [
+      '实现 7×24 工位合规自动监控，违规操作发现率提升 300%。',
+      '替代人工巡检，每班次节省 2 小时巡检工时。',
+      'NG 视频自动保存+上报 MES，异常追溯从"无据可查"→"逐帧可回放"。'
+    ],
+    outcomes: [
+      'SC440 + SC480 两种工站版本交付，~3,000+ 行 Python 核心代码，约 20 个源文件。',
+      'YOLOv11x ONNX 模型在工位机上推理满足实时性要求。',
+      'PyInstaller 打包为 Windows exe，部署至产线工位机稳定运行。'
+    ],
+    details: [
+      '【模型训练】YOLOv11x 最大精度模型，640x1280 分辨率，300 epoch，AdamW+余弦退火，Mosaic+MixUp+Copy-paste+Random erasing 数据增强，4 卡 GPU 并行训练，ONNX 导出量化。',
+      '【四阶段状态机】emptybox（节拍信号/蓝色）→putmateril（物料放入/青色）→closethebox（盖盒/白色，须晚于 putmateril）→useroboticarm（机械臂/绿色），前置依赖校验。',
+      '【防抖机制】30 帧连续确认状态切换，75 帧确认节拍结束，85 秒超时强制 NG，NumPy 矩阵管理多相机状态变量。',
+      '【IPC 通信】Flask API（:40001）写入 api_calls.log→ListenerThread tail 监听→正则提取 SN+StationCode→更新全局变量→主检测线程读取触发。',
+      '技术栈：Python + YOLOv11x + PyTorch + ONNX Runtime + OpenCV + Flask + PyQt5 + NumPy + PyInstaller。'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2026.03',
+    duration: '2个月',
+    title: 'Data Matrix 条码智能识别系统',
+    company: '歌尔股份有限公司',
+    role: 'ITBP',
+    teamSize: '独立',
+    summary: '独立开发工业产线 Data Matrix 条码批量识别与异常检测系统（insightBarcodeCheck）。设计三级递进式解码策略（传统 ROI 预处理→多阈值增强→YOLOv8 ONNX AI 定位），解决模糊/残缺/低对比度条码识别难题；支持 DG/VN 双区域多节点部署、增量处理、MySQL 持久化、SMTP 异常邮件告警、tkinter GUI 界面与 Excel 异常报告输出。',
+    technologyStack: {
+      backend: 'Python 3.10+, OpenCV, ONNX Runtime, YOLOv8, pylibdmtx, zxing-cpp, SQLAlchemy, PyMySQL',
+      frontend: 'tkinter（GUI 桌面端）',
+      database: 'MySQL',
+      devops: 'PyInstaller（x86/x64 双架构 exe 打包），python-dotenv 配置管理',
+      integration: 'SMTP 邮件告警',
+      others: '三级解码链（Chain of Responsibility）, YOLOv8 ONNX 推理, 多线程并行（ThreadPoolExecutor）, 增量扫描, 10 核心源文件 ~4,575 行'
+    },
+    businessContext: '歌尔东莞/越南产线需对产品 Data Matrix 条码（产品 SN + 物料 SN）进行批量识别与一致性校验，用于质量追溯。产线环境复杂，条码常出现模糊、残缺、低对比度等情况，传统单一解码方案覆盖率不足 85%。需支持多区域多工站并行采集，增量处理避免重复识别。',
+    painPoints: [
+      '工业场景条码质量参差不齐（模糊/残缺/低对比度），单一 pylibdmtx 解码覆盖率不足 85%，需人工复核。',
+      '多工站多节点同时采集，需避免重复识别与数据冲突。',
+      '异常条码（同产品 SN 下物料 SN 不一致）需及时发现并告警，否则追溯链断裂。'
+    ],
+    challenges: [
+      '三级解码链设计：需在速度与覆盖率间平衡——快速路径（ROI+pylibdmtx）覆盖 85%，增强路径（多阈值预处理）覆盖 95%，AI 路径（YOLOv8 ONNX）兜底极端场景。',
+      'AI 模型轻量化部署：YOLOv8 ONNX Runtime 替代 PyTorch，需在 Win x86/x64 工位机上稳定运行，推理速度满足产线节拍。',
+      '多区域多节点：DG（东莞）/VN（越南）双数据库独立连接，NODE_ID 区分采集节点，增量处理（文件创建时间+数据库已处理记录双过滤）。'
+    ],
+    solutions: [
+      '三级递进式解码（Chain of Responsibility）：Level 1 — ROI 区域裁剪 + pylibdmtx 解码（快速路径）；Level 2 — 多阈值预处理（CLAHE 增强/去噪/锐化/形态学/OTSU 二值化/多尺度缩放）+ pylibdmtx 解码；Level 3 — YOLOv8 ONNX 全图定位条码区域 + zxingcpp/pylibdmtx 双库解码（B515DDecoder SDK，含时间预算管理）。',
+      'B515D Decoder SDK：自研 YOLOv8ONNX 类封装 ONNX Runtime 推理（NMS 后处理），B515DDecoder 类组合 zxingcpp + pylibdmtx 双库解码，逐级回退。',
+      '多线程并行 + 批量写入：ThreadPoolExecutor 并发解码，每 BATCH_SIZE 条批量 MySQL upsert；增量双过滤（文件创建时间 + DB 已处理记录）避免重复。',
+      'GUI + 告警 + 报告：tkinter 界面（文件夹选择/实时表格/进度/暂停恢复），SMTP 异常自动邮件（含 CSV 附件），Excel 双 Sheet 输出（识别结果 + 异常匹配）。'
+    ],
+    impact: [
+      '条码识别率从 85%→99.5%（三级策略 + AI 定位），人工复核量下降 90%。',
+      '多节点稳定运行于东莞/越南双区域产线，支持日处理条码 10 万+。',
+      '异常检出从人工抽查→自动实时告警，追溯链可靠性大幅提升。'
+    ],
+    outcomes: [
+      '10 个核心 Python 源文件 ~4,575 行，三级解码链完整实现。',
+      'B515D Decoder SDK（YOLOv8 ONNX + zxingcpp + pylibdmtx）独立可复用。',
+      'PyInstaller x86/x64 双架构打包，部署至多产线工站。'
+    ],
+    details: [
+      '【三级解码链】Level 1（ROI+pylibdmtx，快速）→Level 2（CLAHE+OTSU+多尺度+pylibdmtx，增强）→Level 3（YOLOv8 ONNX 定位+zxingcpp/pylibdmtx 双库，AI 兜底），逐级提升覆盖率。',
+      '【B515D SDK】YOLOv8ONNX 类：ONNX Runtime 推理 + NMS 后处理；B515DDecoder 类：AI 定位 ROI + zxingcpp→pylibdmtx 双库回退 + 时间预算管理。',
+      '【增量处理】双过滤机制：文件创建时间排序 + MySQL 已处理记录过滤，BATCH_SIZE 批量写入，支持暂停恢复。',
+      '【异常检测与告警】同产品 SN 下物料 SN 不一致自动标记异常，SMTP 邮件告警（含 CSV 附件），Excel 双 Sheet 输出（结果+异常）。',
+      '技术栈：Python + OpenCV + ONNX Runtime + YOLOv8 + pylibdmtx + zxing-cpp + SQLAlchemy + MySQL + tkinter + PyInstaller。'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2026.01',
+    duration: '4个月',
+    title: 'U01 E&F EIH Tracking System',
+    company: '歌尔股份有限公司',
+    role: 'ITBP',
+    teamSize: '3人',
+    summary: '基于 MOM 框架独立设计并交付 U01 E&F（Equipment & Facility）Capex 设备投资追踪系统，采用 DDD 五层架构，实现 NB（新购）/RF（改造）双源 Tracker Excel 自动解析→CTB 数据生成管道（5 步）→Dashboard 产能可视化→EIH 9 项指标全生命周期追踪，覆盖从 Tech Approval 到设备入厂的完整投资闭环。',
+    technologyStack: {
+      backend: 'ASP.NET MVC 5, .NET Framework 4.8, Dapper, Entity Framework 6, Web API, Mapster',
+      frontend: 'Vue 3, Element Plus, Tabulator, jQuery, Layui, ECharts, Highcharts（新旧混用，渐进迁移）',
+      database: 'MySQL（t_capex_* 系列表）',
+      devops: 'IIS, Git, Windows Server',
+      integration: 'LDAP/AD 域认证, ZOffice 在线文档编辑, Redis',
+      others: 'CTB 数据生成管道（5 步）, EIH 9 项指标追踪, EPPlus + NPOI Excel 处理, 58,849 行 C#, 366 源文件, 833 commits'
+    },
+    businessContext: '歌尔 U01 产品线的 Capex 设备投资管理需跟踪从技术审批、预算批准、采购下单（PR→PO）、供应商发货（ETD/ETA）到设备入厂（EIH）的全生命周期。涉及 NB（新购设备）和 RF（改造设备）两种投资类型，需从 Excel Tracker 自动解析并生成 CTB（Capacity to Build）产能评估看板，识别 Gating Items（瓶颈设备）以支撑投产决策。',
+    painPoints: [
+      'Capex 设备投资涉及 Tech Approval→CapEx Approval→PR→PO→ETA→EIH 多节点追踪，原依赖 Excel 手工管理，进度不透明。',
+      'NB（新购）和 RF（改造）Tracker Excel 格式各异，人工解析耗时且无法自动汇总 CTB 产能数据。',
+      'Gating Items（UPH=0 的瓶颈设备）难以快速识别，影响投产计划与资源调度。'
+    ],
+    challenges: [
+      'CTB 五步数据管道：NB Tracker→CTB 项目生成→RF Tracker→CTB 项目生成→累计数据（按日累计到货+累计 UPH）→CTB Dashboard（Target UPH/Available UPH/Gating Items）→EIH Dashboard（9 项指标聚合），需处理 Excel 列名映射与 Program_GTK 数据一致性。',
+      '双源合并：NB 与 RF 两种投资类型字段结构不同，需分别解析后合并为统一 CTB 视图。',
+      '9 项 EIH 指标追踪：Tech Approval→CapEx Approval→PR Complete→PO Complete→ETA Available→Design Open→Pending ETA→Late ETA→EIH Complete，按项目/区域/阶段多维度聚合展示。'
+    ],
+    solutions: [
+      'CTB 数据生成管道（CTBDataGeneratorService）：NB Tracker 解析→RF Tracker 解析→累计数据生成（CumulativeArrival/CumulativeUPH 按日累计）→CTB Dashboard 生成（加权平均 UPH/Gating Items 识别）→EIH Dashboard 生成（9 项指标按 NB/RF/ALL 聚合），全管道事务化，支持版本管理与重新生成。',
+      'EIH Dashboard：9 项里程碑指标按项目维度展示完成率与趋势，ECharts 可视化，支持下钻至明细。',
+      'Station BOM 管理：工位级物料清单版本管理（版本历史/对比），ZOffice 在线编辑集成，Excel 导入/导出。',
+      '新前端架构：Vue 3 + Element Plus + Tabulator 构建 NewIndex 新首页，ECharts/Highcharts 数据可视化，与旧 Layui 页面通过 Area 路由共存，渐进式迁移。'
+    ],
+    impact: [
+      'Capex 设备投资从 Excel 手工追踪→系统化全生命周期管理，进度透明可追溯。',
+      'CTB 产能评估从手工汇总→自动生成，Gating Items 识别从人工排查→Dashboard 高亮，投产决策效率大幅提升。',
+      'Vue 3 + Element Plus 前端架构验证成功，833 commits 持续迭代交付。'
+    ],
+    outcomes: [
+      '17 个 Area 模块（EIHManage/StationBOMManage/CapexBomManage/NBBOMManage/ProjectManage 等），58,849 行 C#。',
+      'CTB 管道覆盖 NB Tracker/RFT Tracker/Week ETA 全流程，含 CTB Dashboard + EIH Dashboard + Excel 导出。',
+      '系统独立部署稳定运行于 U01 E&F 项目。'
+    ],
+    details: [
+      '【NB/RF Tracker 管理】双源 Excel 自动解析（CTBNBTrackerParser/CTBRFTrackerParser），版本管理，导入变更履历，Program_GTK 映射修复。',
+      '【CTB Dashboard】累计到货/累计 UPH 按日趋势，加权平均 UPH，Gating Items 高亮（UPH=0），按周分组 + 明细钻取，Excel 导出。',
+      '【EIH Dashboard】9 项里程碑指标（Tech Approval→EIH Complete）按 NB/RF/ALL 三个维度聚合展示，完成率 + 趋势图。',
+      '【Station BOM】工位物料清单版本管理/对比/在线编辑（ZOffice），Excel 导入导出，模板下载。',
+      '技术栈：ASP.NET MVC 5 + Dapper + EF6 + MySQL + Redis + Vue 3 + Element Plus + ECharts。'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2025.12',
+    duration: '2个月',
+    title: '歌尔MOM — HWTE设备异常监控系统',
+    company: '歌尔股份有限公司',
+    role: 'ITBP',
+    teamSize: '独立',
+    summary: '基于 MOM 框架独立设计并交付 HWTE 设备异常实时监控与处理闭环系统，实现双规则引擎（连续无产出+连续不良品）、四级继承式配置（项目→线体→工站→工位）、自动责任人分配+超时逐级升级、工程日历排除节假日、异常工单闭环管理，将设备异常发现从人工巡检 30 分钟/次→实时秒级。',
+    technologyStack: {
+      backend: 'ASP.NET MVC 5, .NET Framework 4.8, Dapper, Web API, Quartz',
+      frontend: 'Layui, jQuery, ECharts, Bootstrap',
+      database: 'MySQL, Oracle（MES 过站/不良数据源）, Redis（实时过站缓存）',
+      devops: 'IIS, Git, Windows Server',
+      integration: 'MES 系统（WIP_TRACKING_LOG_T / WIP_REPAIR_T）, 企业微信通知',
+      others: '双规则引擎, 四级继承式配置, 工程日历, 超时升级责任链, 17 张数据表, 17 个领域实体'
+    },
+    businessContext: 'HWTE 测试工站需实时监控设备异常（无产出、连续不良），原依赖人工巡检（30 分钟/次），无法 7×24 覆盖。异常处理缺乏标准化流程，责任人不明确，产线休息/节假日需排除误报，异常数据无法统计分析。',
+    painPoints: [
+      '设备异常依赖人工巡检，30 分钟/次，无法 7×24 覆盖，停产响应滞后。',
+      '异常处理缺乏标准化流程，责任人不明确，处理进度不可追踪。',
+      '产线休息时间/节假日缺乏排除机制，误报频繁。'
+    ],
+    challenges: [
+      '双规则引擎设计：连续无产出检测需排除非工作时间，连续不良品检测需按测试项分组，规则参数需灵活可配。',
+      '四级继承式配置：项目→线体→工站→工位四层规则继承，需处理配置冲突与优先级。',
+      '实时性能：Redis 缓存 MES 过站数据，定时任务扫描需保证秒级响应，避免规则漏检。'
+    ],
+    solutions: [
+      '双规则引擎：规则 1（无产出）—连续 X 分钟无产品投入触发报警，排除非工作时间；规则 2（不良品）—连续 X 次 Fail 或连续 X 小时共 X 次 Fail 触发报警，按测试项分组。',
+      '四级继承式配置：项目→线体→工站→工位四层规则参数，下级继承上级配置，支持覆盖与优先级控制。',
+      '自动责任人分配+超时升级：工位绑定责任链，自动分配 DRI；超时 10 分钟→DRI Leader，20 分钟→部门负责人，企业微信通知。',
+      '工程日历：排除休息日、节假日、吃饭时间等非工作时段，避免误报。',
+      '异常工单闭环：待处理→处理中→已解决，关闭时填写异常类型/原因/处理措施（下拉选项+文本），故障频率帕累托分析 + BI 看板。'
+    ],
+    impact: [
+      '设备异常发现从人工巡检 30 分钟/次→实时秒级自动侦测，停工响应缩短 90%。',
+      '异常处理标准化，责任明确到人，处理进度全程可追踪。',
+      '工程日历排除非工作时间，误报率大幅降低。'
+    ],
+    outcomes: [
+      '17 张数据表（项目/产线/工站/工位/日历/报警规则/报警事件/异常工单/处理记录/责任人等），完整支撑监控全流程。',
+      '12 个 Controller + 17 个 AppService，覆盖规则配置、报警事件、工单管理、日历管理、责任链、数据分析。',
+      '系统稳定运行，覆盖 HWTE 测试工站全部设备。'
+    ],
+    details: [
+      '【设备异常监控】双规则引擎：连续无产出检测（排除非工作时间）+ 连续不良品检测（按测试项分组），参数灵活可配。',
+      '【四级继承式配置】项目→线体→工站→工位，下级继承上级配置，支持覆盖与优先级控制。',
+      '【自动通知与升级】自动分配 DRI + 超时逐级升级（DRI 10min→Leader 20min→部门负责人），企业微信推送。',
+      '【工程日历】排除休息日、节假日、吃饭时间等非工作时段，避免误报。',
+      '【异常工单闭环】待处理→处理中→已解决，关闭时填写异常类型/原因/处理措施，故障频率帕累托分析。',
+      '技术栈：ASP.NET MVC 5 + Dapper + MySQL + Oracle + Redis + Quartz + ECharts + Layui。'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2025.11',
+    duration: '1个月',
+    title: 'Python 数据分析报表自动化（IOS/AC 日报）',
+    company: '歌尔股份有限公司',
+    role: 'ITBP',
+    teamSize: '独立',
+    summary: '基于 Python pandas + SQLAlchemy + PyYAML 独立设计并交付 HS-C 产品线 IOS/AC 产能日报自动化数据管道。采用 OOP + SOLID + YAML 配置化架构，实现 Excel 宽表多工作表自动解析→数据清洗→宽转窄→批量 upsert 写入 MySQL 的全流程自动化，将每天 2 小时人工 Excel 操作缩短至 5 分钟。',
+    technologyStack: {
+      backend: 'Python 3.10, pandas, numpy, SQLAlchemy, mysql-connector-python, PyYAML',
+      frontend: '',
+      database: 'MySQL（t_ops_daily_ios_plan / t_ops_daily_ios_detail）',
+      devops: '',
+      integration: '',
+      others: 'OOP + SOLID 架构, YAML 配置化, 工厂模式, 宽表转窄表（unpivot/melt）, openpyxl/calamine 引擎'
+    },
+    businessContext: '歌尔东莞工厂 HS-C 产品线需每日汇总产能计划与实绩报表（IOS：Input/Output Schedule），覆盖 MLB SMA、SA1/SA2、Coating、Pri/Sec Grill/Enclosure、FATP、Packing 等多制程段。原流程依赖人工用 Excel 处理宽表数据（6-8 个工作表、每表 200-400 行 × 100+ 日期列），从解析、清洗到数据库写入全手工完成，每天耗时 2 小时且数据口径不统一。',
+    painPoints: [
+      'IOS/AC 日报数据源为宽表 Excel，多工作表格式不统一，人工解析耗时且易出错。',
+      '各工作表解析规则差异大（行删除位置、header 关键词、cutoff_date、数量取整策略），缺乏配置化管理。',
+      '产能计划与实绩数据需分别处理，人工难以保证数据一致性和幂等性。'
+    ],
+    challenges: [
+      '多工作表差异化管理：每个工作表 header_keyword、drop_rows、cutoff_date、qty_rounding 策略不同，需 YAML 配置化统一管理而非硬编码。',
+      '宽表转窄表（unpivot）：100+ 日期列需展开为 (Plan_Date, Plan_Qty) 窄表格式，数量取整策略多样（round/floor/ceil/trunc）。',
+      '双管道设计：产能计划管道（t_ops_daily_ios_plan）和实绩明细管道（t_ops_daily_ios_detail）数据模型不同，后者需区分 Plan/Actual/CumPlan/CumActual 四种值类型并处理颜色维度。'
+    ],
+    solutions: [
+      '配置化五步管道（Capacity Plan 管道）：YAML 驱动（capacity_config.yaml），ConfigManager→ExcelReader→RowFilterProcessor→PlanExploder→DatabaseWriter，工厂模式组装组件，每批 500 条批量 upsert。',
+      '增强六步管道（Daily Detail 管道）：在五步基础上新增 Aggregate 步骤，按 9 维度聚合 Plan/Actual/Cum 数量。',
+      '数据库幂等写入：MySQL ON DUPLICATE KEY UPDATE，唯一索引防重复，支持重复执行不产生脏数据。',
+      '配置化管理：YAML 文件管理数据库连接、源文件路径、每个工作表的独立配置（drop_rows/header_keywords/cutoff_date/qty_rounding）、全局/制程级别的行过滤规则（keep/skip），新增工作表只需改配置无需改代码。'
+    ],
+    impact: [
+      'IOS/AC 日报生成从每天 2 小时→5 分钟，数据准确率 100%。',
+      '新增工作表/制程段只需修改 YAML 配置，无需改代码，维护成本降低 90%。',
+      '幂等写入支持重复执行，彻底消除数据重复问题。'
+    ],
+    outcomes: [
+      '两大管道稳定运行，写入 MySQL 表 t_ops_daily_ios_plan 和 t_ops_daily_ios_detail。',
+      'YAML 配置化管理 6+ 种工作表解析规则，覆盖全部制程段（Left/Right/FATP/Packing 等）。',
+      '代码从硬编码单脚本演进为 OOP + 配置化架构，含单元测试（unittest）。'
+    ],
+    details: [
+      '【Capacity Plan 管道】ConfigManager→ExcelReader（pd.read_excel + openpyxl/calamine 引擎）→RowFilterProcessor（keep/skip 规则过滤）→PlanExploder（100+ 日期列 unpivot 为窄表）→DatabaseWriter（upsert 500条/批）。',
+      '【Daily Detail 管道】六步管道，额外处理 Plan/Actual/CumPlan/CumActual 四种值类型 + Color 维度，line_filter_rules 按制程保留指定线体，最终九维度聚合。',
+      '【配置化架构】YAML 管理：DB 连接、文件路径、各工作表独立配置（drop_rows/header_keywords/cutoff_date/qty_rounding）、行过滤规则，工厂模式（ProcessorFactory）装配组件。',
+      '技术栈：Python 3.10 + pandas + numpy + SQLAlchemy + mysql-connector-python + PyYAML + openpyxl。'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2025.11',
+    duration: '3个月',
+    title: '歌尔MOM — FA良率预警与产线滞留时长监控',
+    company: '歌尔股份有限公司',
+    role: 'ITBP',
+    teamSize: '独立',
+    isAI: true,
+    summary: '基于 MOM 框架独立设计并交付两大产线监控模块：(1) FA 良率自动预警系统——Oracle/MySQL 跨库定时拉取、ECharts 多维度趋势看板、DeepSeek AI 语义分析、每日邮件推送；(2) 产线原材料滞留时长监控——FATP/SMT 双产线 12 时段呆滞分布、明细下钻、下拉缓存，将呆滞物料从不可见变为可视化管理。',
+    technologyStack: {
+      backend: 'ASP.NET MVC 5, .NET Framework 4.8, Dapper, Web API, Quartz',
+      frontend: 'Layui, jQuery, ECharts, Bootstrap',
+      database: 'MySQL, Oracle（MES 数据源）',
+      devops: 'IIS, Git, Windows Server',
+      integration: 'SMTP 邮件服务, MES 系统, DeepSeek API',
+      others: '定时任务调度, 良率趋势分析, AI 语义分析, 12 时段分布统计, IMemoryCache 缓存'
+    },
+    businessContext: 'U01 产线需同时监控 FA 良率趋势和线边仓原材料滞留风险。良率数据需从 MES Oracle 手动捞取后用 Excel 清洗，每天耗时 3 小时；线边仓滞留物料无系统监控，呆滞风险不可见，超期物料可能导致报废。两大监控需求均需自动化。',
+    painPoints: [
+      'FA 良率数据需从 MES Oracle 手动捞取+Excel 清洗，每天 3 小时，异常发现滞后。',
+      '线边仓原材料滞留时长不可控，缺乏可视化监控，呆滞物料难以定位。',
+      'Target 阈值缺乏系统化管理，良率达标与滞留预警依赖人工经验。'
+    ],
+    challenges: [
+      '跨数据库查询：MES Oracle 三张表联合查询 + 业务库 MySQL，需处理数据时间窗口和大数据量性能优化。',
+      '多维度展示与下钻：FA 模块需工站级良率趋势 + 不良项下钻；滞留模块需 12 时段分布 + 线体/货位/料号三维汇总 + 明细下钻。',
+      '定时推送可靠性：每日 07:00 自动执行预警 + 邮件推送，需保证 Quartz 任务调度稳定。'
+    ],
+    solutions: [
+      'FA 良率预警：默认展示最近 6 天 By工站/By不良项良率趋势，ECharts 趋势图+表格双展示，点击工站下钻不良项明细；Quartz 每日 07:00 自动推送未达标项邮件；Target 阈值独立管理（单条编辑+Excel批量导入导出）；集成 DeepSeek API 对异常进行 AI 语义分析。',
+      '滞留时长监控：按 FATP/SMT 双产线 12 时段分布统计（0-2h→14天+），按数量降序、列头冻结；点击 Total 明细下钻（工序段/线体/货位/料号/批次/收料时间/呆滞区间）；线体/货位/料号三下拉 IMemoryCache 1h 缓存+强制刷新。',
+      '收料时间获取：优先从上料跟踪表获取，否则从 FID 字段解析（SHL+YYYYMMDD...），处理多种时间来源。'
+    ],
+    impact: [
+      'FA 良率报表从每天 3 小时→0（自动推送），异常响应时效提升 80%。',
+      '呆滞物料从不可见→12 时段可视化监控，清理效率提升 50%。',
+      '两项监控均实现 7×24 自动运行，替代人工巡检。'
+    ],
+    outcomes: [
+      'FA 模块：5 张数据表 + 9 个 Controller + 6 个 Service，覆盖良率看板/目标管理/邮件订阅/定时任务/AI 分析。',
+      '滞留模块：5 个 API 端点，覆盖 FATP+SMT 双产线。',
+      '两模块均稳定运行于 U01 产线环境。'
+    ],
+    details: [
+      '【FA 良率预警】默认最近 6 天 By工站/By不良项良率趋势，图表+表格双展示，支持下钻与筛选；Quartz 每日 07:00 自动邮件推送未达标项；Target 阈值独立管理+Excel 批量导入导出；DeepSeek AI 异常语义分析。',
+      '【滞留时长监控】12 时段库存呆滞分布（0-2h→14天+）；明细下钻（工序段/线体/货位/料号/批次/收料时间/呆滞区间）；三下拉缓存+强制刷新；筛选条件 STORE_STATUS=0 + USEQUANTITY < TOTALQUANTITY。',
+      '技术栈：ASP.NET MVC 5 + Dapper + Oracle + MySQL + ECharts + Quartz + IMemoryCache + Layui + DeepSeek API。'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2025.10',
+    duration: '3个月',
+    title: '歌尔MOM — BOM智能比对系统',
+    company: '歌尔股份有限公司',
+    role: 'ITBP',
+    teamSize: '独立',
+    summary: '基于 MOM 框架独立设计并交付多源 BOM 智能比对系统，实现 Agile/GTK/Matrix/客户四种 BOM 格式自动识别、字段映射可配置、两层 BOM 自动合并、差异高亮导出，将人工 2 小时比对缩短至 5 分钟。',
+    technologyStack: {
+      backend: 'ASP.NET MVC 5, .NET Framework 4.8, Dapper, Entity Framework 6, Web API',
+      frontend: 'Layui, jQuery, Bootstrap',
+      database: 'MySQL',
+      devops: 'IIS, Git, Windows Server',
+      integration: 'MOM 框架',
+      others: 'BOM 解析引擎, BOM 合并引擎, BOM 比对引擎, EPPlus, 可配置字段映射（JSON）'
+    },
+    businessContext: 'HSD 项目 BOM 来源复杂，涉及客户 Agile BOM、GTK Agile BOM、Matrix BOM、客户 CBOM 四种格式，列名不统一、版本变更频繁。人工比对需逐行核对位号/数量/料号差异，每次耗时 2 小时且易遗漏，严重影响 BOM 变更响应效率。',
+    painPoints: [
+      '四种 BOM 来源格式各异，列名不统一，人工解析耗时且易出错。',
+      'BOM 版本变更频繁，新旧 BOM 差异比对依赖人工逐行核对，每次 2 小时。',
+      '两层 BOM（单板级+拼版级）缺乏自动合并能力，需手动拼接。'
+    ],
+    challenges: [
+      '多源 BOM 解析：Agile/GTK/Matrix/CBOM 四种格式列名差异大，需可配置的字段映射规则引擎。',
+      '两层 BOM 合并：单板级 BOM 与拼版级 BOM 需按料号自动合并，处理位号去重与数量汇总。',
+      '比对精度：以"客户料号+制造商"为键，需准确区分新增/删除/数量变更/位号变更四种差异类型。'
+    ],
+    solutions: [
+      '可配置字段映射引擎：JSON 配置源列名→标准字段映射，支持列名模糊匹配 + 数据转换（TRIM/UPPER），自动识别 Agile/GTK/Matrix/客户四种格式。',
+      '两层 BOM 自动合并：单板级 BOM + 拼版级 BOM 按料号合并，位号去重排序，数量求和，自动输出合并结果。',
+      '智能比对引擎：以"客户料号+制造商名称"为对比键，四类变更自动标注（新增/删除/数量变更/位号变更），差异高亮 Excel 导出。',
+      '配置化管理：BOM 文档类型定义、标准字段管理（12 个标准字段）、字段映射配置、列别名与转换规则，支持业务人员自主配置。'
+    ],
+    impact: [
+      'BOM 比对从人工 2 小时→5 分钟，差异识别准确率 100%。',
+      '四种 BOM 格式自动识别，无需人工干预。',
+      '两层 BOM 合并自动化，消除手动拼接错误。'
+    ],
+    outcomes: [
+      '6 张数据表（文档类型/标准字段/字段映射/解析结果/明细/错误日志），完整支撑 BOM 全生命周期。',
+      '4 个引擎（解析/合并/比对/配置），6 个 Controller，覆盖上传/解析/查询/合并/比对/导出全流程。',
+      'BOM 变更比对自动化率 100%，系统稳定运行于 HSD 项目。'
+    ],
+    details: [
+      '【BOM 配置管理】文档类型定义、字段映射配置（源列名→标准字段）、标准字段管理、列别名/转换规则。',
+      '【BOM 文档解析】上传 Excel 文件→自动解析（列名模糊匹配+数据转换）→错误日志→两层 BOM 合并。',
+      '【BOM 对比分析】选择新旧 BOM→以"客户料号+制造商"为键对比→四类变更标注（新增/删除/数量变更/位号变更）→差异高亮 Excel 导出。',
+      '【变更描述】自动生成变更描述：加[位号]、删[位号]、数量变更 N→M、位号变更 [A,B]→[C,D]。',
+      '技术栈：ASP.NET MVC 5 + Dapper + EF6 + MySQL + EPPlus + Layui + jQuery。'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2025.09',
+    duration: '4个月',
+    title: '歌尔MOM — 供应商来料不良索赔系统',
+    company: '歌尔股份有限公司',
+    role: 'ITBP',
+    teamSize: '独立/2人协作',
+    summary: '基于 MOM 框架（ASP.NET MVC + Dapper + MySQL）独立设计并交付供应商来料不良索赔全流程闭环系统，涵盖 8+ 角色 17 节点状态机工作流、损失成本自动核算、数据分析看板，实现从线下数天到系统内数小时的流程变革。',
+    technologyStack: {
+      backend: 'ASP.NET MVC 5, .NET Framework 4.8, Dapper, Entity Framework 6, Web API, Quartz',
+      frontend: 'Layui, jQuery, ECharts, Bootstrap',
+      database: 'MySQL',
+      devops: 'IIS, Git, Windows Server',
+      integration: 'MOM 权限体系, 工作流引擎',
+      others: '状态机工作流引擎（17 节点）, 领域驱动设计（DDD）, 13 张核心业务表'
+    },
+    businessContext: '歌尔产线来料入库后频繁出现不良，导致半成品/成品报废、返工、停线等损失，需向供应商索赔。原流程线下流转，涉及 MFG/QA/FA/SQE/PE/IE/采购/主管 8+ 角色，协同效率低、追溯困难、费用核算不透明。',
+    painPoints: [
+      '索赔流程涉及 8+ 角色多级审批，原线下纸质流转，跨部门协同效率低、周期长。',
+      '损失成本核算（工时、材料、场地、能耗）口径不一，手工统计易出错。',
+      '供应商索赔数据无系统沉淀，无法追溯分析，不利于供应商质量管理。'
+    ],
+    challenges: [
+      '复杂状态机设计：17 个流转节点，需支持驳回、跳转、加签、会签等复杂审批模式，与 MOM 现有权限体系深度集成。',
+      '审批时限管控：FA 分析 2 工作日、SQE/IE/PE 各 1 工作日，需定时提醒与超时升级。',
+      '多角色协同：FA 分析报告→中心级主管确认→SQE 责任判定→厂商确认→PE 拆解方案→IE 成本评估→BU 核算→采购求偿→财务回款，全链路数据贯通。'
+    ],
+    solutions: [
+      '状态机工作流引擎：状态模式 + 策略模式实现多角色审批链，17 个状态节点可配置流转，支持驳回/跳转/加签/会签，全程操作日志可追溯。',
+      '损失成本自动核算：工时×费率 + 材料费 + 场地/能耗分摊，PE 上传报废明细→IE 评估人力→BU 核算→自动汇总，替代手工 Excel。',
+      '索赔结算闭环：供应商费用确认→采购求偿（货款扣除/样品抵扣/现金）→财务确认回款，全链路跟踪。',
+      '数据分析看板：索赔趋势图、Top N 不良供应商/物料排名，支持按时间/物料/供应商多维度筛选与明细下钻。'
+    ],
+    impact: [
+      '索赔流程从线下数天→系统内数小时闭环，全流程可追溯。',
+      '损失成本核算从手工统计→自动汇总，准确率 100%。',
+      '供应商不良数据系统化沉淀，为供应商质量评价提供数据支撑。'
+    ],
+    outcomes: [
+      '13 张核心业务表 + 2 张配置辅助表 + 5 张工作流表，完整支撑索赔全生命周期。',
+      '11 个 Controller + 10 个 AppService，覆盖索赔单、FA 分析、IE 成本、责任判定、结算、工作流审批等全部环节。',
+      '系统稳定运行，覆盖歌尔多工厂来料不良索赔场景。'
+    ],
+    details: [
+      '【索赔单管理】发起（含物料/供应商信息）、列表查询、详情查看、状态流转、附件管理。',
+      '【质量分析与责任判定】内部 FA 分析报告→中心级主管确认→SQE 确认责任→厂商确认责任，四级审批链。',
+      '【损失成本核算】PE 上传拆解/返工方案→PE 报废物料明细→IE 评估人力/场地/能耗→BU 成本核算，自动汇总。',
+      '【索赔结算】供应商费用确认→采购求偿（货款扣除/样品抵扣/现金）→财务确认回款，全链路跟踪。',
+      '【数据分析与报表】索赔趋势图、Top N 不良供应商/物料排名，导出流程明细表。',
+      '技术栈：ASP.NET MVC 5 + Dapper + EF6 + MySQL + Layui + jQuery + ECharts。'
+    ],
+    pictures: []
+  },
+
+  
+{
     startTime: '2025.04',
     duration: '5个月',
     title: '领益多组织-总务类费用化采购系统（MRO）',
@@ -1384,6 +2080,700 @@ const projectlists_zh = [
 
 // 英文項目資料
 const projectlists_en = [
+
+  {
+    startTime: '2026.06',
+    duration: '2 months',
+    title: 'SMA Real-time IO Agent',
+    company: 'Goertek Inc.',
+    role: 'ITBP',
+    teamSize: 'Independent',
+    isAI: true,
+    summary: 'Independently designed and delivered the SMA SMT line real-time IO (Input/Output) report Agent system. Uses dual-version architecture - Version A deterministic state machine algorithm (22-slot time model) as production workhorse; Version B Harness Engineering 6-layer LLM Agent (9 tools+DeepSeek-V4) for complex scenario reasoning and cross-validation. Supports CLI/Flask API/scheduled task 3 trigger modes.',
+    technologyStack: {
+      backend: 'Python 3.10+, Flask, OpenAI SDK (DeepSeek-V4), pymysql, DBUtils, openpyxl, pytest',
+      frontend: '',
+      database: 'MySQL (3 tables)',
+      devops: 'Windows Task Scheduler / Linux cron',
+      integration: '',
+      others: 'Dual-Version Agent Architecture, 22-Slot Time Model State Machine, Harness Engineering 6-Layer, Mem0, Guardrail, -10,474 lines Python, 52 files'
+    },
+    businessContext: 'Goertek SMA SMT line IO reports in the MOM system could not display real-time achievement status, lacking automatic hourly planned output calculation.',
+    painPoints: [
+      'MOM system IO reports cannot display real-time achievement.',
+      'Manual SMT hourly IO achievement rate statistics are time-consuming.',
+      'Changeover time, shift efficiency not included in calculation model.'
+    ],
+    challenges: [
+      '22-slot continuous time model with complex boundary handling.',
+      'Dual-version Agent design for reliability and reasoning.',
+      'Shift efficiency modeling varying by region.'
+    ],
+    solutions: [
+      'Version A deterministic state machine with 22-slot calculation.',
+      'Version B LLM Agent (Harness 6-layer) with 9 tools.',
+      'MOM page config with jqGrid+ECharts report page.',
+      'Excel report with 3 Sheets.',
+      '3 trigger modes: CLI + Flask API + Task Scheduler.'
+    ],
+    impact: [
+      'SMT IO from manual to auto real-time monitoring, estimated 6,900 RMB/month savings.',
+      '22-slot time model verified with real data.',
+      'Enterprise-grade Harness 6-layer Agent practice validated.'
+    ],
+    outcomes: [
+      '-10,474 lines Python, 52 files, 3 Skills, 9 Agent tools.',
+      'MOM system 3 new tables + config page completed.',
+      'Phase 0-1 complete, Phase 2 mostly complete.'
+    ],
+    details: [
+      '[Version A State Machine] 22-slot continuous time model with 5 boundary types.',
+      '[Version B Harness Agent] L1-L6: system_prompt-9 tools-Agent Loop-Mem0-Verifier-Guardrail.',
+      '[MOM Config] C-sharp MVC: scheduling config + shift efficiency + calculation result.',
+      '[Excel Export] openpyxl multi-line merge, 3 Sheets, 6 rows per material.',
+      'Stack: Python + Flask + DeepSeek-V4 + MySQL + openpyxl + DBUtils + Mem0 + pytest.'
+    ],
+    pictures: []
+  },
+  {
+    startTime: '2026.06',
+    duration: '2 months',
+    title: 'Cross-section Report Automation Agent System',
+    company: 'Goertek Inc.',
+    role: 'ITBP',
+    teamSize: 'Independent',
+    isAI: true,
+    summary: 'Independently designed and delivered a cross-section report automation Agent system based on the Harness Engineering 6-layer architecture. Uses a dual-mode architecture (LLM Agent + Deterministic Pipeline), auto-identifying cross-section image annotations via DeepSeek-OCR API, processed by OCR corrector, then auto-generating Excel reports in 4 process templates (SMT/UF/Encap/Coating, 19-304 columns) with image embedding, Spec judgment, conditional formatting, Summary Sheet, historical data comparison, and MySQL persistence. 275 test cases all passed, PyInstaller packaged as distributable exe.',
+    technologyStack: {
+      backend: 'Python 3.10, OpenAI SDK (DeepSeek-V4/DeepSeek-OCR), openpyxl, Pillow, mysql-connector-python, pytest',
+      frontend: 'tkinter (GUI Desktop)',
+      database: 'MySQL (3 tables)',
+      devops: 'PyInstaller (exe packaging)',
+      integration: 'DeepSeek-OCR API',
+      others: 'Harness Engineering 6-Layer Architecture, Dual-Mode Architecture, OCR Corrector (Merge-split/Bracket/Dedup), 4 Process Skills, Guardrail, ContextCompactor (40% threshold), ~15,000+ lines code, 275 test cases'
+    },
+    businessContext: 'Goertek Quality Department standardization team handles cross-section experiment data collation, 2 people per project. Manual process: view cross-section images-reord OCR annotation data-manually format reports-judge data compliance-4 processes with independent complex templates (19-304 columns), hours per report.',
+    painPoints: [
+      'Cross-section data collation by full-time standardization team, 2 people per project, hours-long manual process.',
+      '4 process templates differ greatly (SMT 49/UF 304/Encap 19/Coating 93 columns), formatting complex and error-prone.',
+      'Spec compliance judgment relies on manual threshold memory, no systematic validation.'
+    ],
+    challenges: [
+      'OCR data quality: cross-section image annotations like [1] 173.64um, OCR often has merge issues, missing brackets, duplicate values.',
+      'LLM Agent reliability: legacy GAN mode had up to 66 LLM calls, needed optimization to linear pipeline while keeping LLM-free deterministic pipeline as production workhorse.',
+      'Excel report precision: accurate image embedding in cells (OneCellAnchor), formula automation, conditional formatting for Spec excess.'
+    ],
+    solutions: [
+      'Dual-mode architecture: LLM Agent mode (7-step linear pipeline) for complex scenarios; Deterministic pipeline (LLM-free, rule-based) for stable production.',
+      'OCR Corrector: regex parsing, merge splitting, bracket completion, duplicate removal, auto-retry 2x, fill N/A on failure.',
+      'Harness Engineering 6-layer: L1 Info Boundary-L2 Tool System (8 tools)-L3 Execution (Agent Loop)-L4 Memory State-L5 Evaluation-L6 Recovery.',
+      'Excel Report Engine: openpyxl, OneCellAnchor precise image positioning, Excel formula auto-calculation, conditional formatting for Spec excess.'
+    ],
+    impact: [
+      'Cross-section report generation from hours to minutes, replacing 2 full-time standardization positions.',
+      '275 test cases all passed, covering all 4 process templates.',
+      'Dual-mode balances accuracy (deterministic) and intelligence (LLM Agent anomaly handling).'
+    ],
+    outcomes: [
+      '-15,000+ lines Python, 45 source files, 275 test cases all passed.',
+      '4 process Skills (SMT/UF/Encap/Coating), covering 6,700+ cross-section images.',
+      'PyInstaller packaged as slice_report.exe, launched July 2026.'
+    ],
+    details: [
+      '[LLM Agent Mode] 7-step linear pipeline: FolderParser-Planner LLM-OCR loop-Generator LLM correct-ExcelBuilder-Evaluator LLM-DatabaseWriter.',
+      '[Deterministic Pipeline] LLM-free rule mode: FolderParser-OCRClient-OCRCorrector-SpecJudge-ExcelBuilder-Validator-DatabaseWriter.',
+      '[4 Process Skills] SMT (49), UF (304), Encap (19), Coating (93), YAML frontmatter + template.py.',
+      '[Harness 6-Layer] L1-L6 full implementation, Guardrail + ContextCompactor 40% + AGENTS.md rules.',
+      'Stack: Python + DeepSeek-V4/DeepSeek-OCR + openpyxl + Pillow + MySQL + tkinter + pytest + PyInstaller.'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2026.06',
+    duration: '1 month',
+    title: 'EE-AI - BOM Polarity Component List Auto-Generation Skill',
+    company: 'Goertek Inc.',
+    role: 'ITBP',
+    teamSize: 'Independent',
+    isAI: true,
+    summary: 'Developed a BOM polarity component list auto-generation Skill on the Hiagent platform using a hybrid architecture of rule engine (known component type matching) + LLM web search (unknown component queries). Automatically determines polarity for each BOM component, outputting a standardized Excel list with polarity annotation and judgment basis. Covers 10+ major component categories with 99%+ accuracy.',
+    technologyStack: {
+      backend: 'Python, openpyxl, pandas, OpenAI SDK (LLM)',
+      frontend: '',
+      database: '',
+      devops: 'Hiagent Skill Platform Deployment',
+      integration: 'Bing/LCSC/Alldatasheet Web Search, Hiagent Skill API',
+      others: 'Rule Engine + LLM Hybrid Decision, Column Auto-Matching, C/D Confidence Levels, 5-Column Append Output'
+    },
+    businessContext: 'Goertek SMT/DIP line DFM review requires polarity (directionality) judgment for each of hundreds of components on every BOM. Traditional method: EE engineers manually check each component datasheet or web search, 1-2h per 220-line BOM, prone to omissions.',
+    painPoints: [
+      'BOM polarity analysis relies on manual component-by-component judgment, 1-2h per 220-line BOM, highly repetitive.',
+      'Some IC/special component polarity judgment requires web datasheet search, inefficient manually.',
+      'Polarity judgment results lack standardized output format, inconsistent across engineers.'
+    ],
+    challenges: [
+      'Multi-type component coverage: 10+ major categories, each with different judgment logic.',
+      'Rule engine precision ensures 90% coverage, remaining 10% requiring LLM web search confirmation.',
+      'Column auto-matching: different project BOMs have different column names, requiring automatic identification.'
+    ],
+    solutions: [
+      'Rule engine + LLM hybrid decision: rule engine handles known types, LLM web search handles unknown models.',
+      'Triple data source web search: Bing engine + LCSC + Alldatasheet datasheet, comprehensive judgment with basis.',
+      'Standardized output: appends 5 columns to original BOM. Additional Polar Components independent Sheet for SMT management.',
+      'Hiagent deployment: user uploads BOM Excel-Agent auto column matching-rule engine batch judgment-LLM web search fallback-output analysis Excel.'
+    ],
+    impact: [
+      'BOM polarity analysis from 1-2h/sheet to 3min/sheet, efficiency improved 95%+.',
+      'Rule engine covers 90% common components, LLM handles 10% special models, overall accuracy 99%+.',
+      'Output format standardized, DFM review quality consistency significantly improved.'
+    ],
+    outcomes: [
+      'Skill deployed to Hiagent platform, tested with 217-line real BOM.',
+      'Covers 10+ major component categories, 5-column standardized append output + independent polar component Sheet.'
+    ],
+    details: [
+      '[Rule Engine] Type rules + package rules + model rules, C-level confidence.',
+      '[LLM Web Search] Bing + LCSC + Alldatasheet triple source, auto-triggered, with basis links, D-level confidence.',
+      '[Output Format] 5 columns appended: has polarity/basis/confidence level/polarity marking/notes, plus Polar Components independent Sheet.',
+      'Stack: Python + openpyxl + pandas + LLM (DeepSeek-V4) + Hiagent Skill API.'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2026.06',
+    duration: '1 month',
+    title: 'EE-AI - PCB Assembly Drawing Auto-Generation Skill',
+    company: 'Goertek Inc.',
+    role: 'ITBP',
+    teamSize: 'Independent',
+    isAI: true,
+    summary: 'Developed a PCB assembly drawing auto-generation Skill on the Hiagent platform. Automatically assembles multiple input documents (panel 2D PDF, single-board 2D PDF, PCB front/back assembly drawing PDFs) into a standardized GTK 4-page template document, with automatic template field filling, reducing from 2-4h/product to 5min/product.',
+    technologyStack: {
+      backend: 'Python, Pillow, ReportLab, openpyxl',
+      frontend: '',
+      database: '',
+      devops: 'Hiagent Skill Platform Deployment',
+      integration: 'Hiagent Skill API',
+      others: 'Multi-Unit Panel Algorithm, PDF Assembly, GTK 4-Page Template, Coordinate Transformation'
+    },
+    businessContext: 'Goertek EE department needs PCB assembly drawings (GTK standard format) for each product. Traditional process: export position drawing from PCB design-manual annotation-panel multi-board layout-GTK 4-page template assembly-template info fill-PDF export, 2-4h per product.',
+    painPoints: [
+      'PCB assembly drawing creation relies on EE engineers manually assembling multiple PDFs + filling template info, 2-4h per product.',
+      'GTK template fields need repeated filling on each page, prone to omissions.',
+      'Multi-unit panel layout coordinate transformation and annotation rely on manual calculation.'
+    ],
+    challenges: [
+      'Multi-source PDF assembly: auto-assemble panel 2D, single-board 2D, PCB front/back assembly drawings in GTK 4-page order.',
+      'Template info auto-fill: auto-fill same fields on each page, retaining technical requirements fields for manual input.',
+      'Multi-unit panel algorithm: read Panel layout from JSON config, calculate each Units precise position on Panel and arrange.'
+    ],
+    solutions: [
+      'GTK 4-page auto-assembly: Page1 panel 2D-Page2 single-board 2D-Page3 PCB front assembly-Page4 PCB back assembly.',
+      'Template info fill: read fixed fields from config, auto-fill corresponding positions on each page.',
+      'Multi-unit panel generation: read setting.json panel config-calculate Panel positions-Pillow composite multi-unit image-overlay annotation-export PDF/PNG.',
+      'Hiagent deployment: Skill definition + core logic uploaded to Hiagent agent center, natural language dialogue trigger.'
+    ],
+    impact: [
+      'PCB assembly drawing creation from 2-4h/product to 5min/product, efficiency improved 95%+.',
+      'GTK template auto-fill eliminates manual omission risk, 100% standardization.',
+      'EE engineers can invoke via Hiagent natural language without programming.'
+    ],
+    outcomes: [
+      'Skill deployed to Hiagent platform, generating GTK standard assembly drawings via Agent dialogue.',
+      'Supports arbitrary panel layout multi-unit arrangement, verified with real product.'
+    ],
+    details: [
+      '[GTK 4-Page Template] Panel 2D-Single-board 2D-PCB front assembly-PCB back assembly, auto-assembled into single PDF.',
+      '[Template Info Fill] Version/date/applicable model/material/plating/thickness/drawing no./paper size/scale/unit, auto-filled.',
+      '[Multi-Unit Panel] JSON config: panel size/Unit rows and cols/coordinates/rotation/process edge/bad board mark, Pillow composite+annotation.',
+      'Stack: Python + Pillow + ReportLab + openpyxl + Hiagent Skill API.'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2026.06',
+    duration: 'Ongoing',
+    title: 'MOM Vietnam T Project - Workforce Monitoring System',
+    company: 'Goertek Inc.',
+    role: 'ITBP',
+    teamSize: 'Independent',
+    summary: 'Responsible for MOM Vietnam T project independent deployment, and led the design and delivery of the workforce monitoring system (HRMManage), implementing EAV-based employee FTE multi-dimensional management and visualization dashboards, covering 11 Controllers + 10 AppServices + monthly snapshot mechanism + row-level data permission control.',
+    technologyStack: {
+      backend: 'ASP.NET MVC 5, .NET Framework 4.8, Dapper, Web API, Mapster',
+      frontend: 'jQuery, jqGrid, LayUI, ECharts, Bootstrap, Select2',
+      database: 'MySQL',
+      devops: 'IIS, Git, Windows Server',
+      integration: '',
+      others: 'EAV Mode, Monthly Snapshot Mechanism, Row-Level Data Permission, Excel Batch Import Validation (20+ fields), EPPlus + NPOI, -95,000 lines C#, 828 commits'
+    },
+    businessContext: 'Goertek Vietnam factory needed independent MOM-T deployment. U01 workforce allocation lacked systematic tools - employee FTE allocation by project/department/sequence relied on manual Excel. Core rule: each employees project FTE + support/maternity value = 1 (100% FTE), monthly snapshots.',
+    painPoints: [
+      'Vietnam factory needed independent MOM-T system, setting up from scratch.',
+      'FTE allocation relied on manual Excel across hundreds of employees x multiple projects x monthly snapshots.',
+      'Lacked row-level data permission control, different departments/projects should only see their own data.'
+    ],
+    challenges: [
+      'EAV pivot table: rows=employee info, columns=dynamic project names, values=FTE, requiring sequence mapping + workforce classifications + personnel status.',
+      'Excel batch import validation: 20+ field validation per row, FTE sum=1 consistency check.',
+      'Monthly snapshot mechanism: full initialization snapshot first, then incremental FTE import.'
+    ],
+    solutions: [
+      'MOM-T independent deployment: independent MySQL instance + IIS site, config file separation, DB snapshot restore.',
+      'Workforce monitoring core: 11 Controllers + 10 AppServices, covering full workflow from roster sync to FTE multi-dimension analysis.',
+      'EAV FTE maintenance: monthly snapshot full init-incremental import-total validation (Sigma FTE=1), Excel batch import + online editing.',
+      'Row-level data permission: Dept+Sub-dept+Project triple-based visible range config.',
+      'Dashboard: ECharts department target vs actual vs GAP analysis.'
+    ],
+    impact: [
+      'MOM-T independently launched, Vietnam factory achieved systematic management.',
+      'FTE statistics from 1h/day to 5min, 100% accuracy (mandatory sum=1 validation).',
+      'Monthly snapshot supports historical data review, row-level permission ensures data security.'
+    ],
+    outcomes: [
+      'MOM-T system 17 Area modules, -95,000 lines C#, 828 commits.',
+      'Workforce monitoring subsystem 11 Controllers + 10 AppServices.',
+      'System continuously iterating.'
+    ],
+    details: [
+      '[MOM-T Deployment] Independent MySQL + IIS, dev/test/prod config separation.',
+      '[Roster Management] HR sync roster main table + monthly business field snapshot.',
+      '[FTE Maintenance] EAV storage for dynamic project FTE, monthly snapshot-full init-Excel batch import-online edit.',
+      '[Dashboard] ECharts: dept target vs actual vs GAP, multi-dimension FTE utilization analysis.',
+      '[Data Permission] Dept+Sub-dept+Project triple row-level permission. Stack: ASP.NET MVC 5 + Dapper + MySQL + jqGrid + ECharts + LayUI.'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2026.04',
+    duration: '1 month',
+    title: 'YOLO Workstation Behavior Detection (AI Camera)',
+    company: 'Goertek Inc.',
+    role: 'Full-Stack Developer',
+    teamSize: 'Independent',
+    isAI: true,
+    summary: 'Independently designed and delivered a YOLOv11x-based industrial vision behavior detection system (AI Camera) covering SC440 and SC480 stations. Full closed loop from data collection and annotation-AIHub cloud training-ONNX export and quantization-OpenCV real-time inference-Flask API MES integration-4-stage state machine process verification-anomaly video save and NG reporting, PyQt5 GUI + PyInstaller exe deployment.',
+    technologyStack: {
+      backend: 'Python 3.10+, PyTorch, ultralytics (YOLOv11x), OpenCV, ONNX Runtime, Flask, NumPy, PyYAML',
+      frontend: 'PyQt5 (Desktop GUI)',
+      database: '',
+      devops: 'PyInstaller (Windows exe packaging), AIHub Cloud Platform (GPU cluster training)',
+      integration: 'MES System (HTTP POST SN+StationCode), RTSP Camera',
+      others: '4-Stage State Machine Process Validation, State Buffer Debounce, Process Dependency Constraints, Multi-Thread Architecture, Template Method Pattern'
+    },
+    businessContext: 'Goertek U01 line SC440/SC480 stations operation compliance relied on manual patrol without 7x24 coverage. Needed AI vision to monitor whether operators follow SOP for each action.',
+    painPoints: [
+      'Station operation compliance relied on manual patrol, unable to achieve 7x24 coverage.',
+      'Operators may skip or reverse process steps, impossible to review frame-by-frame manually.',
+      'Anomaly events lacked video evidence for traceability and training improvement.'
+    ],
+    challenges: [
+      'YOLO model training required camera video-frame extraction-POI crop-manual annotation of 4 categories with limited data.',
+      'Process dependency verification: closethebox must be detected after putmateril to be valid.',
+      'Real-time performance with debounce: YOLOv11x inference on workstation must maintain frame rate.',
+      'Inter-process communication: MES sends scan SN via HTTP POST, Flask API must reliably pass to main detection process.'
+    ],
+    solutions: [
+      'Model training and deployment: camera video-frame extraction+POI crop-manual annotation-AIHub YOLOv11x training-ONNX export quantization-OpenCV ONNX Runtime real-time inference.',
+      '4-stage state machine: Standby-scan SN trigger detection-4-stage tracking-emptybox triggers cycle end-verification-reset.',
+      'Debounce mechanism: 30 continuous frames confirm state transition, 75 frames confirm cycle end, 85s timeout force NG.',
+      'Multi-thread architecture: Main detection thread-VideoSaverThread-ListenerThread-Flask API, IPC via shared log file.',
+      'Template Method Pattern: BaseAICamera base class defines detection skeleton with derived subclasses.'
+    ],
+    impact: [
+      'Achieved 7x24 station compliance auto-monitoring, violation detection rate improved 300%.',
+      'Replaced manual patrol, saving 2h patrol time per shift.',
+      'NG video auto-save + MES report, anomaly traceability from no evidence to frame-by-frame replay.'
+    ],
+    outcomes: [
+      'SC440 + SC480 station versions delivered, -3,000+ lines Python core code.',
+      'YOLOv11x ONNX model inference on workstation meets real-time requirements.',
+      'PyInstaller packaged as Windows exe, deployed to line workstations.'
+    ],
+    details: [
+      '[Model Training] YOLOv11x max precision, 640x1280, 300 epoch, AdamW+cosine annealing, 4-GPU training.',
+      '[4-Stage State Machine] emptybox (blue)-putmateril (cyan)-closethebox (white, after putmateril)-useroboticarm (green).',
+      '[Debounce] 30-frame continuous confirm state, 75-frame confirm cycle end, 85s timeout force NG.',
+      '[IPC] Flask API writes log-ListenerThread tail monitor-regex extract SN+StationCode-global variables-main thread reads.',
+      'Stack: Python + YOLOv11x + PyTorch + ONNX Runtime + OpenCV + Flask + PyQt5 + NumPy + PyInstaller.'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2026.03',
+    duration: '2 months',
+    title: 'Data Matrix Barcode Intelligent Recognition System',
+    company: 'Goertek Inc.',
+    role: 'ITBP',
+    teamSize: 'Independent',
+    summary: 'Independently developed an industrial Data Matrix barcode batch recognition and anomaly detection system (insightBarcodeCheck). Designed a 3-tier progressive decoding strategy (Traditional ROI preprocessing - Multi-threshold enhancement - YOLOv8 ONNX AI localization) solving blurry/damaged/low-contrast barcode challenges; supports DG/VN multi-region multi-node deployment, incremental processing, MySQL persistence, SMTP email alerts, tkinter GUI and Excel anomaly report output.',
+    technologyStack: {
+      backend: 'Python 3.10+, OpenCV, ONNX Runtime, YOLOv8, pylibdmtx, zxing-cpp, SQLAlchemy, PyMySQL',
+      frontend: 'tkinter (GUI Desktop)',
+      database: 'MySQL',
+      devops: 'PyInstaller (x86/x64 dual-architecture exe packaging), python-dotenv config management',
+      integration: 'SMTP Email Alerting',
+      others: '3-Tier Decoding Chain (Chain of Responsibility), YOLOv8 ONNX Inference, Multi-thread Parallel, Incremental Scanning, 10 Core Source Files -4,575 Lines'
+    },
+    businessContext: 'Goertek Dongguan/Vietnam production lines need batch Data Matrix barcode recognition (product SN + material SN) with consistency verification for quality traceability. Barcodes in industrial environments are often blurry/damaged/low-contrast.',
+    painPoints: [
+      'Industrial barcode quality varies greatly, single pylibdmtx decoding coverage <85%, requiring manual review.',
+      'Multi-station multi-node simultaneous collection needs duplicate avoidance.',
+      'Anomalous barcodes need real-time detection and alerting.'
+    ],
+    challenges: [
+      '3-tier decoding chain design: balancing speed vs coverage - fast path covers 85%, enhanced path covers 95%, AI path handles extreme cases.',
+      'AI model lightweight deployment: YOLOv8 ONNX Runtime on Win x86/x64 workstations.',
+      'Multi-region multi-node: DG/VN dual DB independent connections, incremental processing.'
+    ],
+    solutions: [
+      '3-tier progressive decoding: Level 1 fast, Level 2 enhanced, Level 3 AI fallback.',
+      'B515D Decoder SDK: YOLOv8ONNX class + B515DDecoder class combining zxingcpp + pylibdmtx dual-library decoding.',
+      'Multi-thread parallel + batch writes, incremental dual filter.',
+      'GUI + Alert + Report: tkinter interface, SMTP auto-email, Excel dual-Sheet output.'
+    ],
+    impact: [
+      'Barcode recognition rate from 85% to 99.5%, manual review reduced 90%.',
+      'Multi-node stable operation across Dongguan/Vietnam dual-region lines.',
+      'Anomaly detection from manual sampling to real-time auto-alerting.'
+    ],
+    outcomes: [
+      '10 core Python source files -4,575 lines, 3-tier decoding chain fully implemented.',
+      'B515D Decoder SDK independently reusable.',
+      'PyInstaller x86/x64 dual-architecture packaged, deployed to multi-line workstations.'
+    ],
+    details: [
+      '[3-Tier Decoding Chain] Level 1 fast - Level 2 enhanced - Level 3 AI fallback, progressive coverage.',
+      '[B515D SDK] YOLOv8ONNX class + B515DDecoder class with time budget management.',
+      '[Incremental Processing] Dual filter: file creation time + DB processed record filter.',
+      '[Anomaly Detection] Inconsistent material SN auto-tagged, SMTP email alert, Excel dual-Sheet output.',
+      'Stack: Python + OpenCV + ONNX Runtime + YOLOv8 + pylibdmtx + zxing-cpp + SQLAlchemy + MySQL + tkinter + PyInstaller.'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2026.01',
+    duration: '4 months',
+    title: 'U01 E and F EIH Tracking System',
+    company: 'Goertek Inc.',
+    role: 'ITBP',
+    teamSize: '3 people',
+    summary: 'Independently designed and delivered the U01 E and F (Equipment and Facility) Capex equipment investment tracking system on the MOM framework using DDD 5-layer architecture, implementing NB (New Buy)/RF (Retrofit) dual-source Tracker Excel auto-parsing - CTB data generation pipeline (5 steps) - Dashboard capacity visualization - EIH 9-key indicator full lifecycle tracking.',
+    technologyStack: {
+      backend: 'ASP.NET MVC 5, .NET Framework 4.8, Dapper, Entity Framework 6, Web API, Mapster',
+      frontend: 'Vue 3, Element Plus, Tabulator, jQuery, Layui, ECharts, Highcharts',
+      database: 'MySQL (t_capex_* series tables)',
+      devops: 'IIS, Git, Windows Server',
+      integration: 'LDAP/AD Domain Auth, ZOffice Online Document Editing, Redis',
+      others: 'CTB Data Generation Pipeline (5 steps), EIH 9 Indicators Tracking, EPPlus + NPOI Excel, 58,849 lines C#, 366 source files, 833 commits'
+    },
+    businessContext: 'Goertek U01 product line Capex equipment investment management needs to track the full lifecycle from Tech Approval, CapEx Approval, PR-PO, ETD/ETA to EIH. Covers NB and RF investment types.',
+    painPoints: [
+      'Capex equipment investment involved multi-node tracking, originally Excel-based with opaque progress.',
+      'NB and RF Tracker Excel formats differ, manual parsing is time-consuming.',
+      'Gating Items (UPH=0) are hard to identify quickly.'
+    ],
+    challenges: [
+      'CTB 5-step data pipeline: NB Tracker-CTB project generation-RF Tracker-CTB project generation-Cumulative data-CTB Dashboard-EIH Dashboard.',
+      'Dual-source merge: NB and RF investment types have different field structures.',
+      '9 EIH indicators tracking: Tech Approval-EIH Complete, multi-dimension aggregation.'
+    ],
+    solutions: [
+      'CTB data generation pipeline: NB Tracker parsing-RF Tracker parsing-Cumulative data generation-CTB Dashboard-EIH Dashboard, fully transactional.',
+      'EIH Dashboard: 9 milestone indicators by project dimension showing completion rate and trends.',
+      'Station BOM management: workstation-level BOM version management, ZOffice online editing.',
+      'New frontend architecture: Vue 3 + Element Plus + Tabulator.'
+    ],
+    impact: [
+      'Capex investment from Excel manual tracking to systematic lifecycle management.',
+      'CTB capacity assessment from manual to auto-generation, Gating Items identification from manual to Dashboard highlighting.',
+      'Vue 3 + Element Plus architecture validated, 833 commits continuous delivery.'
+    ],
+    outcomes: [
+      '17 Area modules, 58,849 lines C#.',
+      'CTB pipeline covers NB Tracker/RFT Tracker/Week ETA full workflow.',
+      'System independently deployed and running stably on U01 E and F project.'
+    ],
+    details: [
+      '[NB/RF Tracker] Dual-source Excel auto-parsing, version management.',
+      '[CTB Dashboard] Daily cumulative arrival/UPH trends, Gating Items highlighting.',
+      '[EIH Dashboard] 9 milestone indicators by NB/RF/ALL 3 dimensions.',
+      '[Station BOM] Workstation BOM version management/compare/online editing.',
+      'Stack: ASP.NET MVC 5 + Dapper + EF6 + MySQL + Redis + Vue 3 + Element Plus + ECharts.'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2025.12',
+    duration: '2 months',
+    title: 'Goertek MOM - HWTE Equipment Anomaly Monitoring System',
+    company: 'Goertek Inc.',
+    role: 'ITBP',
+    teamSize: 'Independent',
+    summary: 'Independently designed and delivered a HWTE equipment real-time anomaly monitoring and closed-loop handling system on the MOM framework, featuring dual rule engines, 4-level inheritable configuration, automatic DRI assignment + timeout escalation, engineering calendar exclusion of holidays, and closed-loop work order management.',
+    technologyStack: {
+      backend: 'ASP.NET MVC 5, .NET Framework 4.8, Dapper, Web API, Quartz',
+      frontend: 'Layui, jQuery, ECharts, Bootstrap',
+      database: 'MySQL, Oracle, Redis',
+      devops: 'IIS, Git, Windows Server',
+      integration: 'MES System, WeChat Work Notifications',
+      others: 'Dual Rule Engine, 4-Level Inheritable Configuration, Engineering Calendar, 17 Data Tables, 17 Domain Entities'
+    },
+    businessContext: 'HWTE test workstations needed real-time monitoring of equipment anomalies. Previously relied on manual patrol, unable to achieve 7x24 coverage.',
+    painPoints: [
+      'Equipment anomaly detection relied on manual patrol, 30min/interval.',
+      'Anomaly handling lacked standardized processes.',
+      'Production line breaks and holidays lacked exclusion mechanisms.'
+    ],
+    challenges: [
+      'Dual rule engine design: continuous no-output and continuous defect detection.',
+      '4-level inheritable configuration handling conflicts and priorities.',
+      'Real-time performance with Redis caching of MES data.'
+    ],
+    solutions: [
+      'Dual rule engine: no-output and defect detection rules.',
+      '4-level inheritable configuration: Project-Line-Station-Position.',
+      'Automatic DRI assignment + timeout escalation with WeChat Work notifications.',
+      'Engineering calendar excluding non-working periods.',
+      'Anomaly work order closed-loop with Pareto analysis.'
+    ],
+    impact: [
+      'Equipment anomaly detection from 30min patrol to real-time seconds.',
+      'Anomaly handling standardized with full traceability.',
+      'False alarm rate significantly reduced.'
+    ],
+    outcomes: [
+      '17 data tables supporting full monitoring workflow.',
+      '12 Controllers + 17 AppServices covering all features.',
+      'System running stably covering all HWTE test workstation equipment.'
+    ],
+    details: [
+      '[Equipment Anomaly Monitoring] Dual rule engine with flexible parameter configuration.',
+      '[4-Level Inheritable Config] Project-Line-Station-Position inheritance hierarchy.',
+      '[Auto Notification and Escalation] Auto-assign DRI + timeout escalation chain.',
+      '[Engineering Calendar] Exclude non-working periods.',
+      '[Anomaly Work Order Closed-Loop] Pending-In Progress-Resolved with Pareto analysis.',
+      'Stack: ASP.NET MVC 5 + Dapper + MySQL + Oracle + Redis + Quartz + ECharts + Layui.'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2025.11',
+    duration: '1 month',
+    title: 'Python Data Analysis Report Automation (IOS/AC Daily)',
+    company: 'Goertek Inc.',
+    role: 'ITBP',
+    teamSize: 'Independent',
+    summary: 'Independently designed and delivered the HS-C product line IOS/AC capacity daily report automation data pipeline using Python pandas + SQLAlchemy + PyYAML. Adopted OOP + SOLID + YAML config-driven architecture, implementing automatic Excel wide-table multi-sheet parsing - data cleaning - unpivot - bulk upsert to MySQL, reducing manual Excel work from 2h/day to 5min.',
+    technologyStack: {
+      backend: 'Python 3.10, pandas, numpy, SQLAlchemy, mysql-connector-python, PyYAML',
+      frontend: '',
+      database: 'MySQL',
+      devops: '',
+      integration: '',
+      others: 'OOP + SOLID Architecture, YAML Config-Driven, Factory Pattern, Wide-to-Narrow Table, openpyxl/calamine Engine'
+    },
+    businessContext: 'Goertek Dongguan factory HS-C product line required daily capacity plan and actual report (IOS/AC). The original process manually processed wide-table Excel (6-8 sheets, 200-400 rows x 100+ date columns per sheet), taking 2 hours daily.',
+    painPoints: [
+      'IOS/AC daily report source is wide-table Excel with inconsistent sheet formats.',
+      'Sheet parsing rules differ greatly, lacking config-driven management.',
+      'Capacity plan and actual data need separate processing, making consistency difficult.'
+    ],
+    challenges: [
+      'Multi-sheet differentiated management requiring YAML configuration instead of hardcoding.',
+      'Wide-to-narrow table: 100+ date columns needing expansion to narrow format.',
+      'Dual pipeline design with different data models.'
+    ],
+    solutions: [
+      'Config-driven 5-step pipeline (Capacity Plan): YAML-driven, Factory pattern.',
+      'Enhanced 6-step pipeline (Daily Detail): adds Aggregate step.',
+      'Idempotent DB writes: MySQL ON DUPLICATE KEY UPDATE.',
+      'Config-driven management: YAML manages DB connections, source file paths, per-sheet config.'
+    ],
+    impact: [
+      'IOS/AC daily report generation from 2h/day to 5min, 100% data accuracy.',
+      'Adding new sheets only requires YAML config changes, maintenance cost reduced 90%.',
+      'Idempotent writes eliminate data duplication issues.'
+    ],
+    outcomes: [
+      'Two pipelines running stably, writing to MySQL tables.',
+      'YAML config-driven management of 6+ sheet parsing rules.',
+      'Code evolved from hardcoded single script to OOP + config-driven architecture.'
+    ],
+    details: [
+      '[Capacity Plan Pipeline] ConfigManager-ExcelReader-RowFilterProcessor-PlanExploder-DatabaseWriter.',
+      '[Daily Detail Pipeline] 6-step pipeline with additional value types and Color dimension.',
+      '[Config-Driven Architecture] YAML manages DB, file paths, per-sheet config, Factory pattern.',
+      'Stack: Python 3.10 + pandas + numpy + SQLAlchemy + mysql-connector-python + PyYAML + openpyxl.'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2025.11',
+    duration: '3 months',
+    title: 'Goertek MOM - FA Yield Alert and Line Stagnation Monitoring',
+    company: 'Goertek Inc.',
+    role: 'ITBP',
+    teamSize: 'Independent',
+    isAI: true,
+    summary: 'Independently designed and delivered two production line monitoring modules on the MOM framework: (1) FA yield auto-alert system with Oracle/MySQL cross-DB extraction, ECharts dashboards, DeepSeek AI analysis, daily email push; (2) Line material stagnation duration monitoring with FATP/SMT dual-line 12-bucket distribution.',
+    technologyStack: {
+      backend: 'ASP.NET MVC 5, .NET Framework 4.8, Dapper, Web API, Quartz',
+      frontend: 'Layui, jQuery, ECharts, Bootstrap',
+      database: 'MySQL, Oracle (MES data source)',
+      devops: 'IIS, Git, Windows Server',
+      integration: 'SMTP Email Service, MES System, DeepSeek API',
+      others: 'Scheduled Task Scheduling, Yield Trend Analysis, AI Semantic Analysis, 12-Bucket Distribution, IMemoryCache'
+    },
+    businessContext: 'U01 production line needed both FA yield trend monitoring and line-side raw material stagnation risk monitoring.',
+    painPoints: [
+      'FA yield data required manual extraction + Excel cleaning, 3h/day.',
+      'Line-side material stagnation duration was uncontrolled.',
+      'Target thresholds lacked systematic management.'
+    ],
+    challenges: [
+      'Cross-DB queries: MES Oracle 3-table join + business MySQL.',
+      'Multi-dimensional drill-down for both modules.',
+      'Scheduled push reliability for daily 07:00 auto-execution.'
+    ],
+    solutions: [
+      'FA yield alert with ECharts + table dual display, Quartz daily auto-email, DeepSeek AI analysis.',
+      'Stagnation monitor with FATP/SMT dual-line 12-bucket distribution and detail drill-down.',
+      'Receipt time extraction from multiple time sources.'
+    ],
+    impact: [
+      'FA yield report from 3h/day to 0 (auto-push).',
+      'Stagnant materials from invisible to 12-bucket visual monitoring.',
+      'Both modules running 7x24 automatically.'
+    ],
+    outcomes: [
+      'FA module: 5 data tables + 9 Controllers + 6 Services.',
+      'Stagnation module: 5 API endpoints covering dual lines.',
+      'Both modules running stably in U01 production environment.'
+    ],
+    details: [
+      '[FA Yield Alert] Last 6 days by-workstation/by-defect trends with drill-down and filtering.',
+      '[Stagnation Monitor] 12-bucket inventory stagnation distribution with drill-down.',
+      'Stack: ASP.NET MVC 5 + Dapper + Oracle + MySQL + ECharts + Quartz + IMemoryCache + Layui + DeepSeek API.'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2025.10',
+    duration: '3 months',
+    title: 'Goertek MOM - BOM Intelligent Comparison System',
+    company: 'Goertek Inc.',
+    role: 'ITBP',
+    teamSize: 'Independent',
+    summary: 'Independently designed and delivered a multi-source BOM intelligent comparison system on the MOM framework, achieving automatic recognition of 4 BOM formats, configurable field mapping, two-level BOM auto-merge, and highlighted diff export - reducing manual comparison from 2 hours to 5 minutes.',
+    technologyStack: {
+      backend: 'ASP.NET MVC 5, .NET Framework 4.8, Dapper, Entity Framework 6, Web API',
+      frontend: 'Layui, jQuery, Bootstrap',
+      database: 'MySQL',
+      devops: 'IIS, Git, Windows Server',
+      integration: 'MOM Framework',
+      others: 'BOM Parsing Engine, BOM Merge Engine, BOM Comparison Engine, EPPlus, Configurable Field Mapping'
+    },
+    businessContext: 'The HSD project had BOMs from 4 different sources with inconsistent column names and frequent version changes. Manual comparison took 2 hours per iteration.',
+    painPoints: [
+      'Four BOM source formats with different column names.',
+      'Frequent BOM version changes, manual old-vs-new comparison took 2 hours.',
+      'Two-level BOM lacked automatic merge capability.'
+    ],
+    challenges: [
+      'Multi-source BOM parsing with large column name variations.',
+      'Two-level BOM merge with reference designator deduplication.',
+      'Comparison precision distinguishing 4 diff types.'
+    ],
+    solutions: [
+      'Configurable field mapping engine with fuzzy column name matching.',
+      'Two-level BOM auto-merge with deduplication and summation.',
+      'Intelligent comparison engine with 4 change types auto-labeling.',
+      'Configuration management for business user self-service.'
+    ],
+    impact: [
+      'BOM comparison from 2 hours manual to 5 minutes, 100% accuracy.',
+      '4 BOM formats auto-recognized.',
+      'Two-level BOM merge automated.'
+    ],
+    outcomes: [
+      '6 data tables supporting full BOM lifecycle.',
+      '4 engines + 6 Controllers covering full workflow.',
+      'BOM change comparison 100% automated.'
+    ],
+    details: [
+      '[BOM Configuration] Document type definition, field mapping config.',
+      '[BOM Document Parsing] Upload Excel - auto-parse - error logging - two-level merge.',
+      '[BOM Comparison] 4 change types labeled with highlighted diff Excel export.',
+      '[Change Description] Auto-generated change descriptions.',
+      'Stack: ASP.NET MVC 5 + Dapper + EF6 + MySQL + EPPlus + Layui + jQuery.'
+    ],
+    pictures: []
+  },
+
+  {
+    startTime: '2025.09',
+    duration: '4 months',
+    title: 'Goertek MOM - Supplier Material Defect Claim System',
+    company: 'Goertek Inc.',
+    role: 'ITBP',
+    teamSize: 'Independent / 2-person collaboration',
+    summary: 'Independently designed and delivered a full closed-loop supplier material defect claim system on the MOM framework (ASP.NET MVC + Dapper + MySQL), covering 8+ roles with a 17-node state machine workflow, automatic loss cost calculation, and data analytics dashboards - transforming a days-long offline process into in-system hours.',
+    technologyStack: {
+      backend: 'ASP.NET MVC 5, .NET Framework 4.8, Dapper, Entity Framework 6, Web API, Quartz',
+      frontend: 'Layui, jQuery, ECharts, Bootstrap',
+      database: 'MySQL',
+      devops: 'IIS, Git, Windows Server',
+      integration: 'MOM Permission System, Workflow Engine',
+      others: 'State Machine Workflow Engine (17 states), Domain-Driven Design (DDD), 13 Core Business Tables'
+    },
+    businessContext: 'Incoming materials at Goertek production lines frequently had defects causing scrap, rework, and downtime losses requiring supplier claims.',
+    painPoints: [
+      'Claim process involved 8+ roles with multi-level approvals, originally offline paper-based flow.',
+      'Loss cost calculation lacked consistent standards, manual statistics were error-prone.',
+      'Supplier claim data had no systematic repository.'
+    ],
+    challenges: [
+      'Complex state machine design: 17 state nodes with reject, skip, countersign modes.',
+      'Approval deadline management with timed reminders and timeout escalation.',
+      'Multi-role collaboration: full-chain data connectivity.'
+    ],
+    solutions: [
+      'State machine workflow engine: State pattern + Strategy pattern.',
+      'Automatic loss cost calculation replacing manual Excel.',
+      'Claim settlement closed-loop: full-chain tracking.',
+      'Data analytics dashboard with multi-dimensional filtering.'
+    ],
+    impact: [
+      'Claim process from offline days to in-system hours, fully traceable.',
+      'Loss cost calculation from manual to automatic summary, 100% accuracy.',
+      'Supplier defect data systematically accumulated.'
+    ],
+    outcomes: [
+      '13 core business tables + 2 configuration tables + 5 workflow tables.',
+      '11 Controllers + 10 AppServices covering full claim lifecycle.',
+      'System running stably across Goertek factories.'
+    ],
+    details: [
+      '[Claim Order Management] Initiation, list query, detail view, state transitions.',
+      '[Quality Analysis and Responsibility] Four-level approval chain.',
+      '[Loss Cost Calculation] PE uploads - IE assessment - BU calculation, auto-summary.',
+      '[Claim Settlement] Full-chain tracking from confirmation to payment.',
+      '[Data Analytics] Trend charts, Top N rankings, export reports.',
+      'Stack: ASP.NET MVC 5 + Dapper + EF6 + MySQL + Layui + jQuery + ECharts.'
+    ],
+    pictures: []
+  },
+
   {
     startTime: '2025.04',
     duration: '5 months',
@@ -2026,7 +3416,7 @@ const projectlists_en = [
     duration: '12 months',
     title: 'Digital Workshop - MES Lean Manufacturing Execution System',
     company: 'Dongguan Chunsi Printing Co., Ltd.',
-    role: 'Senior Full-Stack Developer',
+    role: 'ITBP',
     teamSize: '8 people',
     summary: 'Responsible for core module development of the MES system, achieving digital management of production processes, assisting the enterprise in its Industry 4.0 transformation.',
     technologyStack: {

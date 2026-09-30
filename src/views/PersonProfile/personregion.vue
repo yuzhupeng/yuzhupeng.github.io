@@ -1,33 +1,53 @@
 <!--  -->
 <template>
   <div class="responsive-resume">
-    <!-- PC端布局 -->
-    <div class="pc-layout"
-         v-show="!isMobile">
-      <div class="rm-main-left">
-        <mainleft></mainleft>
+    <!-- 简历视图 -->
+    <template v-if="viewMode === 'resume'">
+      <!-- PC端布局 -->
+      <div class="pc-layout"
+           v-show="!isMobile">
+        <div class="rm-main-left">
+          <mainleft></mainleft>
+        </div>
+        <div class="rm-main-right">
+          <mainright></mainright>
+        </div>
       </div>
-      <div class="rm-main-right">
-        <mainright></mainright>
+
+      <!-- 移动端布局 -->
+      <div class="mobile-layout"
+           v-show="isMobile">
+        <mobilecontent></mobilecontent>
       </div>
-    </div>
 
-    <!-- 移动端布局 -->
-    <div class="mobile-layout"
-         v-show="isMobile">
-      <mobilecontent></mobilecontent>
-    </div>
+      <!-- 語言切換器 -->
+      <div class="language-switcher-container">
+        <LanguageSwitcher @language-changed="handleLanguageChange" />
+      </div>
 
-    <!-- 語言切換器 -->
-    <div class="language-switcher-container">
-      <LanguageSwitcher @language-changed="handleLanguageChange" />
-    </div>
+      <!-- 返回顶部按钮 -->
+      <div v-show="iftop"
+           class="totop flexCenter"
+           @click="backTop">
+        <i class="el-icon-caret-top"></i>
+      </div>
+    </template>
 
-    <!-- 返回顶部按钮 -->
-    <div v-show="iftop"
-         class="totop flexCenter"
-         @click="backTop">
-      <i class="el-icon-caret-top"></i>
+    <!-- 作品集视图 -->
+    <template v-if="viewMode === 'portfolio'">
+      <portfolio-inline />
+    </template>
+
+    <!-- 视图切换浮动按钮 -->
+    <div class="view-switcher">
+      <button
+        :class="['vs-btn', { active: viewMode === 'resume' }]"
+        @click="switchView('resume')"
+      >📋 {{ isMobile ? '' : ($t('switcher.resume') || '简历') }}</button>
+      <button
+        :class="['vs-btn', { active: viewMode === 'portfolio' }]"
+        @click="switchView('portfolio')"
+      >📊 {{ isMobile ? '' : ($t('switcher.portfolio') || '作品集') }}</button>
     </div>
   </div>
 </template>
@@ -39,15 +59,17 @@ import mainleft from '@/Views/PersonProfile/left.vue'
 import mainright from '@/Views/PersonProfile/personright.vue';
 import mobilecontent from '@/Views/PersonProfile/mobilecontent.vue';
 import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
+import PortfolioInline from '@/views/Portfolio/portfolio.vue';
 
 export default {
   //import引入的组件需要注入到对象中才能使用
-  components: { mainleft, mainright, mobilecontent, LanguageSwitcher },
+  components: { mainleft, mainright, mobilecontent, LanguageSwitcher, PortfolioInline },
   data () {
     //这里存放数据
     return {
       iftop: false,
-      isMobile: false
+      isMobile: false,
+      viewMode: 'resume'
     };
   },
   //监听属性 类似于data概念
@@ -83,8 +105,8 @@ export default {
     handleLanguageChange (lang) {
       // 更新頁面標題
       const titles = {
-        'zh-CN': '庾柱鵬 | 全棧工程師 - 數字化工廠專家（9年經驗）',
-        'en-US': 'Yu Zhupeng | Full-Stack Engineer - Digital Factory Expert (9 Years Experience)'
+        'zh-CN': '庾柱鵬 | 全棧工程師 - 數字化工廠專家（10年經驗）',
+        'en-US': 'Yu Zhupeng | Full-Stack Engineer - Digital Factory Expert (10 Years Experience)'
       }
       document.title = titles[lang] || titles['zh-CN']
 
@@ -93,6 +115,12 @@ export default {
 
       // 觸發子組件重新渲染
       this.$forceUpdate()
+    },
+
+    // 切换视图
+    switchView (mode) {
+      this.viewMode = mode
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 
   },
@@ -107,7 +135,7 @@ export default {
     window.addEventListener('resize', this.handleResize);
 
     // 设置页面标题
-    document.title = '庾柱鹏 | 全栈工程师 - 数字化工厂专家（9年经验）';
+    document.title = '庾柱鹏 | 全栈工程师 - 数字化工厂专家（10年经验）';
   },
   beforeCreate () { }, //生命周期 - 创建之前
   beforeMount () { }, //生命周期 - 挂载之前
@@ -168,7 +196,7 @@ export default {
 .totop {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 220px;
   width: 50px;
   height: 50px;
   background-color: #2b3a67;
@@ -231,6 +259,55 @@ export default {
   @media (max-width: 768px) {
     top: 15px;
     right: 15px;
+  }
+}
+
+// 视图切换浮动按钮
+.view-switcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1001;
+  display: flex;
+  gap: 8px;
+}
+
+.vs-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 18px;
+  border: 1px solid #e8e0d5;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  color: #5c5c5c;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+
+  &:hover {
+    border-color: #b8956a;
+    color: #b8956a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  &.active {
+    background: #2b3a67;
+    border-color: #2b3a67;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px 14px;
+    font-size: 12px;
+    border-radius: 20px;
   }
 }
 </style>

@@ -70,8 +70,8 @@ export default {
     
     updatePageTitle() {
       const titles = {
-        'zh-CN': '庾柱鵬 | 全棧工程師 - 數字化工廠專家（9年經驗）',
-        'en-US': 'Yu Zhupeng | Full-Stack Engineer - Digital Factory Expert (9 Years Experience)'
+        'zh-CN': '庾柱鵬 | 全棧工程師 - 數字化工廠專家（10年經驗）',
+        'en-US': 'Yu Zhupeng | Full-Stack Engineer - Digital Factory Expert (10 Years Experience)'
       }
       document.title = titles[this.currentLanguage] || titles['zh-CN']
     }

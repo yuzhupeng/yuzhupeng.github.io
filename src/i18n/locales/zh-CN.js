@@ -3,8 +3,8 @@ export default {
   // 个人信息
   personalInfo: {
     name: '庾柱鹏',
-    position: '高级全栈工程师',
-    description: '9年数字化工厂及企业应用开发经验',
+    position: 'AI全栈工程师',
+    description: '10年数字化工厂及企业应用开发经验',
     sex: '男',
     birthday: '1992.09',
     university: '东莞理工学院城市学院',
@@ -12,8 +12,8 @@ export default {
     education: '本科',
     graduation: '2016年',
     graduationSuffix: '毕业',
-    workExperience: '9年',
-    age: '33岁',
+    workExperience: '10年',
+    age: '34岁',
     email: '364466548@qq.com',
     phone: '13794928207'
   },
@@ -160,5 +160,64 @@ export default {
     close: '关闭',
     download: '下载',
     languageChanged: '语言切换成功'
+  },
+  // Portfolio 页面
+  portfolio: {
+    brand: '庾柱鹏 · Portfolio',
+    tabDashboard: '项目全景',
+    tabArchive: '深度档案',
+    tabAi: 'AI 能力',
+    toResume: '简历 →',
+    footer: '庾柱鹏 · AI全栈工程师 / AI 应用工程师 · yuzhupeng.top'
+  },
+  // 视图切换
+  switcher: {
+    resume: '简历',
+    portfolio: '作品集'
+  },
+  dashboard: {
+    eyebrow: 'Dashboard · 数据纵览',
+    title: '项目全景',
+    subtitle: '十年，二十七个项目，五大领域。从 ASP.NET 到 AI Agent，从单体架构到多智能体系统——这是一个全栈工程师向 AI 架构师演进的完整轨迹。',
+    statProjects: '交付项目',
+    statProjectsSub: 'MOM · MES · WMS · AI Agent',
+    statAiApps: 'AI 应用上线',
+    statAiAppsSub: 'PCB · BOM · 切片 · SMA · YOLO',
+    statYears: '年开发经验',
+    statCompanies: '家公司',
+    statCompaniesSub: '隽思 → 京瓷 → 领益 → 歌尔',
+    timeline: '项目时间线',
+    timelineDesc: '按时间倒序，展示每个项目的核心技术与领域标签。共 27 个项目',
+    techDist: '技术栈分布',
+    techDistDesc: '基于 27 个项目的技术选型统计，反映技术栈演进路径',
+    backendLang: '后端语言',
+    frontendFw: '前端框架',
+    dbInfra: '数据库 & 基础设施',
+    domainMap: '领域分布',
+    domainMapDesc: '项目覆盖的五大业务领域'
+  },
+  archive: {
+    eyebrow: 'Archive · 深度档案',
+    title: '项目深度档案',
+    subtitle: '每个项目背后，是业务理解、技术决策与工程实践的完整叙事。按公司阶段分组，展示从隽思到歌尔的十年进化。',
+    businessContext: '业务背景',
+    painPoints: '核心痛点',
+    solutions: '技术方案',
+    impact: '量化成果'
+  },
+  ai: {
+    eyebrow: 'AI Capability · 能力矩阵',
+    title: 'AI 工程能力',
+    subtitle: '从自研 Agent 框架到 Claude Code 协作，从 Skill 驱动到多智能体编排——构建 AI 原生的工程实践体系。',
+    quote: 'AI 不是替代工程师，而是让工程师从重复劳动中解放，专注于真正需要创造力的决策。',
+    quoteAuthor: '—— 基于 5 个工业 AI 应用落地实践的认知',
+    skillMatrix: 'AI Agent 应用矩阵',
+    skillMatrixDesc: '5 个工业 AI 应用，覆盖电子制造全场景，全部上线稳定运行',
+    ccTitle: 'Claude Code 协作实践',
+    ccSub: 'AI 辅助开发的最佳实践——从单一对话到多 Agent 编排，从手工操作到工程化工作流。月均消耗 <strong style="color:#b8956a;">10 亿+ token</strong>',
+    memTitle: '三层记忆架构',
+    memDesc: '从短期到长期，从会话到全局，知识的持续积累与复用',
+    techStack: 'AI 技术栈',
+    techStackDesc: '核心 AI 基础设施与工具链'
   }
 }

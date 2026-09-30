@@ -91,7 +91,7 @@
       <div v-show="showSections.projects" class="section-content">
         <div v-for="(item, idx) in projectlists" :key="idx" class="project-item">
           <div class="project-header">
-            <h3>{{ item.title }}</h3>
+            <h3>{{ item.title }}<span v-if="item.isAI" class="ai-badge">AI</span></h3>
             <span class="project-time">{{ item.startTime }}</span>
           </div>
           
@@ -238,6 +238,17 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.ai-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
 .mobile-resume {
   max-width: 100vw;
   background: #f5f5f5;

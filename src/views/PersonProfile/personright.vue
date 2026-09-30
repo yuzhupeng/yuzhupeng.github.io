@@ -15,6 +15,7 @@
            class="titles">
           <Icon type="ios-film-outline"></Icon>
           {{ item.title }}
+          <span v-if="item.isAI" class="ai-badge">AI</span>
         </p>
         <a href="#"
            slot="extra">
@@ -224,6 +225,18 @@ export default {
 };
 </script>
 <style>
+.ai-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: 6px;
+  vertical-align: middle;
+  letter-spacing: 0.5px;
+}
 .ivu-card-head p {
   color: #337ab7;
   font-weight: 600;

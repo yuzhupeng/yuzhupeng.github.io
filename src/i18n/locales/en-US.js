@@ -4,7 +4,7 @@ export default {
   personalInfo: {
     name: 'Yu Zhupeng',
     position: 'Senior Full-Stack Engineer',
-    description: '9 years of experience in digital factory and enterprise application development',
+    description: '10 years of experience in digital factory and enterprise application development',
     sex: 'Male',
     birthday: '1992.09',
     university: 'Dongguan University of Technology City College',
@@ -12,8 +12,8 @@ export default {
     education: 'Bachelor',
     graduation: '2016',
     graduationSuffix: ' graduate',
-    workExperience: '9 years',
-    age: '33 years old',
+    workExperience: '10 years',
+    age: '34 years old',
     email: '364466548@qq.com',
     phone: '13794928207'
   },
@@ -161,5 +161,64 @@ export default {
     close: 'Close',
     download: 'Download',
     languageChanged: 'Language switched successfully'
+  },
+  // Portfolio page
+  portfolio: {
+    brand: 'Yuzhupeng · Portfolio',
+    tabDashboard: 'Dashboard',
+    tabArchive: 'Archive',
+    tabAi: 'AI Capability',
+    toResume: 'Resume →',
+    footer: 'Yuzhupeng · Senior Full-Stack Engineer / AI Architect · yuzhupeng.top'
+  },
+  // View switcher
+  switcher: {
+    resume: 'Resume',
+    portfolio: 'Portfolio'
+  },
+  dashboard: {
+    eyebrow: 'Dashboard · Data Overview',
+    title: 'Project Dashboard',
+    subtitle: 'Ten years, twenty-seven projects, five domains. From ASP.NET to AI Agent, from monolith to multi-agent systems — the complete evolution of a full-stack engineer into an AI architect.',
+    statProjects: 'Projects Delivered',
+    statProjectsSub: 'MOM · MES · WMS · AI Agent',
+    statAiApps: 'AI Apps Live',
+    statAiAppsSub: 'PCB · BOM · Cross-section · SMA · YOLO',
+    statYears: 'Years Experience',
+    statCompanies: 'Companies',
+    statCompaniesSub: 'Jinsi → Kyocera → Lingyi → Goertek',
+    timeline: 'Project Timeline',
+    timelineDesc: 'Reverse chronological order, showing core tech and domain tags for each project. 27 projects total',
+    techDist: 'Tech Stack Distribution',
+    techDistDesc: 'Based on tech selection statistics across 27 projects, reflecting the technology evolution path',
+    backendLang: 'Backend Languages',
+    frontendFw: 'Frontend Frameworks',
+    dbInfra: 'Database & Infrastructure',
+    domainMap: 'Domain Distribution',
+    domainMapDesc: 'Five business domains covered by projects'
+  },
+  archive: {
+    eyebrow: 'Archive · Deep Dive',
+    title: 'Project Archive',
+    subtitle: 'Behind each project lies a complete narrative of business understanding, technical decisions, and engineering practices. Grouped by company stage, showcasing the decade-long evolution from Jinsi to Goertek.',
+    businessContext: 'Business Context',
+    painPoints: 'Pain Points',
+    solutions: 'Solutions',
+    impact: 'Measurable Impact'
+  },
+  ai: {
+    eyebrow: 'AI Capability · Matrix',
+    title: 'AI Engineering Capability',
+    subtitle: 'From self-developed Agent framework to Claude Code collaboration, from Skill-driven to multi-agent orchestration — building an AI-native engineering practice system.',
+    quote: 'AI doesn\'t replace engineers — it frees them from repetitive work to focus on decisions that truly require creativity.',
+    quoteAuthor: '— Insight from delivering 5 industrial AI applications',
+    skillMatrix: 'AI Agent Application Matrix',
+    skillMatrixDesc: '5 industrial AI applications covering the full spectrum of electronics manufacturing, all live and running stably',
+    ccTitle: 'Claude Code Collaboration',
+    ccSub: 'Best practices in AI-assisted development — from single conversations to multi-agent orchestration, from manual operations to engineered workflows. Monthly consumption: <strong style="color:#b8956a;">1B+ tokens</strong>',
+    memTitle: '3-Tier Memory Architecture',
+    memDesc: 'From short-term to long-term, from session to global — continuous knowledge accumulation and reuse',
+    techStack: 'AI Tech Stack',
+    techStackDesc: 'Core AI infrastructure and toolchain'
   }
 }
