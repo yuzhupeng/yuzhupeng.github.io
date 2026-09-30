@@ -132,8 +132,8 @@ const social = [{
 const personalInfo = {
     name: '庾柱鹏',
     sex: '男',
-    position: '高级全栈工程师',
-    personalInfo: '9年数字化工厂及企业应用开发经验',
+    position: 'AI全栈工程师',
+    personalInfo: '10年数字化工厂及企业应用开发经验',
     birthday: '1992.09',
     university: '东莞理工学院城市学院',
     major: '软件工程',
